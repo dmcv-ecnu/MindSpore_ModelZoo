@@ -1,0 +1,7 @@
+Cython
+pycocotools
+numpy
+onnxruntime-gpu
+opencv-python
+pycocotools
+pyyaml
