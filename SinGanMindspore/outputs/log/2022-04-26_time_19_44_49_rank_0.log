@@ -1,0 +1,77 @@
+Args:
+--> platform: CPU
+--> device_id: 0
+--> device_num: 1
+--> is_save_on_master: 1
+--> rank: 0
+--> group_size: 1
+--> model: ResNet
+--> init_type: normal
+--> init_gain: 0.02
+--> image_size: 256
+--> batch_size: 1
+--> pool_size: 50
+--> beta1: 0.5
+--> lr: 0.0002
+--> lr_policy: linear
+--> max_epoch: 200
+--> n_epochs: 100
+--> in_planes: 3
+--> ngf: 64
+--> gl_num: 9
+--> ndf: 64
+--> dl_num: 3
+--> slope: 0.2
+--> norm_mode: instance
+--> lambda_A: 10.0
+--> lambda_B: 10.0
+--> lambda_idt: 0.5
+--> gan_mode: lsgan
+--> pad_mode: CONSTANT
+--> dataroot: ./data/test_haze/
+--> data_dir: testA
+--> outputs_dir: ./outputs
+--> load_ckpt: False
+--> G_A_ckpt: ./outputs/ckpt/G_A_200.ckpt
+--> G_B_ckpt: ./outputs/ckpt/G_B_200.ckpt
+--> D_A_ckpt: ./outputs/ckpt/D_A_200.ckpt
+--> D_B_ckpt: ./outputs/ckpt/D_B_200.ckpt
+--> save_checkpoint_epochs: 10
+--> print_iter: 100
+--> need_profiler: False
+--> save_graphs: False
+--> save_imgs: True
+--> use_random: True
+--> need_dropout: False
+--> max_dataset_size: inf
+--> export_batch_size: 1
+--> export_file_name: CycleGAN
+--> export_file_format: AIR
+--> n_epochs_decay: 100
+--> phase: train
+--> dataset_size: 10
+
+==========start training===============
+Epoch [1] total cost: 220538.81 ms, per step: 22053.88 ms, G_loss: 18.95, D_loss: 5.37
+Epoch [2] total cost: 220474.24 ms, per step: 22047.42 ms, G_loss: 10.69, D_loss: 1.92
+Epoch [3] total cost: 203885.92 ms, per step: 20388.59 ms, G_loss: 7.83, D_loss: 1.04
+Epoch [4] total cost: 195065.45 ms, per step: 19506.54 ms, G_loss: 7.26, D_loss: 0.80
+Epoch [5] total cost: 199360.82 ms, per step: 19936.08 ms, G_loss: 6.94, D_loss: 0.81
+Epoch [6] total cost: 190695.34 ms, per step: 19069.53 ms, G_loss: 7.36, D_loss: 0.88
+Epoch [7] total cost: 215045.42 ms, per step: 21504.54 ms, G_loss: 6.64, D_loss: 0.65
+Epoch [8] total cost: 193439.18 ms, per step: 19343.92 ms, G_loss: 6.46, D_loss: 0.62
+Epoch [9] total cost: 202853.69 ms, per step: 20285.37 ms, G_loss: 6.33, D_loss: 0.54
+Epoch [10] total cost: 200737.25 ms, per step: 20073.72 ms, G_loss: 6.29, D_loss: 0.64
+Epoch [11] total cost: 199029.85 ms, per step: 19902.99 ms, G_loss: 6.31, D_loss: 0.57
+Epoch [12] total cost: 220623.83 ms, per step: 22062.38 ms, G_loss: 6.70, D_loss: 0.78
+Epoch [13] total cost: 211724.71 ms, per step: 21172.47 ms, G_loss: 6.02, D_loss: 0.56
+Epoch [14] total cost: 193139.91 ms, per step: 19313.99 ms, G_loss: 7.00, D_loss: 0.55
+Epoch [15] total cost: 205284.04 ms, per step: 20528.40 ms, G_loss: 5.98, D_loss: 0.52
+Epoch [16] total cost: 211986.84 ms, per step: 21198.68 ms, G_loss: 5.59, D_loss: 0.50
+Epoch [17] total cost: 207722.53 ms, per step: 20772.25 ms, G_loss: 5.76, D_loss: 0.53
+Epoch [18] total cost: 202208.82 ms, per step: 20220.88 ms, G_loss: 5.90, D_loss: 0.64
+Epoch [19] total cost: 198698.52 ms, per step: 19869.85 ms, G_loss: 5.35, D_loss: 0.55
+Epoch [20] total cost: 197220.41 ms, per step: 19722.04 ms, G_loss: 5.94, D_loss: 0.69
+Epoch [21] total cost: 194986.60 ms, per step: 19498.66 ms, G_loss: 5.32, D_loss: 0.56
+Epoch [22] total cost: 201716.60 ms, per step: 20171.66 ms, G_loss: 5.71, D_loss: 0.53
+Epoch [23] total cost: 196467.07 ms, per step: 19646.71 ms, G_loss: 5.48, D_loss: 0.51

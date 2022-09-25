@@ -1,0 +1,61 @@
+Args:
+--> platform: CPU
+--> device_id: 0
+--> device_num: 1
+--> is_save_on_master: 1
+--> rank: 0
+--> group_size: 1
+--> model: ResNet
+--> init_type: normal
+--> init_gain: 0.02
+--> image_size: 256
+--> batch_size: 1
+--> pool_size: 50
+--> beta1: 0.5
+--> lr: 0.0002
+--> lr_policy: linear
+--> max_epoch: 200
+--> n_epochs: 100
+--> in_planes: 3
+--> ngf: 64
+--> gl_num: 9
+--> ndf: 64
+--> dl_num: 3
+--> slope: 0.2
+--> norm_mode: instance
+--> lambda_A: 10.0
+--> lambda_B: 10.0
+--> lambda_idt: 0.5
+--> gan_mode: lsgan
+--> pad_mode: CONSTANT
+--> dataroot: ./data/horse2zebra/
+--> data_dir: testA
+--> outputs_dir: ./outputs
+--> load_ckpt: False
+--> G_A_ckpt: ./outputs/ckpt/G_A_200.ckpt
+--> G_B_ckpt: ./outputs/ckpt/G_B_200.ckpt
+--> D_A_ckpt: ./outputs/ckpt/D_A_200.ckpt
+--> D_B_ckpt: ./outputs/ckpt/D_B_200.ckpt
+--> save_checkpoint_epochs: 10
+--> print_iter: 100
+--> need_profiler: False
+--> save_graphs: False
+--> save_imgs: True
+--> use_random: True
+--> need_dropout: False
+--> max_dataset_size: inf
+--> export_batch_size: 1
+--> export_file_name: CycleGAN
+--> export_file_format: AIR
+--> n_epochs_decay: 100
+--> phase: train
+--> dataset_size: 1334
+
+==========start training===============
+Epoch[1] [100/1334] step cost: 20222.57 ms, G_loss: 12.71, D_loss:0.61, loss_G_A: 0.33, loss_G_B: 0.38, loss_C_A: 2.60,loss_C_B: 5.68, loss_idt_A: 1.24, loss_idt_B£º2.48
+Epoch[1] [200/1334] step cost: 18773.31 ms, G_loss: 12.49, D_loss:0.57, loss_G_A: 0.35, loss_G_B: 0.22, loss_C_A: 2.02,loss_C_B: 6.03, loss_idt_A: 0.85, loss_idt_B£º3.01
+Epoch[1] [300/1334] step cost: 18621.81 ms, G_loss: 10.19, D_loss:0.52, loss_G_A: 0.34, loss_G_B: 0.24, loss_C_A: 3.57,loss_C_B: 2.98, loss_idt_A: 1.71, loss_idt_B£º1.35
+Epoch[1] [400/1334] step cost: 18726.11 ms, G_loss: 8.09, D_loss:0.56, loss_G_A: 0.30, loss_G_B: 0.48, loss_C_A: 2.75,loss_C_B: 2.20, loss_idt_A: 1.39, loss_idt_B£º0.98
+Epoch[1] [500/1334] step cost: 18984.72 ms, G_loss: 5.68, D_loss:0.54, loss_G_A: 0.32, loss_G_B: 0.29, loss_C_A: 1.78,loss_C_B: 1.81, loss_idt_A: 0.78, loss_idt_B£º0.70
+Epoch[1] [600/1334] step cost: 18414.81 ms, G_loss: 7.42, D_loss:0.39, loss_G_A: 0.40, loss_G_B: 0.24, loss_C_A: 2.06,loss_C_B: 2.73, loss_idt_A: 0.92, loss_idt_B£º1.06
+Epoch[1] [700/1334] step cost: 18643.33 ms, G_loss: 8.69, D_loss:0.49, loss_G_A: 0.22, loss_G_B: 0.33, loss_C_A: 2.10,loss_C_B: 3.44, loss_idt_A: 0.86, loss_idt_B£º1.73

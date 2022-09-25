@@ -1,0 +1,59 @@
+Args:
+--> platform: CPU
+--> device_id: 0
+--> device_num: 1
+--> is_save_on_master: 1
+--> rank: 0
+--> group_size: 1
+--> model: ResNet
+--> init_type: normal
+--> init_gain: 0.02
+--> image_size: 256
+--> batch_size: 1
+--> pool_size: 50
+--> beta1: 0.5
+--> lr: 0.0002
+--> lr_policy: linear
+--> max_epoch: 200
+--> n_epochs: 100
+--> in_planes: 3
+--> ngf: 64
+--> gl_num: 9
+--> ndf: 64
+--> dl_num: 3
+--> slope: 0.2
+--> norm_mode: instance
+--> lambda_A: 10.0
+--> lambda_B: 10.0
+--> lambda_idt: 0.5
+--> gan_mode: lsgan
+--> pad_mode: CONSTANT
+--> dataroot: ./data/test_haze/
+--> data_dir: testA
+--> outputs_dir: ./outputs
+--> load_ckpt: False
+--> G_A_ckpt: ./outputs/ckpt/G_A_20.ckpt
+--> G_B_ckpt: ./outputs/ckpt/G_B_20.ckpt
+--> D_A_ckpt: ./outputs/ckpt/D_A_20.ckpt
+--> D_B_ckpt: ./outputs/ckpt/D_B_20.ckpt
+--> save_checkpoint_epochs: 10
+--> print_iter: 100
+--> need_profiler: False
+--> save_graphs: False
+--> save_imgs: True
+--> use_random: True
+--> need_dropout: False
+--> max_dataset_size: inf
+--> export_batch_size: 1
+--> export_file_name: CycleGAN
+--> export_file_format: AIR
+--> n_epochs_decay: 100
+--> phase: predict
+--> dataset_size: 10
+
+==========start predict A to B===============
+save fake_B at ./outputs\predict\fake_B\17_1_0.75785.png
+total 10 imgs cost 21975.15 ms, per img cost 2197.51
+==========end predict A to B===============
+
+==========start predict B to A===============
