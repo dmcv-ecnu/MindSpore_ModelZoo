@@ -1,0 +1,5 @@
+Markdown==3.3.4
+mindspore-gpu @ https://ms-release.obs.cn-north-4.myhuaweicloud.com/1.5.0/MindSpore/gpu/x86_64/cuda-10.1/mindspore_gpu-1.5.0-cp37-cp37m-linux_x86_64.whl
+numpy==1.21.0
+psutil==5.8.0
+tqdm==4.61.2
