@@ -1,0 +1,4 @@
+Pillow
+matplotlib >= 3.4.2
+imageio >= 2.9.0
+pyyaml

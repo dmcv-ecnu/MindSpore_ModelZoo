@@ -1,0 +1,9 @@
+numpy
+annoy
+pillow
+csv
+pandas
+h5py==3.4.0
+matplotlib
+scipy
+scikit-image
