@@ -25,7 +25,7 @@ For original PyTorch implementation please refer to [github](https://github.com/
 
 Convolutional neural networks (CNNs) are highly successful for super-resolution (SR) but often require sophisticated architectures with heavy memory cost and computational overhead, significantly restricts their practical deployments on resource-limited devices. In this paper, we proposed a novel contrastive self-distillation (CSD) framework to simultaneously compress and accelerate various off-the-shelf SR models. In particular, a channel-splitting super-resolution network can first be constructed from a target teacher network as a compact student network. Then, we propose a novel contrastive loss to improve the quality of SR images and PSNR/SSIM via explicit knowledge transfer. Extensive experiments demonstrate that the proposed CSD scheme effectively compresses and accelerates several standard SR models such as EDSR, RCAN and CARN.
 
-![model](https://https://github.com/Booooooooooo/MindSpore_ModelZoo/blob/main/CSD/images/model.png)
+![model](https://github.com/Booooooooooo/MindSpore_ModelZoo/blob/main/CSD/images/model.png)
 
 # [Dataset](#contents)
 
