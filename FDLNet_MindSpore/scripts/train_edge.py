@@ -1,28 +1,20 @@
-# Copyright 2021 Huawei Technologies Co., Ltd
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-# http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-# ============================================================================
-
 import argparse
 import time
+import datetime
 import os
 import shutil
 import sys
 import random
 import numpy as np
+from tqdm import tqdm
+
+cur_path = os.path.abspath(os.path.dirname(__file__))
+root_path = os.path.split(cur_path)[0]
+sys.path.append(root_path)
+
 import mindspore
 from mindspore.dataset import transforms, vision, GeneratorDataset
-from mindspore import nn, load_checkpoint, load_param_into_net, ops
+from mindspore import Tensor, nn, load_checkpoint, load_param_into_net, ops
 from core.data.dataloader import get_segmentation_dataset
 from core.models.model_zoo import get_segmentation_model
 from core.utils.loss import get_segmentation_loss
@@ -33,12 +25,8 @@ from core.utils.score import SegmentationMetric
 from datetime import datetime, timedelta
 from config import data_root
 
-cur_path = os.path.abspath(os.path.dirname(__file__))
-root_path = os.path.split(cur_path)[0]
-sys.path.append(root_path)
 
 def parse_args():
-    """parse_args"""
     parser = argparse.ArgumentParser(description='Semantic Segmentation Training With Pytorch')
     # model and dataset
     parser.add_argument('--model', type=str, default='fdlnet',
@@ -147,21 +135,17 @@ def parse_args():
 
 
 class AverageMeter(object):
-    """AverageMeter"""
 
     def __init__(self):
-        """init"""
         self.reset()
 
     def reset(self):
-        """reset"""
         self.val = 0
         self.avg = 0
         self.sum = 0
         self.count = 0
 
     def update(self, val, n=1):
-        """update"""
         self.val = val
         self.sum += val * n
         self.count += n
@@ -169,9 +153,7 @@ class AverageMeter(object):
 
 
 class Trainer(object):
-    """Trainer"""
     def __init__(self, args):
-        """init"""
         self.train_main_loss = AverageMeter()
         self.train_seg_loss = AverageMeter()
         self.train_aux_loss = AverageMeter()
@@ -184,17 +166,18 @@ class Trainer(object):
             vision.Normalize([.485, .456, .406], [.229, .224, .225], False),
         ])
         # dataset and dataloader
-        data_kwargs = {'transform': input_transform, 'base_size': args.base_size,
-                       'crop_size': args.crop_size}
-        train_dataset = get_segmentation_dataset(args.dataset, root=data_root, split='train',
-                                                 mode='train',**data_kwargs)
-        val_dataset = get_segmentation_dataset(args.dataset, root=data_root, split='val',
-                                               mode='ms_val',transform=input_transform)
+        data_kwargs = {'transform': input_transform, 'base_size': args.base_size, 'crop_size': args.crop_size}
+        train_dataset = get_segmentation_dataset(args.dataset, root=data_root, split='train', mode='train',
+                                                 **data_kwargs)
+        val_dataset = get_segmentation_dataset(args.dataset, root=data_root, split='val', mode='ms_val',
+                                               transform=input_transform)
         args.iters_per_epoch = len(train_dataset) // (args.num_gpus * args.batch_size)
         args.max_iters = args.epochs * args.iters_per_epoch
         val_batch_size = 1
         train_sampler = make_data_sampler(True, args.max_iters)
+        # train_batch_sampler = make_batch_data_sampler(train_sampler, args.batch_size, args.max_iters)
         val_sampler = make_data_sampler(False)
+        # val_batch_sampler = make_batch_data_sampler(val_sampler, val_batch_size)
         self.num_class = val_dataset.num_class
         self.train_loader = GeneratorDataset(source=train_dataset,
                                              column_names=["images", "targets", "edge", "basename"],
@@ -210,9 +193,8 @@ class Trainer(object):
 
         # create network
         BatchNorm2d = nn.BatchNorm2d
-        self.model = get_segmentation_model(model=args.model, dataset=args.dataset,
-                                            backbone=args.backbone,aux=args.aux, jpu=args.jpu,
-                                            norm_layer=BatchNorm2d, pretrained_base=True,
+        self.model = get_segmentation_model(model=args.model, dataset=args.dataset, backbone=args.backbone,
+                                            aux=args.aux, jpu=args.jpu, norm_layer=BatchNorm2d, pretrained_base=True,
                                             criterion=self.criterion)
 
         num_params = sum([param.nelement() for key, param in self.model.parameters_and_names()])
@@ -221,25 +203,24 @@ class Trainer(object):
         params_list = []
         if hasattr(self.model, 'pretrained'):
             params_list.append(
-                {'params': [param for key, param in self.model.pretrained.parameters_and_names()],
-                 'lr': args.lr})
+                {'params': [param for key, param in self.model.pretrained.parameters_and_names()], 'lr': args.lr})
         if hasattr(self.model, 'exclusive'):
             for module in self.model.exclusive:
                 params_list.append(
                     {'params': [param for key, param in getattr(self.model, module).parameters_and_names()],
                      'lr': args.lr * 10})
 
-        self.optimizer = nn.optim_ex.SGD(params_list,
-                                lr=args.lr,
-                                momentum=args.momentum,
-                                weight_decay=args.weight_decay)
-
-        self.lr_scheduler = WarmupPolyLR(self.optimizer,
+        self.lr_scheduler = WarmupPolyLR(args.lr,
                                          max_iters=args.max_iters,
                                          power=0.9,
                                          warmup_factor=args.warmup_factor,
                                          warmup_iters=args.warmup_iters,
                                          warmup_method=args.warmup_method)
+        self.optimizer = nn.SGD(params_list,
+                                learning_rate=args.lr,
+                                momentum=args.momentum,
+                                weight_decay=args.weight_decay)
+
         if args.resume:
             if os.path.isfile(args.resume):
                 name, ext = os.path.splitext(args.resume)
@@ -248,6 +229,7 @@ class Trainer(object):
                 checkpoint = load_checkpoint(args.resume)
                 if 'optimizer' in checkpoint:
                     load_param_into_net(self.optimizer, checkpoint['optimizer'])
+                    # self.optimizer.load_state_dict(checkpoint['optimizer'])
                 if 'state_dict' in checkpoint:
                     loaded_dict = checkpoint['state_dict']
                     net_state_dict = self.model.parameters_dict()
@@ -262,13 +244,16 @@ class Trainer(object):
             else:
                 print("file not exist")
 
+        # if args.distributed:
+        #     self.model = nn.parallel.DistributedDataParallel(self.model, device_ids=[args.local_rank],
+        #                                                      output_device=args.local_rank)
+
         # evaluation metrics
         self.metric = SegmentationMetric(train_dataset.num_class)
 
         self.best_pred = 0.0
 
     def forward_fn(self, images, gts, batch_pixel_size):
-        """forward_fn"""
         loss_dict = self.model(images, gts)
         if args.seg_weight > 0:
             log_seg_loss = loss_dict['seg_loss'].mean()
@@ -289,43 +274,55 @@ class Trainer(object):
         return main_loss
 
     # Define function of one-step training
-    def train_step(self, images, gts, batch_pixel_size):
-        """train_step"""
-        loss, grads = self.grad_fn(images, gts, batch_pixel_size)
-        loss = ops.depend(loss, self.optimizer(grads))
+    def train_step(self, images, gts, batch_pixel_size, iteration):
+        grad_fn = mindspore.value_and_grad(self.forward_fn, None, self.optimizer.parameters)
+        loss, grads = grad_fn(images, gts, batch_pixel_size)
+        self.optimizer(grads)
+#         print(self.optimizer.learning_rate[0].data.asnumpy)
+        lr = self.lr_scheduler(iteration)
+        lr_list = list(self.optimizer.learning_rate)
+        for i in range(len(lr_list)):
+            if lr_list[i].name == "learning_rate_group_0":
+                ops.assign(self.optimizer.learning_rate[i], mindspore.Tensor(lr, mindspore.float32))
+            else:
+                ops.assign(self.optimizer.learning_rate[i], mindspore.Tensor(lr*10, mindspore.float32))
         return loss
 
     def train_edge(self):
-        """train_edge"""
-        save_to_disk = get_rank() == 0
+        save_to_disk = 1
         epochs, max_iters = self.args.epochs, self.args.max_iters
-        log_per_iters, val_per_iters = self.args.log_iter,\
-                                       self.args.val_epoch * self.args.iters_per_epoch
+        log_per_iters, val_per_iters = self.args.log_iter, self.args.val_epoch * self.args.iters_per_epoch
         save_per_iters = self.args.save_epoch * self.args.iters_per_epoch
         start_time = time.time()
-        logger.info('Start training, Total Epochs: {:d} = Total Iterations {:d}'
-                    .format(epochs, max_iters))
+        logger.info('Start training, Total Epochs: {:d} = Total Iterations {:d}'.format(epochs, max_iters))
 
         self.model.set_train()
         iteration=0
-        self.grad_fn = mindspore.value_and_grad(self.forward_fn, None,
-                                                self.optimizer.parameters)
         while(iteration<=args.max_iters):
             for batch, (images, targets, edge, _) in enumerate(self.train_loader):
+#                 edge = mindspore.Tensor.from_numpy(edge).float()
                 iteration = iteration + 1
                 if iteration>args.max_iters:
                     break
                 batch_pixel_size = images.shape[0] * images.shape[2] * images.shape[3]
 
-                main_loss = self.train_step(images, (targets, edge), batch_pixel_size)
+                # images, targets, edge = images.cuda(), targets.cuda(), edge.cuda()
+                # print(images.shape, targets.shape)
+                # self.optimizer.zero_grad()
+
+                main_loss = None
+                main_loss = self.train_step(images, (targets, edge), batch_pixel_size, iteration)
 
                 log_main_loss = main_loss
 
                 self.train_main_loss.update(log_main_loss, batch_pixel_size)
+                # main_loss.backward()
+
+                # self.optimizer.step()
+#                 print(self.lr_scheduler._get_lr())
 
                 if iteration % log_per_iters == 0 and save_to_disk:
-                    eta_seconds = ((time.time() - start_time) / iteration) \
-                                  * (max_iters - iteration)
+                    eta_seconds = ((time.time() - start_time) / iteration) * (max_iters - iteration)
                     eta_string = str(timedelta(seconds=int(eta_seconds)))
 
                     a = float(self.train_main_loss.avg)
@@ -337,12 +334,25 @@ class Trainer(object):
                             iteration, max_iters, a, b, f, e,
                             str(timedelta(seconds=int(time.time() - start_time))), eta_string))
 
-                if not self.args.skip_val and iteration % val_per_iters == 0 :
+                if not self.args.skip_val and iteration % val_per_iters == 0 and (iteration > 90000):
+                    # mIoU = self.validation_edge(iteration)
                     mIoU = self.ms_val(iteration)
                     self.model.training = True
                     self.model.set_train()
 
-                self.lr_scheduler.step()
+#                 self.lr_scheduler.step()
+#                 if iteration>0:
+#                     params_list = []
+#                     if hasattr(self.model, 'pretrained'):
+#                         params_list.append(
+#                             {'params': [param for key, param in self.model.pretrained.parameters_and_names()], 'lr': args.lr})
+#                     if hasattr(self.model, 'exclusive'):
+#                         for module in self.model.exclusive:
+#                             params_list.append(
+#                                 {'params': [param for key, param in getattr(self.model, module).parameters_and_names()],
+#                                  'lr': args.lr * 10})
+#                     print(params_list)
+#                 print(args.lr)
 
         save_checkpoint(self.model, self.optimizer, self.args, iteration, mIoU, is_best=False)
         total_training_time = time.time() - start_time
@@ -352,12 +362,11 @@ class Trainer(object):
                 total_training_str, total_training_time / max_iters))
 
     def ms_val(self, iteration):
-        """ms_val"""
         is_best = False
         mIoU = 0
         self.metric.reset()
         model = self.model
-        model.training = False
+        model.training=False
 
         # model.eval()
         for i, batch_data in enumerate(self.val_loader):
@@ -389,8 +398,7 @@ class Trainer(object):
             self.metric.update(scores, target)
 
         pixAcc, IoU, mIoU = self.metric.get()
-        logger.info("Sample: {:d}, Validation pixAcc: {:.3f}, mIoU: {:.6f}"
-                    .format(i + 1, pixAcc, mIoU))
+        logger.info("Sample: {:d}, Validation pixAcc: {:.3f}, mIoU: {:.6f}".format(i + 1, pixAcc, mIoU))
         IoU = IoU.asnumpy()
         num = IoU.size
         di = dict(zip(range(num), IoU))
@@ -408,32 +416,35 @@ class Trainer(object):
 def save_checkpoint(model, optimizer, args, iteration, mIoU, is_best=False):
     """Save Checkpoint"""
     directory = os.path.expanduser(args.save_dir)
+    # print(iteration, args.iters_per_epoch)
+    # print(mIoU)
     epoch = int(iteration // args.iters_per_epoch)
     if 'mean_iu' in args.last_record:
         if not os.path.exists(directory):
             os.makedirs(directory)
-        last_snapshot = 'last_{}_{}_{}_epoch_{}_mean_iu_{:.5f}.ckpt'\
-            .format(args.model, args.backbone,
-                    args.dataset,args.last_record['epoch'],
-                    args.last_record['mean_iu'])
+        last_snapshot = 'last_{}_{}_{}_epoch_{}_mean_iu_{:.5f}.ckpt'.format(args.model, args.backbone, args.dataset,
+                                                                           args.last_record['epoch'],
+                                                                           args.last_record['mean_iu'])
         last_snapshot = os.path.join(directory, last_snapshot)
         try:
             os.remove(last_snapshot)
         except OSError:
             pass
-    last_snapshot = 'last_{}_{}_{}_epoch_{}_mean_iu_{:.5f}.ckpt'\
-        .format(args.model, args.backbone, args.dataset, epoch, mIoU)
+    last_snapshot = 'last_{}_{}_{}_epoch_{}_mean_iu_{:.5f}.ckpt'.format(args.model, args.backbone, args.dataset, epoch,
+                                                                       mIoU)
     last_snapshot = os.path.join(directory, last_snapshot)
     args.last_record['mean_iu'] = mIoU
     args.last_record['epoch'] = epoch
 
+    # if args.distributed:
+    #     model = model.module
     mindspore.save_checkpoint(model, last_snapshot)
 
     if is_best:
         if args.best_record['epoch'] != -1:
-            best_snapshot = 'best_{}_{}_{}_epoch_{}_mean_iu_{:.5f}.ckpt'\
-                .format(args.model, args.backbone, args.dataset,
-                        args.best_record['epoch'], args.best_record['mean_iu'])
+            best_snapshot = 'best_{}_{}_{}_epoch_{}_mean_iu_{:.5f}.ckpt'.format(args.model, args.backbone, args.dataset,
+                                                                               args.best_record['epoch'],
+                                                                               args.best_record['mean_iu'])
             best_snapshot = os.path.join(directory, best_snapshot)
             assert os.path.exists(best_snapshot), \
                 'cant find old snapshot {}'.format(best_snapshot)
@@ -441,9 +452,9 @@ def save_checkpoint(model, optimizer, args, iteration, mIoU, is_best=False):
 
         args.best_record['epoch'] = epoch
         args.best_record['mean_iu'] = mIoU
-        best_snapshot = 'best_{}_{}_{}_epoch_{}_mean_iu_{:.5f}.ckpt'\
-            .format(args.model, args.backbone, args.dataset
-                    , args.best_record['epoch'], args.best_record['mean_iu'])
+        best_snapshot = 'best_{}_{}_{}_epoch_{}_mean_iu_{:.5f}.ckpt'.format(args.model, args.backbone, args.dataset,
+                                                                           args.best_record['epoch'],
+                                                                           args.best_record['mean_iu'])
         best_snapshot = os.path.join(directory, best_snapshot)
         shutil.copyfile(last_snapshot, best_snapshot)
 
@@ -452,8 +463,11 @@ if __name__ == '__main__':
     args = parse_args()
     args.date_str = str(datetime.now().strftime('%Y_%m_%d_%H_%M_%S'))
     # reference maskrcnn-benchmark
+
     num_gpus = int(os.environ["WORLD_SIZE"]) if "WORLD_SIZE" in os.environ else 1
     args.num_gpus = num_gpus
+    # args.distributed = num_gpus > 1
+    # args.manual_seed = random.randint(0,99999)
     args.manual_seed = 40171
     if args.manual_seed is not None:
         random.seed(args.manual_seed)
@@ -462,7 +476,7 @@ if __name__ == '__main__':
     args.last_record = {}
     args.best_record = {'epoch': -1, 'mean_iu': 0}
     name = 'test'
-    logger = setup_logger(name, args.log_dir, get_rank(), filename='{}_{}_{}_{}.txt'.format(
+    logger = setup_logger(name, args.log_dir, 0, filename='{}_{}_{}_{}.txt'.format(
         args.model, args.backbone, args.dataset, args.date_str))
     logger.info("Using {} GPUs".format(num_gpus))
     logger.info(args)

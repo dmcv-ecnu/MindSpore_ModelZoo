@@ -1,17 +1,3 @@
-# Copyright 2021 Huawei Technologies Co., Ltd
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-# http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-# ============================================================================
 """Custom losses."""
 import mindspore
 import numpy
@@ -99,6 +85,7 @@ class EncNetLoss(nn.CrossEntropyLoss):
         return Tensor(tvect)
 
 
+# TODO: optim function
 class ICNetLoss(nn.CrossEntropyLoss):
     """Cross Entropy Loss for ICNet"""
 
@@ -154,14 +141,22 @@ class OhemCrossEntropy2d(nn.Cell):
         elif num_valid > 0:
             prob = ops.masked_fill(prob, ~valid_mask, 1)
             # prob = prob.masked_fill_(~valid_mask, 1)
-            if len(self.mask_mid) != len(target):
+            if len(self.mask_mid)!=len(target):
                 self.mask_mid = Tensor(numpy.arange(len(target)))
             mask_prob = prob[target, self.mask_mid]
-            kept_mask = ops.le(mask_prob, self.thresh)
+            threshold = self.thresh
+            if self.min_kept > 0:
+                index = numpy.argsort(mask_prob.asnumpy())
+                threshold_index = index[min(len(index), self.min_kept) - 1]
+                maskk = mask_prob[Tensor(threshold_index)]
+                if maskk > self.thresh:
+                    threshold = maskk
+            kept_mask = ops.le(mask_prob, threshold)
             valid_mask = valid_mask.astype(mindspore.int64) * kept_mask.astype(mindspore.int64)
             target = (target * kept_mask.astype(mindspore.int64)).astype(mindspore.int64)
 
         target = ops.masked_fill(target, ~valid_mask, self.ignore_index)
+        # target = target.masked_fill_(~valid_mask, self.ignore_index)
         target = target.view(n, h, w).astype(mindspore.int32)
 
 

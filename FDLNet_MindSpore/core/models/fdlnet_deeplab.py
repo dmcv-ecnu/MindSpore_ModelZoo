@@ -1,18 +1,14 @@
-# Copyright 2021 Huawei Technologies Co., Ltd
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-# http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-# ============================================================================
-"""FDLNet"""
+"""
+ @Time    : 22/9/2
+ @Author  : WangSen
+ @Email   : wangsen@shu.edu.cn
+ 
+ @Project : FDLNet
+ @File    : fdlnet_deeplab.py
+ @Function: FDLNet 
+ 
+"""
+
 from mindspore import nn, ops, load_checkpoint, load_param_into_net
 import mindspore
 from .segbase import SegBaseModel
@@ -23,7 +19,6 @@ from ..nn import _ConvBNReLU
 __all__ = ['FDLNet', 'get_fdlnet', 'get_fdlnet_resnet101_citys']
 
 class FDLNet(SegBaseModel):
-    """FDLNet"""
     def __init__(self, nclass, criterion=None, backbone='resnet50', aux=False, pretrained_base=False, **kwargs):
         super(FDLNet, self).__init__(nclass, aux, backbone, pretrained_base=pretrained_base, **kwargs)
         self.criterion = criterion
@@ -223,6 +218,7 @@ def get_fdlnet(dataset='pascal_voc', backbone='resnet50', pretrained=False, root
         from .model_store import get_model_file
         checkpoint = load_checkpoint(get_model_file('best_mindspore_fdlnet', root=root))
         load_param_into_net(model, checkpoint)
+        # model.load_state_dict(checkpoint['state_dict'])
     return model
 
 

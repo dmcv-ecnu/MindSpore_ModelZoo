@@ -1,17 +1,3 @@
-# Copyright 2021 Huawei Technologies Co., Ltd
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-# http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-# ============================================================================
 """Base Model for Semantic Segmentation"""
 from mindspore import nn,ops
 from .base_models.resnetv1b import resnet50_v1s, resnet101_v1s, resnet152_v1s
@@ -32,6 +18,7 @@ class SegBaseModel(nn.Cell):
 
     def __init__(self, nclass, aux, backbone='resnet50', jpu=False, pretrained_base=True, **kwargs):
         super(SegBaseModel, self).__init__()
+        dilated = False if jpu else True
         self.aux = aux
         self.nclass = nclass
         if backbone == 'resnet50':
@@ -55,7 +42,7 @@ class SegBaseModel(nn.Cell):
             mid.append((0, 0))
         mid.append((1, 0))
         mid.append((1, 0))
-        pad = ops.Pad(tuple(mid))
+        pad = ops.Pad(tuple(mid))  # pytorch的pad优先在左上角，tensorflow和mindspore都在右下角，所以这里要手动添加
         x = pad(x)
         x = self.pretrained.maxpool(x)
         c1 = self.pretrained.layer1(x)

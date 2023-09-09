@@ -1,27 +1,16 @@
-# Copyright 2021 Huawei Technologies Co., Ltd
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-# http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-# ============================================================================
 """Prepare Cityscapes dataset"""
-import os
-import mindspore
+import os, mindspore
 from mindspore import Tensor
 import numpy as np
 
 from PIL import Image
 from .segbase import SegmentationDataset
+# from . import cityscapes_labels
 from . import edge_utils
+
 num_classes = 19
+
+
 class NightEdgeSegmentation(SegmentationDataset):
     """Cityscapes Semantic Segmentation Dataset.
 
@@ -33,6 +22,21 @@ class NightEdgeSegmentation(SegmentationDataset):
         'train', 'val' or 'test'
     transform : callable, optional
         A function that transforms the image
+    Examples
+    --------
+    >>> from torchvision import transforms
+    >>> import torch.utils.data as data
+    >>> # Transforms for Normalization
+    >>> input_transform = transforms.Compose([
+    >>>     transforms.ToTensor(),
+    >>>     transforms.Normalize((.485, .456, .406), (.229, .224, .225)),
+    >>> ])
+    >>> # Create Dataset
+    >>> trainset = CitySegmentation(split='train', transform=input_transform)
+    >>> # Create Training Loader
+    >>> train_data = data.DataLoader(
+    >>>     trainset, 4, shuffle=True,
+    >>>     num_workers=4)
     """
     BASE_DIR = 'cityscapes'
     NUM_CLASS = 19
@@ -47,6 +51,7 @@ class NightEdgeSegmentation(SegmentationDataset):
             raise RuntimeError("Found 0 images in subfolders of:" + root + "\n")
         self.valid_classes = [7, 8, 11, 12, 13, 17, 19, 20, 21, 22,
                               23, 24, 25, 26, 27, 28, 31, 32, 33]
+
         self._key = np.array([-1, -1, -1, -1, -1, -1,
                               -1, -1, 0, 1, -1, -1,
                               2, 3, 4, -1, -1, -1,
@@ -57,6 +62,7 @@ class NightEdgeSegmentation(SegmentationDataset):
         self._mapping = np.array(range(-1, len(self._key) - 1)).astype('int32')
 
     def _class_to_index(self, mask):
+        # assert the value
         values = np.unique(mask)
         for value in values:
             assert (value in self._mapping)
@@ -83,8 +89,8 @@ class NightEdgeSegmentation(SegmentationDataset):
             img, mask = self._sync_transform_2(img, mask)
             _edgemap = mask.numpy()
             _edgemap = edge_utils.mask_to_onehot(_edgemap, num_classes)
-            _edgemap = edge_utils.onehot_to_binary_edges(_edgemap, 2, num_classes)
-            edgemap = Tensor.from_numpy(_edgemap).float()
+            edgemap = edge_utils.onehot_to_binary_edges(_edgemap, 2, num_classes)
+        #             edgemap = Tensor.from_numpy(_edgemap).float()
 
         elif self.mode == 'val':
             img, mask = self._img_transform(img), self._mask_transform(mask)
@@ -109,11 +115,14 @@ class NightEdgeSegmentation(SegmentationDataset):
             _edgemap = edge_utils.onehot_to_binary_edges(_edgemap, 2, num_classes)
             edgemap = Tensor.from_numpy(_edgemap).float()
         # general resize, normalize and toTensor
-        
+
         if self.transform is not None:
             img = self.transform(img)
         return img, mask, edgemap, os.path.basename(self.images[index])
 
+    # def re_mask_transform(self, mask):
+    #     target = self.re_class_to_index(np.array(mask).astype('int32'))
+    #     return torch.LongTensor(np.array(target).astype('int32'))
     def _mask_transform(self, mask):
         target = self._class_to_index(np.array(mask).astype('int32'))
         return Tensor(np.array(target).astype('int32'), dtype=mindspore.int64)
@@ -165,4 +174,4 @@ def _get_city_pairs(folder, split='train', mode='ms_val'):
 
 
 if __name__ == '__main__':
-    dataset = NightEdgeSegmentation()
+    dataset = NightSegmentation()

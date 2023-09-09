@@ -1,18 +1,4 @@
-# Copyright 2021 Huawei Technologies Co., Ltd
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-# http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-# ============================================================================
-"""resnet"""
+import mindspore
 from mindspore import nn,ops
 from mindspore import load_checkpoint, load_param_into_net
 from mindspore.common.initializer import initializer, HeNormal, Constant
@@ -131,6 +117,13 @@ class ResNetV1b(nn.Cell):
         for m in self.cells():
             if isinstance(m, nn.Conv2d):
                 m.weight_init = HeNormal(mode='fan_out', nonlinearity='relu')
+        #
+        # if zero_init_residual:
+        #     for m in self.modules():
+        #         if isinstance(m, BottleneckV1b):
+        #             nn.init.constant_(m.bn3.weight, 0)
+        #         elif isinstance(m, BasicBlockV1b):
+        #             nn.init.constant_(m.bn2.weight, 0)
 
     def _make_layer(self, block, planes, blocks, stride=1, dilation=1, norm_layer=nn.BatchNorm2d):
         downsample = None
@@ -165,7 +158,7 @@ class ResNetV1b(nn.Cell):
             mid.append((0, 0))
         mid.append((1, 0))
         mid.append((1, 0))
-        pad = ops.Pad(tuple(mid))
+        pad = ops.Pad(tuple(mid))#pytorch的pad优先在左上角，tensorflow和mindspore都在右下角，所以这里要手动添加
         x = pad(x)
         x = self.maxpool(x)
 
@@ -183,7 +176,7 @@ class ResNetV1b(nn.Cell):
 
 def _create_resnet(path, pretrained=False, **kwargs):
     model = ResNetV1b(**kwargs)
-    if pretrained:
+    if pretrained :
         param_dict = load_checkpoint(path)
         load_param_into_net(model, param_dict)
     return model
@@ -236,6 +229,11 @@ def resnet152_v1b(pretrained=False, **kwargs):
 def resnet50_v1s(pretrained=False, **kwargs):
     model_args = dict(block=BottleneckV1b, layers=[3, 4, 6, 3], deep_stem=True, **kwargs)
     return _create_resnet("/tmp/pretrainmodel/ms_weight_res50.ckpt", pretrained, **model_args)
+    # model = ResNetV1b(BottleneckV1b, [3, 4, 6, 3], deep_stem=True, **kwargs)
+    # if pretrained:
+    #     from ..model_store import get_resnet_file
+    #     model.load_state_dict(torch.load(get_resnet_file('resnet50', root=root)), strict=False)
+    # return model
 
 
 def resnet101_v1s(pretrained=False, **kwargs):
@@ -247,10 +245,3 @@ def resnet152_v1s(pretrained=False, **kwargs):
     model_args = dict(block=BottleneckV1b, layers=[3, 8, 36, 3], deep_stem=True, **kwargs)
     return _create_resnet(pretrained, **model_args)
 
-
-if __name__ == '__main__':
-    import torch
-
-    img = torch.randn(4, 3, 224, 224)
-    model = resnet50_v1b(True)
-    output = model(img)

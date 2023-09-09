@@ -1,21 +1,9 @@
-# Copyright 2021 Huawei Technologies Co., Ltd
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-# http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-# ============================================================================
 """Popular Learning Rate Schedulers"""
 from __future__ import division
 import math
 from mindspore import nn
+
+from bisect import bisect_right
 
 __all__ = ['LRScheduler', 'WarmupPolyLR']
 
@@ -116,44 +104,39 @@ class LRScheduler(object):
         for i in range(1, len(optimizer.param_groups)):
             optimizer.param_groups[i]['lr'] = lr * 10
 
-class WarmupPolyLR(nn.LRScheduler):
-    def __init__(self, optimizer, target_lr=0, max_iters=0, power=0.9, warmup_factor=1.0 / 3,
+
+class WarmupPolyLR(nn.WarmUpLR):
+    def __init__(self, lr, target_lr=0, max_iters=0, power=0.9, warmup_factor=1.0 / 3,
                  warmup_iters=500, warmup_method='linear', last_epoch=-1):
         if warmup_method not in ("constant", "linear"):
             raise ValueError(
                 "Only 'constant' or 'linear' warmup_method accepted "
                 "got {}".format(warmup_method))
 
+        self.lr = lr
         self.target_lr = target_lr
         self.max_iters = max_iters
         self.power = power
         self.warmup_factor = warmup_factor
         self.warmup_iters = warmup_iters
         self.warmup_method = warmup_method
-        self.base_lrs = [group['lr'].value() for group in optimizer.param_groups]
 
-        super(WarmupPolyLR, self).__init__(optimizer, last_epoch)
+        super(WarmupPolyLR, self).__init__(lr, 1)
 
-    def _get_lr(self):
+    def construct(self, global_step):
         N = self.max_iters - self.warmup_iters
-        T = self.last_epoch - self.warmup_iters
-        if self.last_epoch < self.warmup_iters:
+        T = global_step - self.warmup_iters
+        if global_step < self.warmup_iters:
             if self.warmup_method == 'constant':
                 warmup_factor = self.warmup_factor
             elif self.warmup_method == 'linear':
-                alpha = float(self.last_epoch) / self.warmup_iters
+                alpha = float(global_step) / self.warmup_iters
                 warmup_factor = self.warmup_factor * (1 - alpha) + alpha
             else:
                 raise ValueError("Unknown warmup type.")
-            return [self.target_lr + (base_lr - self.target_lr) * warmup_factor for base_lr in self.base_lrs]
+            self.lr = self.target_lr + (self.lr - self.target_lr) * warmup_factor
+            return self.lr
         factor = pow(1 - T / N, self.power)
-        return [self.target_lr + (base_lr - self.target_lr) * factor for base_lr in self.base_lrs]
+        self.lr = self.target_lr + (0.005 - self.target_lr) * factor
+        return self.lr
 
-
-if __name__ == '__main__':
-    import torch
-    import torch.nn as nn
-
-    model = nn.Conv2d(16, 16, 3, 1, 1)
-    optimizer = torch.optim.Adam(model.parameters(), lr=0.01)
-    lr_scheduler = WarmupPolyLR(optimizer, niters=1000)

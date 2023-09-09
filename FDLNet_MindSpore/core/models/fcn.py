@@ -1,24 +1,5 @@
-# Copyright 2021 Huawei Technologies Co., Ltd
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-# http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-# ============================================================================
-"""FCN"""
 from mindspore import nn, ops
 from mindcv.models.vgg import vgg16
-import torch
-
-__all__ = ['get_fcn32s', 'get_fcn16s', 'get_fcn8s',
-           'get_fcn32s_vgg16_voc', 'get_fcn16s_vgg16_voc', 'get_fcn8s_vgg16_voc']
 
 
 class FCN32s(nn.Cell):
@@ -66,7 +47,7 @@ class FCN16s(nn.Cell):
         self.pool4 = nn.SequentialCell(*self.pretrained[:24])
         self.pool5 = nn.SequentialCell(*self.pretrained[24:])
         self.head = _FCNHead(512, nclass, norm_layer)
-        self.score_pool4 = nn.Conv2d(512, nclass, 1, has_bias=True)
+        self.score_pool4 = nn.Conv2d(512, nclass, 1, has_bias=True)#默认为false
         if aux:
             self.auxlayer = _FCNHead(512, nclass, norm_layer)
 
@@ -107,8 +88,8 @@ class FCN8s(nn.Cell):
         self.pool4 = nn.SequentialCell(*self.pretrained[17:24])
         self.pool5 = nn.SequentialCell(*self.pretrained[24:])
         self.head = _FCNHead(512, nclass, norm_layer)
-        self.score_pool3 = nn.Conv2d(256, nclass, 1, has_bias=True)
-        self.score_pool4 = nn.Conv2d(512, nclass, 1, has_bias=True)
+        self.score_pool3 = nn.Conv2d(256, nclass, 1, has_bias=True)#默认为false
+        self.score_pool4 = nn.Conv2d(512, nclass, 1, has_bias=True)#默认为false
         if aux:
             self.auxlayer = _FCNHead(512, nclass, norm_layer)
 
@@ -153,83 +134,11 @@ class _FCNHead(nn.Cell):
             norm_layer(inter_channels),
             nn.ReLU(),
             nn.Dropout(p=0.1),
-            nn.Conv2d(inter_channels, channels, 1, has_bias=True)
+            nn.Conv2d(inter_channels, channels, 1, has_bias=True)#默认为false
         )
 
     def construct(self, x):
         return self.block(x)
-
-
-def get_fcn32s(dataset='pascal_voc', backbone='vgg16', pretrained=False, root='~/.torch/models',
-               pretrained_base=True, **kwargs):
-    acronyms = {
-        'pascal_voc': 'pascal_voc',
-        'pascal_aug': 'pascal_aug',
-        'ade20k': 'ade',
-        'coco': 'coco',
-        'citys': 'citys',
-        'sbu': 'sbu',
-    }
-    from ..data.dataloader import datasets
-    model = FCN32s(datasets[dataset].NUM_CLASS, backbone=backbone, pretrained_base=pretrained_base, **kwargs)
-    if pretrained:
-        from .model_store import get_model_file
-        device = torch.device(kwargs['local_rank'])
-        model.load_state_dict(torch.load(get_model_file('fcn32s_%s_%s' % (backbone, acronyms[dataset]), root=root),
-                              map_location=device))
-    return model
-
-
-def get_fcn16s(dataset='pascal_voc', backbone='vgg16', pretrained=False, root='~/.torch/models',
-               pretrained_base=True, **kwargs):
-    acronyms = {
-        'pascal_voc': 'pascal_voc',
-        'pascal_aug': 'pascal_aug',
-        'ade20k': 'ade',
-        'coco': 'coco',
-        'citys': 'citys',
-        'sbu': 'sbu',
-    }
-    from ..data.dataloader import datasets
-    model = FCN16s(datasets[dataset].NUM_CLASS, backbone=backbone, pretrained_base=pretrained_base, **kwargs)
-    if pretrained:
-        from .model_store import get_model_file
-        device = torch.device(kwargs['local_rank'])
-        model.load_state_dict(torch.load(get_model_file('fcn16s_%s_%s' % (backbone, acronyms[dataset]), root=root),
-                              map_location=device))
-    return model
-
-
-def get_fcn8s(dataset='pascal_voc', backbone='vgg16', pretrained=False, root='~/.torch/models',
-              pretrained_base=True, **kwargs):
-    acronyms = {
-        'pascal_voc': 'pascal_voc',
-        'pascal_aug': 'pascal_aug',
-        'ade20k': 'ade',
-        'coco': 'coco',
-        'citys': 'citys',
-        'sbu': 'sbu',
-    }
-    from ..data.dataloader import datasets
-    model = FCN8s(datasets[dataset].NUM_CLASS, backbone=backbone, pretrained_base=pretrained_base, **kwargs)
-    if pretrained:
-        from .model_store import get_model_file
-        device = torch.device(kwargs['local_rank'])
-        model.load_state_dict(torch.load(get_model_file('fcn8s_%s_%s' % (backbone, acronyms[dataset]), root=root),
-                              map_location=device))
-    return model
-
-
-def get_fcn32s_vgg16_voc(**kwargs):
-    return get_fcn32s('pascal_voc', 'vgg16', **kwargs)
-
-
-def get_fcn16s_vgg16_voc(**kwargs):
-    return get_fcn16s('pascal_voc', 'vgg16', **kwargs)
-
-
-def get_fcn8s_vgg16_voc(**kwargs):
-    return get_fcn8s('pascal_voc', 'vgg16', **kwargs)
 
 
 if __name__ == '__main__':

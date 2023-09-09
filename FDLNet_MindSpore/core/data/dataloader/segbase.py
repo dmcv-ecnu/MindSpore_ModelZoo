@@ -1,20 +1,7 @@
-# Copyright 2021 Huawei Technologies Co., Ltd
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-# http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-# ============================================================================
 """Base segmentation dataset"""
 import random
 import numpy as np
+from mindspore import Tensor
 from mindspore.dataset import transforms, vision
 
 from PIL import Image, ImageOps, ImageFilter
@@ -35,7 +22,7 @@ class SegmentationDataset(object):
         self.crop_size = crop_size
         self.ms_transform = transforms.Compose([
             vision.ToTensor(),
-            vision.Normalize([.485, .456, .406], [.229, .224, .225], False),
+            vision.Normalize([.485, .456, .406], [.229, .224, .225],False),
         ])
         self.multiscale = [0.5, 0.75, 1.0, 1.25, 1.5, 1.75]
 
@@ -104,6 +91,7 @@ class SegmentationDataset(object):
             mask = mask.transpose(Image.FLIP_LEFT_RIGHT)
         crop_size = self.crop_size
         short_size = random.randint(int(self.base_size * 0.5), int(self.base_size * 2.0))
+        
         w, h = img.size
         if h > w:
             ow = short_size
@@ -126,6 +114,7 @@ class SegmentationDataset(object):
             img = ImageOps.expand(img, border=(0, 0, padw, padh), fill=0)
             mask = ImageOps.expand(mask, border=(0, 0, padw, padh), fill=0)
         # random crop crop_size
+ 
         w, h = img.size
         x1 = random.randint(0, w - cw)
         y1 = random.randint(0, h - ch)
@@ -137,7 +126,7 @@ class SegmentationDataset(object):
         # final transform
         img, mask = self._img_transform(img), self._mask_transform(mask)
         return img, mask
-
+    
     def _val_ms_transform(self, img, mask):
         img_resized_list = []
         w, h = img.size
@@ -156,11 +145,11 @@ class SegmentationDataset(object):
         output['img_data'] = [x for x in img_resized_list]
         output['seg_label'] = mask
         return output
-
+    
     def img_transform(self, img):
         img = self.ms_transform(img)
         return img
-
+    
     def _img_transform(self, img):
         return np.array(img)
 

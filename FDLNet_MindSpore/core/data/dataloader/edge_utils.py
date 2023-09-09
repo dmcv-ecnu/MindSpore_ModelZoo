@@ -1,21 +1,12 @@
-# Copyright 2021 Huawei Technologies Co., Ltd
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-# http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-# ============================================================================
-"""utils"""
+"""
+Copyright (C) 2019 NVIDIA Corporation.  All rights reserved.
+Licensed under the CC BY-NC-SA 4.0 license (https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode).
+"""
 
+import os
 import numpy as np
 import cv2
+from PIL import Image
 from scipy.ndimage.morphology import distance_transform_edt
 
 def mask_to_onehot(mask, num_classes):
@@ -42,8 +33,10 @@ def onehot_to_multiclass_edges(mask, radius, num_classes):
     """
     if radius < 0:
         return mask
+    
     # We need to pad the borders for boundary conditions
     mask_pad = np.pad(mask, ((0, 0), (1, 1), (1, 1)), mode='constant', constant_values=0)
+    
     channels = []
     for i in range(num_classes):
         dist = distance_transform_edt(mask_pad[i, :])+distance_transform_edt(1.0-mask_pad[i, :])
@@ -59,19 +52,23 @@ def onehot_to_binary_edges(mask, radius, num_classes):
     Converts a segmentation mask (K,H,W) to a binary edgemap (H,W)
 
     """
+    
     if radius < 0:
         return mask
+    
     # We need to pad the borders for boundary conditions
     mask_pad = np.pad(mask, ((0, 0), (1, 1), (1, 1)), mode='constant', constant_values=0)
+    
     edgemap = np.zeros(mask.shape[1:])
 
     for i in range(num_classes):
         dist1 = cv2.distanceTransform(mask_pad[i, :].astype(np.uint8), cv2.DIST_L2, maskSize=cv2.DIST_MASK_PRECISE)
         dist2 = cv2.distanceTransform((1.0-mask_pad[i, :]).astype(np.uint8), cv2.DIST_L2, maskSize=cv2.DIST_MASK_PRECISE)
-        if dist1.min == dist1.max:
-            dist1 = distance_transform_edt(mask_pad[i, :])
-        if dist2.min == dist2.max:
-            dist2 = distance_transform_edt(1.0-mask_pad[i, :])
+#         print(np.max(np.subtract(dist1, distance_transform_edt(mask_pad[i, :]))))
+#         if dist1.min == dist1.max :
+#         dist1_ = distance_transform_edt(mask_pad[i, :])
+#         if np.max(np.subtract(dist1, dist1_))>0 :
+#             dist2 = distance_transform_edt(1.0-mask_pad[i, :])
         dist = dist1+dist2
         dist = dist[1:-1, 1:-1]
         dist[dist > radius] = 0

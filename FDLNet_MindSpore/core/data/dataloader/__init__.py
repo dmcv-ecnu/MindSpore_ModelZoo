@@ -5,7 +5,7 @@ from .night_edge import NightEdgeSegmentation
 
 
 datasets = {
-    'night': NightEdgeSegmentation
+    'night': NightEdgeSegmentation,
 }
 
 

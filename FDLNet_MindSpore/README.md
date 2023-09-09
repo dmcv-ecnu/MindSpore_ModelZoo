@@ -23,3 +23,9 @@ python train_edge.py
 cd scripts
 python eval.py
 ```
+
+## Results
+
+| Dataset | w/ ms 
+| :---: | :---: |
+| NightCity | 48.91  |
