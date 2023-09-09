@@ -4,7 +4,6 @@ from __future__ import print_function
 import os
 import zipfile
 
-from ..utils.download import download, check_sha1
 
 __all__ = ['get_model_file', 'get_resnet_file']
 
@@ -31,37 +30,11 @@ def get_resnet_file(name, root='~/.torch/models'):
 
     file_path = os.path.join(root, file_name + '.pth')
     sha1_hash = _model_sha1[name]
-    if os.path.exists(file_path):
-        if check_sha1(file_path, sha1_hash):
-            return file_path
-        else:
-            print('Mismatch in the content of model file {} detected.' +
-                  ' Downloading again.'.format(file_path))
-    else:
-        print('Model file {} is not found. Downloading.'.format(file_path))
-
-    if not os.path.exists(root):
-        os.makedirs(root)
-
-    zip_file_path = os.path.join(root, file_name + '.zip')
-    repo_url = os.environ.get('ENCODING_REPO', encoding_repo_url)
-    if repo_url[-1] != '/':
-        repo_url = repo_url + '/'
-    download(_url_format.format(repo_url=repo_url, file_name=file_name),
-             path=zip_file_path,
-             overwrite=True)
-    with zipfile.ZipFile(zip_file_path) as zf:
-        zf.extractall(root)
-    os.remove(zip_file_path)
-
-    if check_sha1(file_path, sha1_hash):
-        return file_path
-    else:
-        raise ValueError('Downloaded file has different hash. Please try again.')
+    return file_path
 
 
 def get_model_file(name, root='~/.torch/models'):
-    root = 'C:\\Users\\12098\\Desktop\\ecnu_summerwork'
+    root = '/code'
     root = os.path.expanduser(root)
     file_path = os.path.join(root, name + '.ckpt')
     if os.path.exists(file_path):
