@@ -1,0 +1,24 @@
+# convnet: "resnet18"
+convnet: "resnet18_podnet" # podnet resnet use a 3X3 conv instead of 7X7 conv  
+
+dataset: "ImageNet100" #'imagenet100', 'cifar100'
+base_classes: 50
+increment: 5
+class_order_idx: 0
+
+mem_size_mode: "uniform_fixed_per_cls" #uniform_fixed_per_cls, uniform_fixed_total_mem  
+memory_size: 2000 # Max number of storable examplars
+fixed_memory_per_cls: 20 # the fixed number of exemplars per cls
+
+batch_size: 256 # one card. 512 for metric.
+
+
+input_size: 224 
+
+ft:
+  temperature: 1.0
+
+warmup_epochs: 5
+epochs: 120
+sched: multistep  
+decay_milestones:  [50, 70, 90] 

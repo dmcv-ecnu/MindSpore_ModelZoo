@@ -1,0 +1,18 @@
+
+>>>>>>>>>> group_filter_map <<<<<<<<<<
+
+>>>>>>>>>> dependences <<<<<<<<<<
+{  }
+
+>>>>>>>>>> constraints <<<<<<<<<<
+domain: "{ S_0[ax0] : 0 <= ax0 <= 2097151 }"
+
+>>>>>>>>>> time_records <<<<<<<<<<
+[ Polyhedral exec time ], InitSchedule spent 1.64103 ms
+[ Polyhedral exec time ], ComputeSchedule spent 0.190566 ms
+[ Polyhedral exec time ], AnalyzeSchedule spent 4.34668 ms
+[ Polyhedral exec time ], TileOuterBand spent 4.74977 ms
+[ Polyhedral exec time ], MappingOuterBand spent 2.14106 ms
+[ Polyhedral exec time ], SharedMemoryManager spent 118.712 ms
+[ Polyhedral exec time ], RegisterMemoryManager spent 162.969 ms
+[ Polyhedral exec time ], RealizeManager spent 1.17208 ms
