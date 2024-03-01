@@ -1,0 +1,24 @@
+==========
+Args:{'dataset': 'sysu', 'data_path': '/home/wyb/Dataset/SYSU-MM01/', 'pseudo_labels_path': '/home/wyb/Dataset/SYSU-MM01/mindspore/pseudo_labels/', 'batch_size': 4, 'test_batch_size': 64, 'num_instances': 4, 'workers': 4, 'mode': 'all', 'img_w': 144, 'img_h': 288, 'eps': 0.6, 'eps-gap': 0.02, 'k1': 30, 'k2': 6, 'stride_size': [16, 16], 'arch': 'RN50', 'momentum': 0.1, 'change_scale': 0.1, 'pooling_type': 'gem', 'lr': 0.00035, 'weight_decay': 0.0005, 'bias_lr_factor': 2, 'weight_decay_bias': 0.0005, 'steps': [30, 50], 'gamma': 0.1, 'step_size': 20, 'resume_path': None, 'warmup_factor': 0.01, 'warmup_iters': 10, 'warmup_method': 'linear', 'gpu': 0, 'seed': 1, 'print_freq': 100, 'temp': 0.05, 'save_epoch': 10, 'eval_step': 10, 'use_hard': False, 'stage1_maxepochs': 60, 'stage1_baselr': 0.00035, 'stage1_weight_decay': 0.0001, 'stage1_lrmin': 1e-06, 'stage1_warmup_lrinit': 1e-05, 'stage1_warmup_epoch': 5, 'stage1_batch_size': 64, 'base_epoch': 61, 'stage2_maxepochs': 120, 'stage2_baselr': 0.00035, 'stage2_laterlr_factor': 0.1, 'stage2_weight_decay': 0.0005, 'stage2_weight_decay_bias': 0.0005, 'stage2_bias_lr_factor': 2, 'stage2_steps': [30, 50], 'stage2_gamma': 0.1, 'stage2_warmup_factor': 0.01, 'stage2_warmup_iters': 10, 'stage2_warmup_method': 'linear', 'stage2_ims_per_batch': 64, 'logs_dir': 'logs/', 'logs_time': 'debug', 'logs_file': '0129_toprepare', 'vis_log_dir': 'logs/vis_log/', 'model_path': '/home/wyb/Code/ms_cclnet/checkpoint/'}
+==========
+==> Load unlabeled dataset
+Dataset sysu Statistics:
+  ----------------------------
+  subset   | # ids | # images
+  ----------------------------
+  visible  |   395 |    22258
+  thermal  |   395 |    11909
+  ----------------------------
+  ----------------------------
+Data loading time:	 0.945
+Resized position embedding: %s to %s (50, 2048) (163, 2048)
+Position embedding resize to height:18 width: 9
+Resized position embedding: %s to %s (50, 2048) (163, 2048)
+Position embedding resize to height:18 width: 9
+Resized position embedding: %s to %s (50, 2048) (163, 2048)
+Position embedding resize to height:18 width: 9
+Resized position embedding: %s to %s (50, 2048) (163, 2048)
+Position embedding resize to height:18 width: 9
+Clustering criterion: eps: 0.600
+==> Create pseudo labels for unlabeled data
+==> Extract RGB features
