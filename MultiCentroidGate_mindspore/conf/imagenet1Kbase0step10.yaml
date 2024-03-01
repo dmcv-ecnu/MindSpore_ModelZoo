@@ -1,0 +1,49 @@
+convnet: "preact_resnet"
+
+dataset: "ImageNet1K" #'imagenet100', 'cifar100'
+base_classes: 100
+increment: 100
+class_order_idx: 0
+
+mem_size_mode: "uniform_fixed_total_mem" #uniform_fixed_per_cls, uniform_fixed_total_mem ################!!!!!!!!
+memory_size: 20000 # Max number of storable examplars
+fixed_memory_per_cls: 20 # the fixed number of exemplars per cls
+
+batch_size: 256 # one card. 4096 metric.(1024 for one, num gpus seems not affect.)
+
+# specify in bash file. current cannot merge same value dict
+ft:
+  temperature: 1.0 
+
+input_size: 224
+
+#as cifar....? works well?
+# epochs: 130
+# sched: multistep  
+# decay_milestones: 
+#   - 70
+#   - 110 
+
+# wamup = 5
+warmup_epochs: 5
+epochs: 130
+sched: multistep  
+decay_milestones: 
+  - 40
+  - 70 
+  - 100
+# used in train baseline
+# epochs: 120
+# sched: multistep  
+# decay_milestones: 
+#   - 40
+#   - 70 
+#   - 90
+
+# epochs: 220
+# sched: multistep  
+# decay_milestones: 
+#   - 80
+#   - 120
+#   - 160
+#   - 200

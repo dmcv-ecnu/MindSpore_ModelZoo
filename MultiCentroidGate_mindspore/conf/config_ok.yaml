@@ -1,0 +1,141 @@
+debug: False
+seed: 1993
+data_folder: /hdd/HcSoap/datasets/cifar-100-binary  # Soap
+
+# log
+exp_name: "debug"
+save_dir: "./exp"
+save_model: True
+
+# trainer selection.
+network: "gate_sim" # models.
+trainer: "seperate" # methods.
+subtrainer: "baseline/baseline"
+
+# train opt.
+start_task: 0
+
+# trainer opt.
+aux_cls_type: '1-n' # ["disable", "1-n", "n-n"]
+aux_cls_num: 1
+distillation: "experts" # ['disable', 'experts', 'gate', 'final']
+ft_gate_by_ce: True  
+part_enable: [0,0,1,1]  
+force_ft_first: False # enable expert finetune on first session.
+pretrain_model_dir: null # passed by commandline.
+load_only: ["der"] 
+ft_att: False # for gate_feat.
+tau: 1.0 # best. 2.0 cause acc down(about 0.7)
+logit_normalize: False 
+margin: 4.0
+ft_temp: False
+label_smoothing: 0.0 # best. 0.1 cause acc down(about 0.3)
+
+# model opt.
+topk: -1
+task_temperature: 12.0 # if you use cos similarity, consider to use small value. but cosine result is not good(bad old accuracy)
+expert_type: "en" # ["der", "en"]
+
+# training data augmentation opt.
+trainset_sampling: "normal" # ["over", "down", "normal", "maxk"]
+new_transform: "randaugment" # ["disable", "randaugment", "contrastive"] 
+aug_type: "disable" # ["disable", "mixup", "regmixup", "copypaste/{center/resize}", "temper_mixup", "adv"]
+
+# metric debug option.
+md_opt_cent: True
+md_momentum: 0.8
+md_update_cent: False # using
+md_pos: 2 # 2 best
+md_neg: 2 # 2 best.
+md_heat: 1.0
+md_k: 1.0 # change: now k == md_k * cls_num
+md_pos_old: False # semantic now change to "use prev model's argmax as idx(old: use old model to predict current batch)"
+md_use_la: True
+md_dis_alpha: 1.0
+md_use_la_on_cls: True 
+md_cos_dis: False
+md_reuse: True
+md_ft_bn: True
+md_div_k: True
+
+overlap_dataset: False
+overlap_class: 10
+cls_proto_expand: 1
+ 
+# specified in sub option files.
+
+# #Memory
+coreset_strategy: "iCaRL"  # iCaRL, random, keepall, disable
+coreset_feature: "all" # ["all", "last"]
+
+validation: 0 # Validation split (0. <= x <= 1.)
+use_timm_aug: False # use simple data augmentation. same as DER
+input_size: 32
+  
+ft: 
+  epochs: 30
+  opt: momentum
+  opt_eps: 1e-8 
+  momentum: 0.9
+  weight_decay: 0.0005
+  # scheduler
+  sched: multistep
+  lr: 0.1 
+  decay_milestones: [15] 
+  decay_rate: 0.1
+  warmup_lr: 0.01
+  warmup_epochs: 0
+  # data loader
+  batch_size: 128
+  num_workers: 4
+  pin_mem: true 
+  temperature: 5.0  
+
+amp: True
+syncbn: True
+
+epochs: 130
+# optimizer
+opt: momentum
+opt_eps: 1e-8
+momentum: 0.9
+weight_decay: 0.0005
+# scheduler
+sched: multistep
+lr: 0.1 #0.1
+warmup_lr: 0.01  
+decay_milestones:
+- 70
+- 110
+decay_rate: 0.1
+warmup_epochs: 10
+min_lr: 0.00001
+cooldown_epochs: 0
+
+# augmentation
+color_jitter: 0.4
+aa: rand-m9-mstd0.5-inc1
+aa_n: 2
+aa_m: 9
+train_interpolation: bicubic
+# erase opt.
+repeated_aug: false
+reprob: 0.
+remode: pixel
+recount: 1
+resplit: false
+## cutmix & mixup
+mixup: 0.8
+cutmix: 1.0
+cutmix_minmax: null
+mixup_prob: 1.0
+mixup_switch_prob: 0.5
+mixup_mode: batch
+smoothing: 0.1 # for mixup
+# misc
+device: cuda
+seed: 1993 
+# dataloader
+batch_size: 128 # one card. 512 for metric.
+num_workers: 4
+pin_mem: true 
