@@ -1,0 +1,1564 @@
+# 1.This file shows the parsed IR info when graph evaluating failed to help find the problem.
+# 2.You can search the last `------------------------>` to the node which is inferred failed.
+# 3.Refer to https://www.mindspore.cn/search?inputValue=analyze_fail.dat to get more instructions.
+# ===============================================================================
+
+# [No.1] construct_wrapper.42
+# In file /home/hjh/.conda/envs/md17/lib/python3.9/site-packages/mindspore/nn/wrap/loss_scale.py(330)/    def construct(self, *inputs):/
+funcgraph fg_42(
+        %para1 : Tensor(F32)[3, 40960, 6]    # inputs0
+        , %para2 : Tensor(I32)[3, 40960]    # inputs1
+        , %para3 : Tensor(I32)[3, 40960]    # inputs2
+        , %para4 : Tensor(I32)[3, 1]    # inputs3
+        , %para5 : Tensor(F32)[3, 40960, 3]    # inputs4
+        , %para6 : Tensor(F32)[3, 10240, 3]    # inputs5
+        , %para7 : Tensor(F32)[3, 2560, 3]    # inputs6
+        , %para8 : Tensor(F32)[3, 640, 3]    # inputs7
+        , %para9 : Tensor(F32)[3, 160, 3]    # inputs8
+        , %para10 : Tensor(I32)[3, 40960, 16]    # inputs9
+        , %para11 : Tensor(I32)[3, 10240, 16]    # inputs10
+        , %para12 : Tensor(I32)[3, 2560, 16]    # inputs11
+        , %para13 : Tensor(I32)[3, 640, 16]    # inputs12
+        , %para14 : Tensor(I32)[3, 160, 16]    # inputs13
+        , %para15 : Tensor(I32)[3, 10240, 16]    # inputs14
+        , %para16 : Tensor(I32)[3, 2560, 16]    # inputs15
+        , %para17 : Tensor(I32)[3, 640, 16]    # inputs16
+        , %para18 : Tensor(I32)[3, 160, 16]    # inputs17
+        , %para19 : Tensor(I32)[3, 80, 16]    # inputs18
+        , %para20 : Tensor(I32)[3, 40960, 1]    # inputs19
+        , %para21 : Tensor(I32)[3, 10240, 1]    # inputs20
+        , %para22 : Tensor(I32)[3, 2560, 1]    # inputs21
+        , %para23 : Tensor(I32)[3, 640, 1]    # inputs22
+        , %para24 : Tensor(I32)[3, 160, 1]    # inputs23
+        , %para25 : Ref[Tensor(F32)][]    # scale_sense
+        , %para26 : Ref[Tensor(F32)][8]    # network.fc_start.bias
+        , %para27 : Ref[Tensor(F32)][8]    # network.bn_start.0.gamma
+        , %para28 : Ref[Tensor(F32)][8]    # network.bn_start.0.beta
+        , %para29 : Ref[Tensor(F32)][8]    # network.encoder.0.mlp1.conv.bias
+        , %para30 : Ref[Tensor(F32)][8]    # network.encoder.0.mlp1.batch_norm.gamma
+        , %para31 : Ref[Tensor(F32)][8]    # network.encoder.0.mlp1.batch_norm.beta
+        , %para32 : Ref[Tensor(F32)][32]    # network.encoder.0.mlp2.conv.bias
+        , %para33 : Ref[Tensor(F32)][32]    # network.encoder.0.mlp2.batch_norm.gamma
+        , %para34 : Ref[Tensor(F32)][32]    # network.encoder.0.mlp2.batch_norm.beta
+        , %para35 : Ref[Tensor(F32)][32]    # network.encoder.0.shortcut.conv.bias
+        , %para36 : Ref[Tensor(F32)][32]    # network.encoder.0.shortcut.batch_norm.gamma
+        , %para37 : Ref[Tensor(F32)][32]    # network.encoder.0.shortcut.batch_norm.beta
+        , %para38 : Ref[Tensor(F32)][8]    # network.encoder.0.lse1.mlp.conv.bias
+        , %para39 : Ref[Tensor(F32)][8]    # network.encoder.0.lse1.mlp.batch_norm.gamma
+        , %para40 : Ref[Tensor(F32)][8]    # network.encoder.0.lse1.mlp.batch_norm.beta
+        , %para41 : Ref[Tensor(F32)][8]    # network.encoder.0.lse2.mlp.conv.bias
+        , %para42 : Ref[Tensor(F32)][8]    # network.encoder.0.lse2.mlp.batch_norm.gamma
+        , %para43 : Ref[Tensor(F32)][8]    # network.encoder.0.lse2.mlp.batch_norm.beta
+        , %para44 : Ref[Tensor(F32)][8]    # network.encoder.0.pool1.mlp.conv.bias
+        , %para45 : Ref[Tensor(F32)][8]    # network.encoder.0.pool1.mlp.batch_norm.gamma
+        , %para46 : Ref[Tensor(F32)][8]    # network.encoder.0.pool1.mlp.batch_norm.beta
+        , %para47 : Ref[Tensor(F32)][16]    # network.encoder.0.pool2.mlp.conv.bias
+        , %para48 : Ref[Tensor(F32)][16]    # network.encoder.0.pool2.mlp.batch_norm.gamma
+        , %para49 : Ref[Tensor(F32)][16]    # network.encoder.0.pool2.mlp.batch_norm.beta
+        , %para50 : Ref[Tensor(F32)][32]    # network.encoder.1.mlp1.conv.bias
+        , %para51 : Ref[Tensor(F32)][32]    # network.encoder.1.mlp1.batch_norm.gamma
+        , %para52 : Ref[Tensor(F32)][32]    # network.encoder.1.mlp1.batch_norm.beta
+        , %para53 : Ref[Tensor(F32)][128]    # network.encoder.1.mlp2.conv.bias
+        , %para54 : Ref[Tensor(F32)][128]    # network.encoder.1.mlp2.batch_norm.gamma
+        , %para55 : Ref[Tensor(F32)][128]    # network.encoder.1.mlp2.batch_norm.beta
+        , %para56 : Ref[Tensor(F32)][128]    # network.encoder.1.shortcut.conv.bias
+        , %para57 : Ref[Tensor(F32)][128]    # network.encoder.1.shortcut.batch_norm.gamma
+        , %para58 : Ref[Tensor(F32)][128]    # network.encoder.1.shortcut.batch_norm.beta
+        , %para59 : Ref[Tensor(F32)][32]    # network.encoder.1.lse1.mlp.conv.bias
+        , %para60 : Ref[Tensor(F32)][32]    # network.encoder.1.lse1.mlp.batch_norm.gamma
+        , %para61 : Ref[Tensor(F32)][32]    # network.encoder.1.lse1.mlp.batch_norm.beta
+        , %para62 : Ref[Tensor(F32)][32]    # network.encoder.1.lse2.mlp.conv.bias
+        , %para63 : Ref[Tensor(F32)][32]    # network.encoder.1.lse2.mlp.batch_norm.gamma
+        , %para64 : Ref[Tensor(F32)][32]    # network.encoder.1.lse2.mlp.batch_norm.beta
+        , %para65 : Ref[Tensor(F32)][32]    # network.encoder.1.pool1.mlp.conv.bias
+        , %para66 : Ref[Tensor(F32)][32]    # network.encoder.1.pool1.mlp.batch_norm.gamma
+        , %para67 : Ref[Tensor(F32)][32]    # network.encoder.1.pool1.mlp.batch_norm.beta
+        , %para68 : Ref[Tensor(F32)][64]    # network.encoder.1.pool2.mlp.conv.bias
+        , %para69 : Ref[Tensor(F32)][64]    # network.encoder.1.pool2.mlp.batch_norm.gamma
+        , %para70 : Ref[Tensor(F32)][64]    # network.encoder.1.pool2.mlp.batch_norm.beta
+        , %para71 : Ref[Tensor(F32)][64]    # network.encoder.2.mlp1.conv.bias
+        , %para72 : Ref[Tensor(F32)][64]    # network.encoder.2.mlp1.batch_norm.gamma
+        , %para73 : Ref[Tensor(F32)][64]    # network.encoder.2.mlp1.batch_norm.beta
+        , %para74 : Ref[Tensor(F32)][256]    # network.encoder.2.mlp2.conv.bias
+        , %para75 : Ref[Tensor(F32)][256]    # network.encoder.2.mlp2.batch_norm.gamma
+        , %para76 : Ref[Tensor(F32)][256]    # network.encoder.2.mlp2.batch_norm.beta
+        , %para77 : Ref[Tensor(F32)][256]    # network.encoder.2.shortcut.conv.bias
+        , %para78 : Ref[Tensor(F32)][256]    # network.encoder.2.shortcut.batch_norm.gamma
+        , %para79 : Ref[Tensor(F32)][256]    # network.encoder.2.shortcut.batch_norm.beta
+        , %para80 : Ref[Tensor(F32)][64]    # network.encoder.2.lse1.mlp.conv.bias
+        , %para81 : Ref[Tensor(F32)][64]    # network.encoder.2.lse1.mlp.batch_norm.gamma
+        , %para82 : Ref[Tensor(F32)][64]    # network.encoder.2.lse1.mlp.batch_norm.beta
+        , %para83 : Ref[Tensor(F32)][64]    # network.encoder.2.lse2.mlp.conv.bias
+        , %para84 : Ref[Tensor(F32)][64]    # network.encoder.2.lse2.mlp.batch_norm.gamma
+        , %para85 : Ref[Tensor(F32)][64]    # network.encoder.2.lse2.mlp.batch_norm.beta
+        , %para86 : Ref[Tensor(F32)][64]    # network.encoder.2.pool1.mlp.conv.bias
+        , %para87 : Ref[Tensor(F32)][64]    # network.encoder.2.pool1.mlp.batch_norm.gamma
+        , %para88 : Ref[Tensor(F32)][64]    # network.encoder.2.pool1.mlp.batch_norm.beta
+        , %para89 : Ref[Tensor(F32)][128]    # network.encoder.2.pool2.mlp.conv.bias
+        , %para90 : Ref[Tensor(F32)][128]    # network.encoder.2.pool2.mlp.batch_norm.gamma
+        , %para91 : Ref[Tensor(F32)][128]    # network.encoder.2.pool2.mlp.batch_norm.beta
+        , %para92 : Ref[Tensor(F32)][128]    # network.encoder.3.mlp1.conv.bias
+        , %para93 : Ref[Tensor(F32)][128]    # network.encoder.3.mlp1.batch_norm.gamma
+        , %para94 : Ref[Tensor(F32)][128]    # network.encoder.3.mlp1.batch_norm.beta
+        , %para95 : Ref[Tensor(F32)][512]    # network.encoder.3.mlp2.conv.bias
+        , %para96 : Ref[Tensor(F32)][512]    # network.encoder.3.mlp2.batch_norm.gamma
+        , %para97 : Ref[Tensor(F32)][512]    # network.encoder.3.mlp2.batch_norm.beta
+        , %para98 : Ref[Tensor(F32)][512]    # network.encoder.3.shortcut.conv.bias
+        , %para99 : Ref[Tensor(F32)][512]    # network.encoder.3.shortcut.batch_norm.gamma
+        , %para100 : Ref[Tensor(F32)][512]    # network.encoder.3.shortcut.batch_norm.beta
+        , %para101 : Ref[Tensor(F32)][128]    # network.encoder.3.lse1.mlp.conv.bias
+        , %para102 : Ref[Tensor(F32)][128]    # network.encoder.3.lse1.mlp.batch_norm.gamma
+        , %para103 : Ref[Tensor(F32)][128]    # network.encoder.3.lse1.mlp.batch_norm.beta
+        , %para104 : Ref[Tensor(F32)][128]    # network.encoder.3.lse2.mlp.conv.bias
+        , %para105 : Ref[Tensor(F32)][128]    # network.encoder.3.lse2.mlp.batch_norm.gamma
+        , %para106 : Ref[Tensor(F32)][128]    # network.encoder.3.lse2.mlp.batch_norm.beta
+        , %para107 : Ref[Tensor(F32)][128]    # network.encoder.3.pool1.mlp.conv.bias
+        , %para108 : Ref[Tensor(F32)][128]    # network.encoder.3.pool1.mlp.batch_norm.gamma
+        , %para109 : Ref[Tensor(F32)][128]    # network.encoder.3.pool1.mlp.batch_norm.beta
+        , %para110 : Ref[Tensor(F32)][256]    # network.encoder.3.pool2.mlp.conv.bias
+        , %para111 : Ref[Tensor(F32)][256]    # network.encoder.3.pool2.mlp.batch_norm.gamma
+        , %para112 : Ref[Tensor(F32)][256]    # network.encoder.3.pool2.mlp.batch_norm.beta
+        , %para113 : Ref[Tensor(F32)][256]    # network.encoder.4.mlp1.conv.bias
+        , %para114 : Ref[Tensor(F32)][256]    # network.encoder.4.mlp1.batch_norm.gamma
+        , %para115 : Ref[Tensor(F32)][256]    # network.encoder.4.mlp1.batch_norm.beta
+        , %para116 : Ref[Tensor(F32)][1024]    # network.encoder.4.mlp2.conv.bias
+        , %para117 : Ref[Tensor(F32)][1024]    # network.encoder.4.mlp2.batch_norm.gamma
+        , %para118 : Ref[Tensor(F32)][1024]    # network.encoder.4.mlp2.batch_norm.beta
+        , %para119 : Ref[Tensor(F32)][1024]    # network.encoder.4.shortcut.conv.bias
+        , %para120 : Ref[Tensor(F32)][1024]    # network.encoder.4.shortcut.batch_norm.gamma
+        , %para121 : Ref[Tensor(F32)][1024]    # network.encoder.4.shortcut.batch_norm.beta
+        , %para122 : Ref[Tensor(F32)][256]    # network.encoder.4.lse1.mlp.conv.bias
+        , %para123 : Ref[Tensor(F32)][256]    # network.encoder.4.lse1.mlp.batch_norm.gamma
+        , %para124 : Ref[Tensor(F32)][256]    # network.encoder.4.lse1.mlp.batch_norm.beta
+        , %para125 : Ref[Tensor(F32)][256]    # network.encoder.4.lse2.mlp.conv.bias
+        , %para126 : Ref[Tensor(F32)][256]    # network.encoder.4.lse2.mlp.batch_norm.gamma
+        , %para127 : Ref[Tensor(F32)][256]    # network.encoder.4.lse2.mlp.batch_norm.beta
+        , %para128 : Ref[Tensor(F32)][256]    # network.encoder.4.pool1.mlp.conv.bias
+        , %para129 : Ref[Tensor(F32)][256]    # network.encoder.4.pool1.mlp.batch_norm.gamma
+        , %para130 : Ref[Tensor(F32)][256]    # network.encoder.4.pool1.mlp.batch_norm.beta
+        , %para131 : Ref[Tensor(F32)][512]    # network.encoder.4.pool2.mlp.conv.bias
+        , %para132 : Ref[Tensor(F32)][512]    # network.encoder.4.pool2.mlp.batch_norm.gamma
+        , %para133 : Ref[Tensor(F32)][512]    # network.encoder.4.pool2.mlp.batch_norm.beta
+        , %para134 : Ref[Tensor(F32)][1024]    # network.mlp.conv.bias
+        , %para135 : Ref[Tensor(F32)][1024]    # network.mlp.batch_norm.gamma
+        , %para136 : Ref[Tensor(F32)][1024]    # network.mlp.batch_norm.beta
+        , %para137 : Ref[Tensor(F32)][13]    # network.supervise.0.conv.bias
+        , %para138 : Ref[Tensor(F32)][13]    # network.supervise.0.batch_norm.gamma
+        , %para139 : Ref[Tensor(F32)][13]    # network.supervise.0.batch_norm.beta
+        , %para140 : Ref[Tensor(F32)][13]    # network.supervise.1.conv.bias
+        , %para141 : Ref[Tensor(F32)][13]    # network.supervise.1.batch_norm.gamma
+        , %para142 : Ref[Tensor(F32)][13]    # network.supervise.1.batch_norm.beta
+        , %para143 : Ref[Tensor(F32)][13]    # network.supervise.2.conv.bias
+        , %para144 : Ref[Tensor(F32)][13]    # network.supervise.2.batch_norm.gamma
+        , %para145 : Ref[Tensor(F32)][13]    # network.supervise.2.batch_norm.beta
+        , %para146 : Ref[Tensor(F32)][13]    # network.supervise.3.conv.bias
+        , %para147 : Ref[Tensor(F32)][13]    # network.supervise.3.batch_norm.gamma
+        , %para148 : Ref[Tensor(F32)][13]    # network.supervise.3.batch_norm.beta
+        , %para149 : Ref[Tensor(F32)][13]    # network.supervise.4.conv.bias
+        , %para150 : Ref[Tensor(F32)][13]    # network.supervise.4.batch_norm.gamma
+        , %para151 : Ref[Tensor(F32)][13]    # network.supervise.4.batch_norm.beta
+        , %para152 : Ref[Tensor(F32)][13]    # network.supervise.5.conv.bias
+        , %para153 : Ref[Tensor(F32)][13]    # network.supervise.5.batch_norm.gamma
+        , %para154 : Ref[Tensor(F32)][13]    # network.supervise.5.batch_norm.beta
+        , %para155 : Ref[Tensor(F32)][10]    # network.Se.0.conv.bias
+        , %para156 : Ref[Tensor(F32)][10]    # network.Se.0.batch_norm.gamma
+        , %para157 : Ref[Tensor(F32)][10]    # network.Se.0.batch_norm.beta
+        , %para158 : Ref[Tensor(F32)][10]    # network.Se.1.conv.bias
+        , %para159 : Ref[Tensor(F32)][10]    # network.Se.1.batch_norm.gamma
+        , %para160 : Ref[Tensor(F32)][10]    # network.Se.1.batch_norm.beta
+        , %para161 : Ref[Tensor(F32)][10]    # network.Se.2.conv.bias
+        , %para162 : Ref[Tensor(F32)][10]    # network.Se.2.batch_norm.gamma
+        , %para163 : Ref[Tensor(F32)][10]    # network.Se.2.batch_norm.beta
+        , %para164 : Ref[Tensor(F32)][10]    # network.Se.3.conv.bias
+        , %para165 : Ref[Tensor(F32)][10]    # network.Se.3.batch_norm.gamma
+        , %para166 : Ref[Tensor(F32)][10]    # network.Se.3.batch_norm.beta
+        , %para167 : Ref[Tensor(F32)][512]    # network.decoder.0.conv.bias
+        , %para168 : Ref[Tensor(F32)][512]    # network.decoder.0.batch_norm.gamma
+        , %para169 : Ref[Tensor(F32)][512]    # network.decoder.0.batch_norm.beta
+        , %para170 : Ref[Tensor(F32)][256]    # network.decoder.1.conv.bias
+        , %para171 : Ref[Tensor(F32)][256]    # network.decoder.1.batch_norm.gamma
+        , %para172 : Ref[Tensor(F32)][256]    # network.decoder.1.batch_norm.beta
+        , %para173 : Ref[Tensor(F32)][128]    # network.decoder.2.conv.bias
+        , %para174 : Ref[Tensor(F32)][128]    # network.decoder.2.batch_norm.gamma
+        , %para175 : Ref[Tensor(F32)][128]    # network.decoder.2.batch_norm.beta
+        , %para176 : Ref[Tensor(F32)][32]    # network.decoder.3.conv.bias
+        , %para177 : Ref[Tensor(F32)][32]    # network.decoder.3.batch_norm.gamma
+        , %para178 : Ref[Tensor(F32)][32]    # network.decoder.3.batch_norm.beta
+        , %para179 : Ref[Tensor(F32)][32]    # network.decoder.4.conv.bias
+        , %para180 : Ref[Tensor(F32)][32]    # network.decoder.4.batch_norm.gamma
+        , %para181 : Ref[Tensor(F32)][32]    # network.decoder.4.batch_norm.beta
+        , %para182 : Ref[Tensor(F32)][64]    # network.fc_end.0.conv.bias
+        , %para183 : Ref[Tensor(F32)][64]    # network.fc_end.0.batch_norm.gamma
+        , %para184 : Ref[Tensor(F32)][64]    # network.fc_end.0.batch_norm.beta
+        , %para185 : Ref[Tensor(F32)][32]    # network.fc_end.1.conv.bias
+        , %para186 : Ref[Tensor(F32)][32]    # network.fc_end.1.batch_norm.gamma
+        , %para187 : Ref[Tensor(F32)][32]    # network.fc_end.1.batch_norm.beta
+        , %para188 : Ref[Tensor(F32)][13]    # network.fc_end.3.conv.bias
+        , %para189 : Ref[Tensor(F32)][13]    # network.fc_end.3.batch_norm.gamma
+        , %para190 : Ref[Tensor(F32)][13]    # network.fc_end.3.batch_norm.beta
+        , %para191 : Ref[Tensor(F32)][8, 6]    # network.fc_start.weight
+        , %para192 : Ref[Tensor(F32)][8, 8, 1, 1]    # network.encoder.0.mlp1.conv.weight
+        , %para193 : Ref[Tensor(F32)][32, 16, 1, 1]    # network.encoder.0.mlp2.conv.weight
+        , %para194 : Ref[Tensor(F32)][32, 8, 1, 1]    # network.encoder.0.shortcut.conv.weight
+        , %para195 : Ref[Tensor(F32)][8, 10, 1, 1]    # network.encoder.0.lse1.mlp.conv.weight
+        , %para196 : Ref[Tensor(F32)][8, 8, 1, 1]    # network.encoder.0.lse2.mlp.conv.weight
+        , %para197 : Ref[Tensor(F32)][16, 16]    # network.encoder.0.pool1.score_fn.0.weight
+        , %para198 : Ref[Tensor(F32)][8, 16, 1, 1]    # network.encoder.0.pool1.mlp.conv.weight
+        , %para199 : Ref[Tensor(F32)][16, 16]    # network.encoder.0.pool2.score_fn.0.weight
+        , %para200 : Ref[Tensor(F32)][16, 16, 1, 1]    # network.encoder.0.pool2.mlp.conv.weight
+        , %para201 : Ref[Tensor(F32)][32, 32, 1, 1]    # network.encoder.1.mlp1.conv.weight
+        , %para202 : Ref[Tensor(F32)][128, 64, 1, 1]    # network.encoder.1.mlp2.conv.weight
+        , %para203 : Ref[Tensor(F32)][128, 32, 1, 1]    # network.encoder.1.shortcut.conv.weight
+        , %para204 : Ref[Tensor(F32)][32, 10, 1, 1]    # network.encoder.1.lse1.mlp.conv.weight
+        , %para205 : Ref[Tensor(F32)][32, 32, 1, 1]    # network.encoder.1.lse2.mlp.conv.weight
+        , %para206 : Ref[Tensor(F32)][64, 64]    # network.encoder.1.pool1.score_fn.0.weight
+        , %para207 : Ref[Tensor(F32)][32, 64, 1, 1]    # network.encoder.1.pool1.mlp.conv.weight
+        , %para208 : Ref[Tensor(F32)][64, 64]    # network.encoder.1.pool2.score_fn.0.weight
+        , %para209 : Ref[Tensor(F32)][64, 64, 1, 1]    # network.encoder.1.pool2.mlp.conv.weight
+        , %para210 : Ref[Tensor(F32)][64, 128, 1, 1]    # network.encoder.2.mlp1.conv.weight
+        , %para211 : Ref[Tensor(F32)][256, 128, 1, 1]    # network.encoder.2.mlp2.conv.weight
+        , %para212 : Ref[Tensor(F32)][256, 128, 1, 1]    # network.encoder.2.shortcut.conv.weight
+        , %para213 : Ref[Tensor(F32)][64, 10, 1, 1]    # network.encoder.2.lse1.mlp.conv.weight
+        , %para214 : Ref[Tensor(F32)][64, 64, 1, 1]    # network.encoder.2.lse2.mlp.conv.weight
+        , %para215 : Ref[Tensor(F32)][128, 128]    # network.encoder.2.pool1.score_fn.0.weight
+        , %para216 : Ref[Tensor(F32)][64, 128, 1, 1]    # network.encoder.2.pool1.mlp.conv.weight
+        , %para217 : Ref[Tensor(F32)][128, 128]    # network.encoder.2.pool2.score_fn.0.weight
+        , %para218 : Ref[Tensor(F32)][128, 128, 1, 1]    # network.encoder.2.pool2.mlp.conv.weight
+        , %para219 : Ref[Tensor(F32)][128, 256, 1, 1]    # network.encoder.3.mlp1.conv.weight
+        , %para220 : Ref[Tensor(F32)][512, 256, 1, 1]    # network.encoder.3.mlp2.conv.weight
+        , %para221 : Ref[Tensor(F32)][512, 256, 1, 1]    # network.encoder.3.shortcut.conv.weight
+        , %para222 : Ref[Tensor(F32)][128, 10, 1, 1]    # network.encoder.3.lse1.mlp.conv.weight
+        , %para223 : Ref[Tensor(F32)][128, 128, 1, 1]    # network.encoder.3.lse2.mlp.conv.weight
+        , %para224 : Ref[Tensor(F32)][256, 256]    # network.encoder.3.pool1.score_fn.0.weight
+        , %para225 : Ref[Tensor(F32)][128, 256, 1, 1]    # network.encoder.3.pool1.mlp.conv.weight
+        , %para226 : Ref[Tensor(F32)][256, 256]    # network.encoder.3.pool2.score_fn.0.weight
+        , %para227 : Ref[Tensor(F32)][256, 256, 1, 1]    # network.encoder.3.pool2.mlp.conv.weight
+        , %para228 : Ref[Tensor(F32)][256, 512, 1, 1]    # network.encoder.4.mlp1.conv.weight
+        , %para229 : Ref[Tensor(F32)][1024, 512, 1, 1]    # network.encoder.4.mlp2.conv.weight
+        , %para230 : Ref[Tensor(F32)][1024, 512, 1, 1]    # network.encoder.4.shortcut.conv.weight
+        , %para231 : Ref[Tensor(F32)][256, 10, 1, 1]    # network.encoder.4.lse1.mlp.conv.weight
+        , %para232 : Ref[Tensor(F32)][256, 256, 1, 1]    # network.encoder.4.lse2.mlp.conv.weight
+        , %para233 : Ref[Tensor(F32)][512, 512]    # network.encoder.4.pool1.score_fn.0.weight
+        , %para234 : Ref[Tensor(F32)][256, 512, 1, 1]    # network.encoder.4.pool1.mlp.conv.weight
+        , %para235 : Ref[Tensor(F32)][512, 512]    # network.encoder.4.pool2.score_fn.0.weight
+        , %para236 : Ref[Tensor(F32)][512, 512, 1, 1]    # network.encoder.4.pool2.mlp.conv.weight
+        , %para237 : Ref[Tensor(F32)][1024, 1024, 1, 1]    # network.mlp.conv.weight
+        , %para238 : Ref[Tensor(F32)][13, 1024, 1, 1]    # network.supervise.0.conv.weight
+        , %para239 : Ref[Tensor(F32)][13, 512, 1, 1]    # network.supervise.1.conv.weight
+        , %para240 : Ref[Tensor(F32)][13, 256, 1, 1]    # network.supervise.2.conv.weight
+        , %para241 : Ref[Tensor(F32)][13, 128, 1, 1]    # network.supervise.3.conv.weight
+        , %para242 : Ref[Tensor(F32)][13, 32, 1, 1]    # network.supervise.4.conv.weight
+        , %para243 : Ref[Tensor(F32)][13, 32, 1, 1]    # network.supervise.5.conv.weight
+        , %para244 : Ref[Tensor(F32)][10, 512, 1, 1]    # network.Se.0.conv.weight
+        , %para245 : Ref[Tensor(F32)][10, 256, 1, 1]    # network.Se.1.conv.weight
+        , %para246 : Ref[Tensor(F32)][10, 128, 1, 1]    # network.Se.2.conv.weight
+        , %para247 : Ref[Tensor(F32)][10, 32, 1, 1]    # network.Se.3.conv.weight
+        , %para248 : Ref[Tensor(F32)][1536, 512, 1, 1]    # network.decoder.0.conv.weight
+        , %para249 : Ref[Tensor(F32)][768, 256, 1, 1]    # network.decoder.1.conv.weight
+        , %para250 : Ref[Tensor(F32)][384, 128, 1, 1]    # network.decoder.2.conv.weight
+        , %para251 : Ref[Tensor(F32)][160, 32, 1, 1]    # network.decoder.3.conv.weight
+        , %para252 : Ref[Tensor(F32)][64, 32, 1, 1]    # network.decoder.4.conv.weight
+        , %para253 : Ref[Tensor(F32)][64, 32, 1, 1]    # network.fc_end.0.conv.weight
+        , %para254 : Ref[Tensor(F32)][32, 64, 1, 1]    # network.fc_end.1.conv.weight
+        , %para255 : Ref[Tensor(F32)][13, 32, 1, 1]    # network.fc_end.3.conv.weight
+        , %para256 : Ref[Tensor(F32)][1]    # beta1_power
+        , %para257 : Ref[Tensor(F32)][1]    # beta2_power
+        , %para258 : Ref[Tensor(I32)][]    # training_epoch
+        , %para259 : Ref[Tensor(I32)][]    # current_iterator_step
+        , %para260 : Ref[Tensor(F32)][8]    # moment1.network.fc_start.bias
+        , %para261 : Ref[Tensor(F32)][8]    # moment1.network.bn_start.0.gamma
+        , %para262 : Ref[Tensor(F32)][8]    # moment1.network.bn_start.0.beta
+        , %para263 : Ref[Tensor(F32)][8]    # moment1.network.encoder.0.mlp1.conv.bias
+        , %para264 : Ref[Tensor(F32)][8]    # moment1.network.encoder.0.mlp1.batch_norm.gamma
+        , %para265 : Ref[Tensor(F32)][8]    # moment1.network.encoder.0.mlp1.batch_norm.beta
+        , %para266 : Ref[Tensor(F32)][32]    # moment1.network.encoder.0.mlp2.conv.bias
+        , %para267 : Ref[Tensor(F32)][32]    # moment1.network.encoder.0.mlp2.batch_norm.gamma
+        , %para268 : Ref[Tensor(F32)][32]    # moment1.network.encoder.0.mlp2.batch_norm.beta
+        , %para269 : Ref[Tensor(F32)][32]    # moment1.network.encoder.0.shortcut.conv.bias
+        , %para270 : Ref[Tensor(F32)][32]    # moment1.network.encoder.0.shortcut.batch_norm.gamma
+        , %para271 : Ref[Tensor(F32)][32]    # moment1.network.encoder.0.shortcut.batch_norm.beta
+        , %para272 : Ref[Tensor(F32)][8]    # moment1.network.encoder.0.lse1.mlp.conv.bias
+        , %para273 : Ref[Tensor(F32)][8]    # moment1.network.encoder.0.lse1.mlp.batch_norm.gamma
+        , %para274 : Ref[Tensor(F32)][8]    # moment1.network.encoder.0.lse1.mlp.batch_norm.beta
+        , %para275 : Ref[Tensor(F32)][8]    # moment1.network.encoder.0.lse2.mlp.conv.bias
+        , %para276 : Ref[Tensor(F32)][8]    # moment1.network.encoder.0.lse2.mlp.batch_norm.gamma
+        , %para277 : Ref[Tensor(F32)][8]    # moment1.network.encoder.0.lse2.mlp.batch_norm.beta
+        , %para278 : Ref[Tensor(F32)][8]    # moment1.network.encoder.0.pool1.mlp.conv.bias
+        , %para279 : Ref[Tensor(F32)][8]    # moment1.network.encoder.0.pool1.mlp.batch_norm.gamma
+        , %para280 : Ref[Tensor(F32)][8]    # moment1.network.encoder.0.pool1.mlp.batch_norm.beta
+        , %para281 : Ref[Tensor(F32)][16]    # moment1.network.encoder.0.pool2.mlp.conv.bias
+        , %para282 : Ref[Tensor(F32)][16]    # moment1.network.encoder.0.pool2.mlp.batch_norm.gamma
+        , %para283 : Ref[Tensor(F32)][16]    # moment1.network.encoder.0.pool2.mlp.batch_norm.beta
+        , %para284 : Ref[Tensor(F32)][32]    # moment1.network.encoder.1.mlp1.conv.bias
+        , %para285 : Ref[Tensor(F32)][32]    # moment1.network.encoder.1.mlp1.batch_norm.gamma
+        , %para286 : Ref[Tensor(F32)][32]    # moment1.network.encoder.1.mlp1.batch_norm.beta
+        , %para287 : Ref[Tensor(F32)][128]    # moment1.network.encoder.1.mlp2.conv.bias
+        , %para288 : Ref[Tensor(F32)][128]    # moment1.network.encoder.1.mlp2.batch_norm.gamma
+        , %para289 : Ref[Tensor(F32)][128]    # moment1.network.encoder.1.mlp2.batch_norm.beta
+        , %para290 : Ref[Tensor(F32)][128]    # moment1.network.encoder.1.shortcut.conv.bias
+        , %para291 : Ref[Tensor(F32)][128]    # moment1.network.encoder.1.shortcut.batch_norm.gamma
+        , %para292 : Ref[Tensor(F32)][128]    # moment1.network.encoder.1.shortcut.batch_norm.beta
+        , %para293 : Ref[Tensor(F32)][32]    # moment1.network.encoder.1.lse1.mlp.conv.bias
+        , %para294 : Ref[Tensor(F32)][32]    # moment1.network.encoder.1.lse1.mlp.batch_norm.gamma
+        , %para295 : Ref[Tensor(F32)][32]    # moment1.network.encoder.1.lse1.mlp.batch_norm.beta
+        , %para296 : Ref[Tensor(F32)][32]    # moment1.network.encoder.1.lse2.mlp.conv.bias
+        , %para297 : Ref[Tensor(F32)][32]    # moment1.network.encoder.1.lse2.mlp.batch_norm.gamma
+        , %para298 : Ref[Tensor(F32)][32]    # moment1.network.encoder.1.lse2.mlp.batch_norm.beta
+        , %para299 : Ref[Tensor(F32)][32]    # moment1.network.encoder.1.pool1.mlp.conv.bias
+        , %para300 : Ref[Tensor(F32)][32]    # moment1.network.encoder.1.pool1.mlp.batch_norm.gamma
+        , %para301 : Ref[Tensor(F32)][32]    # moment1.network.encoder.1.pool1.mlp.batch_norm.beta
+        , %para302 : Ref[Tensor(F32)][64]    # moment1.network.encoder.1.pool2.mlp.conv.bias
+        , %para303 : Ref[Tensor(F32)][64]    # moment1.network.encoder.1.pool2.mlp.batch_norm.gamma
+        , %para304 : Ref[Tensor(F32)][64]    # moment1.network.encoder.1.pool2.mlp.batch_norm.beta
+        , %para305 : Ref[Tensor(F32)][64]    # moment1.network.encoder.2.mlp1.conv.bias
+        , %para306 : Ref[Tensor(F32)][64]    # moment1.network.encoder.2.mlp1.batch_norm.gamma
+        , %para307 : Ref[Tensor(F32)][64]    # moment1.network.encoder.2.mlp1.batch_norm.beta
+        , %para308 : Ref[Tensor(F32)][256]    # moment1.network.encoder.2.mlp2.conv.bias
+        , %para309 : Ref[Tensor(F32)][256]    # moment1.network.encoder.2.mlp2.batch_norm.gamma
+        , %para310 : Ref[Tensor(F32)][256]    # moment1.network.encoder.2.mlp2.batch_norm.beta
+        , %para311 : Ref[Tensor(F32)][256]    # moment1.network.encoder.2.shortcut.conv.bias
+        , %para312 : Ref[Tensor(F32)][256]    # moment1.network.encoder.2.shortcut.batch_norm.gamma
+        , %para313 : Ref[Tensor(F32)][256]    # moment1.network.encoder.2.shortcut.batch_norm.beta
+        , %para314 : Ref[Tensor(F32)][64]    # moment1.network.encoder.2.lse1.mlp.conv.bias
+        , %para315 : Ref[Tensor(F32)][64]    # moment1.network.encoder.2.lse1.mlp.batch_norm.gamma
+        , %para316 : Ref[Tensor(F32)][64]    # moment1.network.encoder.2.lse1.mlp.batch_norm.beta
+        , %para317 : Ref[Tensor(F32)][64]    # moment1.network.encoder.2.lse2.mlp.conv.bias
+        , %para318 : Ref[Tensor(F32)][64]    # moment1.network.encoder.2.lse2.mlp.batch_norm.gamma
+        , %para319 : Ref[Tensor(F32)][64]    # moment1.network.encoder.2.lse2.mlp.batch_norm.beta
+        , %para320 : Ref[Tensor(F32)][64]    # moment1.network.encoder.2.pool1.mlp.conv.bias
+        , %para321 : Ref[Tensor(F32)][64]    # moment1.network.encoder.2.pool1.mlp.batch_norm.gamma
+        , %para322 : Ref[Tensor(F32)][64]    # moment1.network.encoder.2.pool1.mlp.batch_norm.beta
+        , %para323 : Ref[Tensor(F32)][128]    # moment1.network.encoder.2.pool2.mlp.conv.bias
+        , %para324 : Ref[Tensor(F32)][128]    # moment1.network.encoder.2.pool2.mlp.batch_norm.gamma
+        , %para325 : Ref[Tensor(F32)][128]    # moment1.network.encoder.2.pool2.mlp.batch_norm.beta
+        , %para326 : Ref[Tensor(F32)][128]    # moment1.network.encoder.3.mlp1.conv.bias
+        , %para327 : Ref[Tensor(F32)][128]    # moment1.network.encoder.3.mlp1.batch_norm.gamma
+        , %para328 : Ref[Tensor(F32)][128]    # moment1.network.encoder.3.mlp1.batch_norm.beta
+        , %para329 : Ref[Tensor(F32)][512]    # moment1.network.encoder.3.mlp2.conv.bias
+        , %para330 : Ref[Tensor(F32)][512]    # moment1.network.encoder.3.mlp2.batch_norm.gamma
+        , %para331 : Ref[Tensor(F32)][512]    # moment1.network.encoder.3.mlp2.batch_norm.beta
+        , %para332 : Ref[Tensor(F32)][512]    # moment1.network.encoder.3.shortcut.conv.bias
+        , %para333 : Ref[Tensor(F32)][512]    # moment1.network.encoder.3.shortcut.batch_norm.gamma
+        , %para334 : Ref[Tensor(F32)][512]    # moment1.network.encoder.3.shortcut.batch_norm.beta
+        , %para335 : Ref[Tensor(F32)][128]    # moment1.network.encoder.3.lse1.mlp.conv.bias
+        , %para336 : Ref[Tensor(F32)][128]    # moment1.network.encoder.3.lse1.mlp.batch_norm.gamma
+        , %para337 : Ref[Tensor(F32)][128]    # moment1.network.encoder.3.lse1.mlp.batch_norm.beta
+        , %para338 : Ref[Tensor(F32)][128]    # moment1.network.encoder.3.lse2.mlp.conv.bias
+        , %para339 : Ref[Tensor(F32)][128]    # moment1.network.encoder.3.lse2.mlp.batch_norm.gamma
+        , %para340 : Ref[Tensor(F32)][128]    # moment1.network.encoder.3.lse2.mlp.batch_norm.beta
+        , %para341 : Ref[Tensor(F32)][128]    # moment1.network.encoder.3.pool1.mlp.conv.bias
+        , %para342 : Ref[Tensor(F32)][128]    # moment1.network.encoder.3.pool1.mlp.batch_norm.gamma
+        , %para343 : Ref[Tensor(F32)][128]    # moment1.network.encoder.3.pool1.mlp.batch_norm.beta
+        , %para344 : Ref[Tensor(F32)][256]    # moment1.network.encoder.3.pool2.mlp.conv.bias
+        , %para345 : Ref[Tensor(F32)][256]    # moment1.network.encoder.3.pool2.mlp.batch_norm.gamma
+        , %para346 : Ref[Tensor(F32)][256]    # moment1.network.encoder.3.pool2.mlp.batch_norm.beta
+        , %para347 : Ref[Tensor(F32)][256]    # moment1.network.encoder.4.mlp1.conv.bias
+        , %para348 : Ref[Tensor(F32)][256]    # moment1.network.encoder.4.mlp1.batch_norm.gamma
+        , %para349 : Ref[Tensor(F32)][256]    # moment1.network.encoder.4.mlp1.batch_norm.beta
+        , %para350 : Ref[Tensor(F32)][1024]    # moment1.network.encoder.4.mlp2.conv.bias
+        , %para351 : Ref[Tensor(F32)][1024]    # moment1.network.encoder.4.mlp2.batch_norm.gamma
+        , %para352 : Ref[Tensor(F32)][1024]    # moment1.network.encoder.4.mlp2.batch_norm.beta
+        , %para353 : Ref[Tensor(F32)][1024]    # moment1.network.encoder.4.shortcut.conv.bias
+        , %para354 : Ref[Tensor(F32)][1024]    # moment1.network.encoder.4.shortcut.batch_norm.gamma
+        , %para355 : Ref[Tensor(F32)][1024]    # moment1.network.encoder.4.shortcut.batch_norm.beta
+        , %para356 : Ref[Tensor(F32)][256]    # moment1.network.encoder.4.lse1.mlp.conv.bias
+        , %para357 : Ref[Tensor(F32)][256]    # moment1.network.encoder.4.lse1.mlp.batch_norm.gamma
+        , %para358 : Ref[Tensor(F32)][256]    # moment1.network.encoder.4.lse1.mlp.batch_norm.beta
+        , %para359 : Ref[Tensor(F32)][256]    # moment1.network.encoder.4.lse2.mlp.conv.bias
+        , %para360 : Ref[Tensor(F32)][256]    # moment1.network.encoder.4.lse2.mlp.batch_norm.gamma
+        , %para361 : Ref[Tensor(F32)][256]    # moment1.network.encoder.4.lse2.mlp.batch_norm.beta
+        , %para362 : Ref[Tensor(F32)][256]    # moment1.network.encoder.4.pool1.mlp.conv.bias
+        , %para363 : Ref[Tensor(F32)][256]    # moment1.network.encoder.4.pool1.mlp.batch_norm.gamma
+        , %para364 : Ref[Tensor(F32)][256]    # moment1.network.encoder.4.pool1.mlp.batch_norm.beta
+        , %para365 : Ref[Tensor(F32)][512]    # moment1.network.encoder.4.pool2.mlp.conv.bias
+        , %para366 : Ref[Tensor(F32)][512]    # moment1.network.encoder.4.pool2.mlp.batch_norm.gamma
+        , %para367 : Ref[Tensor(F32)][512]    # moment1.network.encoder.4.pool2.mlp.batch_norm.beta
+        , %para368 : Ref[Tensor(F32)][1024]    # moment1.network.mlp.conv.bias
+        , %para369 : Ref[Tensor(F32)][1024]    # moment1.network.mlp.batch_norm.gamma
+        , %para370 : Ref[Tensor(F32)][1024]    # moment1.network.mlp.batch_norm.beta
+        , %para371 : Ref[Tensor(F32)][13]    # moment1.network.supervise.0.conv.bias
+        , %para372 : Ref[Tensor(F32)][13]    # moment1.network.supervise.0.batch_norm.gamma
+        , %para373 : Ref[Tensor(F32)][13]    # moment1.network.supervise.0.batch_norm.beta
+        , %para374 : Ref[Tensor(F32)][13]    # moment1.network.supervise.1.conv.bias
+        , %para375 : Ref[Tensor(F32)][13]    # moment1.network.supervise.1.batch_norm.gamma
+        , %para376 : Ref[Tensor(F32)][13]    # moment1.network.supervise.1.batch_norm.beta
+        , %para377 : Ref[Tensor(F32)][13]    # moment1.network.supervise.2.conv.bias
+        , %para378 : Ref[Tensor(F32)][13]    # moment1.network.supervise.2.batch_norm.gamma
+        , %para379 : Ref[Tensor(F32)][13]    # moment1.network.supervise.2.batch_norm.beta
+        , %para380 : Ref[Tensor(F32)][13]    # moment1.network.supervise.3.conv.bias
+        , %para381 : Ref[Tensor(F32)][13]    # moment1.network.supervise.3.batch_norm.gamma
+        , %para382 : Ref[Tensor(F32)][13]    # moment1.network.supervise.3.batch_norm.beta
+        , %para383 : Ref[Tensor(F32)][13]    # moment1.network.supervise.4.conv.bias
+        , %para384 : Ref[Tensor(F32)][13]    # moment1.network.supervise.4.batch_norm.gamma
+        , %para385 : Ref[Tensor(F32)][13]    # moment1.network.supervise.4.batch_norm.beta
+        , %para386 : Ref[Tensor(F32)][13]    # moment1.network.supervise.5.conv.bias
+        , %para387 : Ref[Tensor(F32)][13]    # moment1.network.supervise.5.batch_norm.gamma
+        , %para388 : Ref[Tensor(F32)][13]    # moment1.network.supervise.5.batch_norm.beta
+        , %para389 : Ref[Tensor(F32)][10]    # moment1.network.Se.0.conv.bias
+        , %para390 : Ref[Tensor(F32)][10]    # moment1.network.Se.0.batch_norm.gamma
+        , %para391 : Ref[Tensor(F32)][10]    # moment1.network.Se.0.batch_norm.beta
+        , %para392 : Ref[Tensor(F32)][10]    # moment1.network.Se.1.conv.bias
+        , %para393 : Ref[Tensor(F32)][10]    # moment1.network.Se.1.batch_norm.gamma
+        , %para394 : Ref[Tensor(F32)][10]    # moment1.network.Se.1.batch_norm.beta
+        , %para395 : Ref[Tensor(F32)][10]    # moment1.network.Se.2.conv.bias
+        , %para396 : Ref[Tensor(F32)][10]    # moment1.network.Se.2.batch_norm.gamma
+        , %para397 : Ref[Tensor(F32)][10]    # moment1.network.Se.2.batch_norm.beta
+        , %para398 : Ref[Tensor(F32)][10]    # moment1.network.Se.3.conv.bias
+        , %para399 : Ref[Tensor(F32)][10]    # moment1.network.Se.3.batch_norm.gamma
+        , %para400 : Ref[Tensor(F32)][10]    # moment1.network.Se.3.batch_norm.beta
+        , %para401 : Ref[Tensor(F32)][512]    # moment1.network.decoder.0.conv.bias
+        , %para402 : Ref[Tensor(F32)][512]    # moment1.network.decoder.0.batch_norm.gamma
+        , %para403 : Ref[Tensor(F32)][512]    # moment1.network.decoder.0.batch_norm.beta
+        , %para404 : Ref[Tensor(F32)][256]    # moment1.network.decoder.1.conv.bias
+        , %para405 : Ref[Tensor(F32)][256]    # moment1.network.decoder.1.batch_norm.gamma
+        , %para406 : Ref[Tensor(F32)][256]    # moment1.network.decoder.1.batch_norm.beta
+        , %para407 : Ref[Tensor(F32)][128]    # moment1.network.decoder.2.conv.bias
+        , %para408 : Ref[Tensor(F32)][128]    # moment1.network.decoder.2.batch_norm.gamma
+        , %para409 : Ref[Tensor(F32)][128]    # moment1.network.decoder.2.batch_norm.beta
+        , %para410 : Ref[Tensor(F32)][32]    # moment1.network.decoder.3.conv.bias
+        , %para411 : Ref[Tensor(F32)][32]    # moment1.network.decoder.3.batch_norm.gamma
+        , %para412 : Ref[Tensor(F32)][32]    # moment1.network.decoder.3.batch_norm.beta
+        , %para413 : Ref[Tensor(F32)][32]    # moment1.network.decoder.4.conv.bias
+        , %para414 : Ref[Tensor(F32)][32]    # moment1.network.decoder.4.batch_norm.gamma
+        , %para415 : Ref[Tensor(F32)][32]    # moment1.network.decoder.4.batch_norm.beta
+        , %para416 : Ref[Tensor(F32)][64]    # moment1.network.fc_end.0.conv.bias
+        , %para417 : Ref[Tensor(F32)][64]    # moment1.network.fc_end.0.batch_norm.gamma
+        , %para418 : Ref[Tensor(F32)][64]    # moment1.network.fc_end.0.batch_norm.beta
+        , %para419 : Ref[Tensor(F32)][32]    # moment1.network.fc_end.1.conv.bias
+        , %para420 : Ref[Tensor(F32)][32]    # moment1.network.fc_end.1.batch_norm.gamma
+        , %para421 : Ref[Tensor(F32)][32]    # moment1.network.fc_end.1.batch_norm.beta
+        , %para422 : Ref[Tensor(F32)][13]    # moment1.network.fc_end.3.conv.bias
+        , %para423 : Ref[Tensor(F32)][13]    # moment1.network.fc_end.3.batch_norm.gamma
+        , %para424 : Ref[Tensor(F32)][13]    # moment1.network.fc_end.3.batch_norm.beta
+        , %para425 : Ref[Tensor(F32)][8, 6]    # moment1.network.fc_start.weight
+        , %para426 : Ref[Tensor(F32)][8, 8, 1, 1]    # moment1.network.encoder.0.mlp1.conv.weight
+        , %para427 : Ref[Tensor(F32)][32, 16, 1, 1]    # moment1.network.encoder.0.mlp2.conv.weight
+        , %para428 : Ref[Tensor(F32)][32, 8, 1, 1]    # moment1.network.encoder.0.shortcut.conv.weight
+        , %para429 : Ref[Tensor(F32)][8, 10, 1, 1]    # moment1.network.encoder.0.lse1.mlp.conv.weight
+        , %para430 : Ref[Tensor(F32)][8, 8, 1, 1]    # moment1.network.encoder.0.lse2.mlp.conv.weight
+        , %para431 : Ref[Tensor(F32)][16, 16]    # moment1.network.encoder.0.pool1.score_fn.0.weight
+        , %para432 : Ref[Tensor(F32)][8, 16, 1, 1]    # moment1.network.encoder.0.pool1.mlp.conv.weight
+        , %para433 : Ref[Tensor(F32)][16, 16]    # moment1.network.encoder.0.pool2.score_fn.0.weight
+        , %para434 : Ref[Tensor(F32)][16, 16, 1, 1]    # moment1.network.encoder.0.pool2.mlp.conv.weight
+        , %para435 : Ref[Tensor(F32)][32, 32, 1, 1]    # moment1.network.encoder.1.mlp1.conv.weight
+        , %para436 : Ref[Tensor(F32)][128, 64, 1, 1]    # moment1.network.encoder.1.mlp2.conv.weight
+        , %para437 : Ref[Tensor(F32)][128, 32, 1, 1]    # moment1.network.encoder.1.shortcut.conv.weight
+        , %para438 : Ref[Tensor(F32)][32, 10, 1, 1]    # moment1.network.encoder.1.lse1.mlp.conv.weight
+        , %para439 : Ref[Tensor(F32)][32, 32, 1, 1]    # moment1.network.encoder.1.lse2.mlp.conv.weight
+        , %para440 : Ref[Tensor(F32)][64, 64]    # moment1.network.encoder.1.pool1.score_fn.0.weight
+        , %para441 : Ref[Tensor(F32)][32, 64, 1, 1]    # moment1.network.encoder.1.pool1.mlp.conv.weight
+        , %para442 : Ref[Tensor(F32)][64, 64]    # moment1.network.encoder.1.pool2.score_fn.0.weight
+        , %para443 : Ref[Tensor(F32)][64, 64, 1, 1]    # moment1.network.encoder.1.pool2.mlp.conv.weight
+        , %para444 : Ref[Tensor(F32)][64, 128, 1, 1]    # moment1.network.encoder.2.mlp1.conv.weight
+        , %para445 : Ref[Tensor(F32)][256, 128, 1, 1]    # moment1.network.encoder.2.mlp2.conv.weight
+        , %para446 : Ref[Tensor(F32)][256, 128, 1, 1]    # moment1.network.encoder.2.shortcut.conv.weight
+        , %para447 : Ref[Tensor(F32)][64, 10, 1, 1]    # moment1.network.encoder.2.lse1.mlp.conv.weight
+        , %para448 : Ref[Tensor(F32)][64, 64, 1, 1]    # moment1.network.encoder.2.lse2.mlp.conv.weight
+        , %para449 : Ref[Tensor(F32)][128, 128]    # moment1.network.encoder.2.pool1.score_fn.0.weight
+        , %para450 : Ref[Tensor(F32)][64, 128, 1, 1]    # moment1.network.encoder.2.pool1.mlp.conv.weight
+        , %para451 : Ref[Tensor(F32)][128, 128]    # moment1.network.encoder.2.pool2.score_fn.0.weight
+        , %para452 : Ref[Tensor(F32)][128, 128, 1, 1]    # moment1.network.encoder.2.pool2.mlp.conv.weight
+        , %para453 : Ref[Tensor(F32)][128, 256, 1, 1]    # moment1.network.encoder.3.mlp1.conv.weight
+        , %para454 : Ref[Tensor(F32)][512, 256, 1, 1]    # moment1.network.encoder.3.mlp2.conv.weight
+        , %para455 : Ref[Tensor(F32)][512, 256, 1, 1]    # moment1.network.encoder.3.shortcut.conv.weight
+        , %para456 : Ref[Tensor(F32)][128, 10, 1, 1]    # moment1.network.encoder.3.lse1.mlp.conv.weight
+        , %para457 : Ref[Tensor(F32)][128, 128, 1, 1]    # moment1.network.encoder.3.lse2.mlp.conv.weight
+        , %para458 : Ref[Tensor(F32)][256, 256]    # moment1.network.encoder.3.pool1.score_fn.0.weight
+        , %para459 : Ref[Tensor(F32)][128, 256, 1, 1]    # moment1.network.encoder.3.pool1.mlp.conv.weight
+        , %para460 : Ref[Tensor(F32)][256, 256]    # moment1.network.encoder.3.pool2.score_fn.0.weight
+        , %para461 : Ref[Tensor(F32)][256, 256, 1, 1]    # moment1.network.encoder.3.pool2.mlp.conv.weight
+        , %para462 : Ref[Tensor(F32)][256, 512, 1, 1]    # moment1.network.encoder.4.mlp1.conv.weight
+        , %para463 : Ref[Tensor(F32)][1024, 512, 1, 1]    # moment1.network.encoder.4.mlp2.conv.weight
+        , %para464 : Ref[Tensor(F32)][1024, 512, 1, 1]    # moment1.network.encoder.4.shortcut.conv.weight
+        , %para465 : Ref[Tensor(F32)][256, 10, 1, 1]    # moment1.network.encoder.4.lse1.mlp.conv.weight
+        , %para466 : Ref[Tensor(F32)][256, 256, 1, 1]    # moment1.network.encoder.4.lse2.mlp.conv.weight
+        , %para467 : Ref[Tensor(F32)][512, 512]    # moment1.network.encoder.4.pool1.score_fn.0.weight
+        , %para468 : Ref[Tensor(F32)][256, 512, 1, 1]    # moment1.network.encoder.4.pool1.mlp.conv.weight
+        , %para469 : Ref[Tensor(F32)][512, 512]    # moment1.network.encoder.4.pool2.score_fn.0.weight
+        , %para470 : Ref[Tensor(F32)][512, 512, 1, 1]    # moment1.network.encoder.4.pool2.mlp.conv.weight
+        , %para471 : Ref[Tensor(F32)][1024, 1024, 1, 1]    # moment1.network.mlp.conv.weight
+        , %para472 : Ref[Tensor(F32)][13, 1024, 1, 1]    # moment1.network.supervise.0.conv.weight
+        , %para473 : Ref[Tensor(F32)][13, 512, 1, 1]    # moment1.network.supervise.1.conv.weight
+        , %para474 : Ref[Tensor(F32)][13, 256, 1, 1]    # moment1.network.supervise.2.conv.weight
+        , %para475 : Ref[Tensor(F32)][13, 128, 1, 1]    # moment1.network.supervise.3.conv.weight
+        , %para476 : Ref[Tensor(F32)][13, 32, 1, 1]    # moment1.network.supervise.4.conv.weight
+        , %para477 : Ref[Tensor(F32)][13, 32, 1, 1]    # moment1.network.supervise.5.conv.weight
+        , %para478 : Ref[Tensor(F32)][10, 512, 1, 1]    # moment1.network.Se.0.conv.weight
+        , %para479 : Ref[Tensor(F32)][10, 256, 1, 1]    # moment1.network.Se.1.conv.weight
+        , %para480 : Ref[Tensor(F32)][10, 128, 1, 1]    # moment1.network.Se.2.conv.weight
+        , %para481 : Ref[Tensor(F32)][10, 32, 1, 1]    # moment1.network.Se.3.conv.weight
+        , %para482 : Ref[Tensor(F32)][1536, 512, 1, 1]    # moment1.network.decoder.0.conv.weight
+        , %para483 : Ref[Tensor(F32)][768, 256, 1, 1]    # moment1.network.decoder.1.conv.weight
+        , %para484 : Ref[Tensor(F32)][384, 128, 1, 1]    # moment1.network.decoder.2.conv.weight
+        , %para485 : Ref[Tensor(F32)][160, 32, 1, 1]    # moment1.network.decoder.3.conv.weight
+        , %para486 : Ref[Tensor(F32)][64, 32, 1, 1]    # moment1.network.decoder.4.conv.weight
+        , %para487 : Ref[Tensor(F32)][64, 32, 1, 1]    # moment1.network.fc_end.0.conv.weight
+        , %para488 : Ref[Tensor(F32)][32, 64, 1, 1]    # moment1.network.fc_end.1.conv.weight
+        , %para489 : Ref[Tensor(F32)][13, 32, 1, 1]    # moment1.network.fc_end.3.conv.weight
+        , %para490 : Ref[Tensor(F32)][8]    # moment2.network.fc_start.bias
+        , %para491 : Ref[Tensor(F32)][8]    # moment2.network.bn_start.0.gamma
+        , %para492 : Ref[Tensor(F32)][8]    # moment2.network.bn_start.0.beta
+        , %para493 : Ref[Tensor(F32)][8]    # moment2.network.encoder.0.mlp1.conv.bias
+        , %para494 : Ref[Tensor(F32)][8]    # moment2.network.encoder.0.mlp1.batch_norm.gamma
+        , %para495 : Ref[Tensor(F32)][8]    # moment2.network.encoder.0.mlp1.batch_norm.beta
+        , %para496 : Ref[Tensor(F32)][32]    # moment2.network.encoder.0.mlp2.conv.bias
+        , %para497 : Ref[Tensor(F32)][32]    # moment2.network.encoder.0.mlp2.batch_norm.gamma
+        , %para498 : Ref[Tensor(F32)][32]    # moment2.network.encoder.0.mlp2.batch_norm.beta
+        , %para499 : Ref[Tensor(F32)][32]    # moment2.network.encoder.0.shortcut.conv.bias
+        , %para500 : Ref[Tensor(F32)][32]    # moment2.network.encoder.0.shortcut.batch_norm.gamma
+        , %para501 : Ref[Tensor(F32)][32]    # moment2.network.encoder.0.shortcut.batch_norm.beta
+        , %para502 : Ref[Tensor(F32)][8]    # moment2.network.encoder.0.lse1.mlp.conv.bias
+        , %para503 : Ref[Tensor(F32)][8]    # moment2.network.encoder.0.lse1.mlp.batch_norm.gamma
+        , %para504 : Ref[Tensor(F32)][8]    # moment2.network.encoder.0.lse1.mlp.batch_norm.beta
+        , %para505 : Ref[Tensor(F32)][8]    # moment2.network.encoder.0.lse2.mlp.conv.bias
+        , %para506 : Ref[Tensor(F32)][8]    # moment2.network.encoder.0.lse2.mlp.batch_norm.gamma
+        , %para507 : Ref[Tensor(F32)][8]    # moment2.network.encoder.0.lse2.mlp.batch_norm.beta
+        , %para508 : Ref[Tensor(F32)][8]    # moment2.network.encoder.0.pool1.mlp.conv.bias
+        , %para509 : Ref[Tensor(F32)][8]    # moment2.network.encoder.0.pool1.mlp.batch_norm.gamma
+        , %para510 : Ref[Tensor(F32)][8]    # moment2.network.encoder.0.pool1.mlp.batch_norm.beta
+        , %para511 : Ref[Tensor(F32)][16]    # moment2.network.encoder.0.pool2.mlp.conv.bias
+        , %para512 : Ref[Tensor(F32)][16]    # moment2.network.encoder.0.pool2.mlp.batch_norm.gamma
+        , %para513 : Ref[Tensor(F32)][16]    # moment2.network.encoder.0.pool2.mlp.batch_norm.beta
+        , %para514 : Ref[Tensor(F32)][32]    # moment2.network.encoder.1.mlp1.conv.bias
+        , %para515 : Ref[Tensor(F32)][32]    # moment2.network.encoder.1.mlp1.batch_norm.gamma
+        , %para516 : Ref[Tensor(F32)][32]    # moment2.network.encoder.1.mlp1.batch_norm.beta
+        , %para517 : Ref[Tensor(F32)][128]    # moment2.network.encoder.1.mlp2.conv.bias
+        , %para518 : Ref[Tensor(F32)][128]    # moment2.network.encoder.1.mlp2.batch_norm.gamma
+        , %para519 : Ref[Tensor(F32)][128]    # moment2.network.encoder.1.mlp2.batch_norm.beta
+        , %para520 : Ref[Tensor(F32)][128]    # moment2.network.encoder.1.shortcut.conv.bias
+        , %para521 : Ref[Tensor(F32)][128]    # moment2.network.encoder.1.shortcut.batch_norm.gamma
+        , %para522 : Ref[Tensor(F32)][128]    # moment2.network.encoder.1.shortcut.batch_norm.beta
+        , %para523 : Ref[Tensor(F32)][32]    # moment2.network.encoder.1.lse1.mlp.conv.bias
+        , %para524 : Ref[Tensor(F32)][32]    # moment2.network.encoder.1.lse1.mlp.batch_norm.gamma
+        , %para525 : Ref[Tensor(F32)][32]    # moment2.network.encoder.1.lse1.mlp.batch_norm.beta
+        , %para526 : Ref[Tensor(F32)][32]    # moment2.network.encoder.1.lse2.mlp.conv.bias
+        , %para527 : Ref[Tensor(F32)][32]    # moment2.network.encoder.1.lse2.mlp.batch_norm.gamma
+        , %para528 : Ref[Tensor(F32)][32]    # moment2.network.encoder.1.lse2.mlp.batch_norm.beta
+        , %para529 : Ref[Tensor(F32)][32]    # moment2.network.encoder.1.pool1.mlp.conv.bias
+        , %para530 : Ref[Tensor(F32)][32]    # moment2.network.encoder.1.pool1.mlp.batch_norm.gamma
+        , %para531 : Ref[Tensor(F32)][32]    # moment2.network.encoder.1.pool1.mlp.batch_norm.beta
+        , %para532 : Ref[Tensor(F32)][64]    # moment2.network.encoder.1.pool2.mlp.conv.bias
+        , %para533 : Ref[Tensor(F32)][64]    # moment2.network.encoder.1.pool2.mlp.batch_norm.gamma
+        , %para534 : Ref[Tensor(F32)][64]    # moment2.network.encoder.1.pool2.mlp.batch_norm.beta
+        , %para535 : Ref[Tensor(F32)][64]    # moment2.network.encoder.2.mlp1.conv.bias
+        , %para536 : Ref[Tensor(F32)][64]    # moment2.network.encoder.2.mlp1.batch_norm.gamma
+        , %para537 : Ref[Tensor(F32)][64]    # moment2.network.encoder.2.mlp1.batch_norm.beta
+        , %para538 : Ref[Tensor(F32)][256]    # moment2.network.encoder.2.mlp2.conv.bias
+        , %para539 : Ref[Tensor(F32)][256]    # moment2.network.encoder.2.mlp2.batch_norm.gamma
+        , %para540 : Ref[Tensor(F32)][256]    # moment2.network.encoder.2.mlp2.batch_norm.beta
+        , %para541 : Ref[Tensor(F32)][256]    # moment2.network.encoder.2.shortcut.conv.bias
+        , %para542 : Ref[Tensor(F32)][256]    # moment2.network.encoder.2.shortcut.batch_norm.gamma
+        , %para543 : Ref[Tensor(F32)][256]    # moment2.network.encoder.2.shortcut.batch_norm.beta
+        , %para544 : Ref[Tensor(F32)][64]    # moment2.network.encoder.2.lse1.mlp.conv.bias
+        , %para545 : Ref[Tensor(F32)][64]    # moment2.network.encoder.2.lse1.mlp.batch_norm.gamma
+        , %para546 : Ref[Tensor(F32)][64]    # moment2.network.encoder.2.lse1.mlp.batch_norm.beta
+        , %para547 : Ref[Tensor(F32)][64]    # moment2.network.encoder.2.lse2.mlp.conv.bias
+        , %para548 : Ref[Tensor(F32)][64]    # moment2.network.encoder.2.lse2.mlp.batch_norm.gamma
+        , %para549 : Ref[Tensor(F32)][64]    # moment2.network.encoder.2.lse2.mlp.batch_norm.beta
+        , %para550 : Ref[Tensor(F32)][64]    # moment2.network.encoder.2.pool1.mlp.conv.bias
+        , %para551 : Ref[Tensor(F32)][64]    # moment2.network.encoder.2.pool1.mlp.batch_norm.gamma
+        , %para552 : Ref[Tensor(F32)][64]    # moment2.network.encoder.2.pool1.mlp.batch_norm.beta
+        , %para553 : Ref[Tensor(F32)][128]    # moment2.network.encoder.2.pool2.mlp.conv.bias
+        , %para554 : Ref[Tensor(F32)][128]    # moment2.network.encoder.2.pool2.mlp.batch_norm.gamma
+        , %para555 : Ref[Tensor(F32)][128]    # moment2.network.encoder.2.pool2.mlp.batch_norm.beta
+        , %para556 : Ref[Tensor(F32)][128]    # moment2.network.encoder.3.mlp1.conv.bias
+        , %para557 : Ref[Tensor(F32)][128]    # moment2.network.encoder.3.mlp1.batch_norm.gamma
+        , %para558 : Ref[Tensor(F32)][128]    # moment2.network.encoder.3.mlp1.batch_norm.beta
+        , %para559 : Ref[Tensor(F32)][512]    # moment2.network.encoder.3.mlp2.conv.bias
+        , %para560 : Ref[Tensor(F32)][512]    # moment2.network.encoder.3.mlp2.batch_norm.gamma
+        , %para561 : Ref[Tensor(F32)][512]    # moment2.network.encoder.3.mlp2.batch_norm.beta
+        , %para562 : Ref[Tensor(F32)][512]    # moment2.network.encoder.3.shortcut.conv.bias
+        , %para563 : Ref[Tensor(F32)][512]    # moment2.network.encoder.3.shortcut.batch_norm.gamma
+        , %para564 : Ref[Tensor(F32)][512]    # moment2.network.encoder.3.shortcut.batch_norm.beta
+        , %para565 : Ref[Tensor(F32)][128]    # moment2.network.encoder.3.lse1.mlp.conv.bias
+        , %para566 : Ref[Tensor(F32)][128]    # moment2.network.encoder.3.lse1.mlp.batch_norm.gamma
+        , %para567 : Ref[Tensor(F32)][128]    # moment2.network.encoder.3.lse1.mlp.batch_norm.beta
+        , %para568 : Ref[Tensor(F32)][128]    # moment2.network.encoder.3.lse2.mlp.conv.bias
+        , %para569 : Ref[Tensor(F32)][128]    # moment2.network.encoder.3.lse2.mlp.batch_norm.gamma
+        , %para570 : Ref[Tensor(F32)][128]    # moment2.network.encoder.3.lse2.mlp.batch_norm.beta
+        , %para571 : Ref[Tensor(F32)][128]    # moment2.network.encoder.3.pool1.mlp.conv.bias
+        , %para572 : Ref[Tensor(F32)][128]    # moment2.network.encoder.3.pool1.mlp.batch_norm.gamma
+        , %para573 : Ref[Tensor(F32)][128]    # moment2.network.encoder.3.pool1.mlp.batch_norm.beta
+        , %para574 : Ref[Tensor(F32)][256]    # moment2.network.encoder.3.pool2.mlp.conv.bias
+        , %para575 : Ref[Tensor(F32)][256]    # moment2.network.encoder.3.pool2.mlp.batch_norm.gamma
+        , %para576 : Ref[Tensor(F32)][256]    # moment2.network.encoder.3.pool2.mlp.batch_norm.beta
+        , %para577 : Ref[Tensor(F32)][256]    # moment2.network.encoder.4.mlp1.conv.bias
+        , %para578 : Ref[Tensor(F32)][256]    # moment2.network.encoder.4.mlp1.batch_norm.gamma
+        , %para579 : Ref[Tensor(F32)][256]    # moment2.network.encoder.4.mlp1.batch_norm.beta
+        , %para580 : Ref[Tensor(F32)][1024]    # moment2.network.encoder.4.mlp2.conv.bias
+        , %para581 : Ref[Tensor(F32)][1024]    # moment2.network.encoder.4.mlp2.batch_norm.gamma
+        , %para582 : Ref[Tensor(F32)][1024]    # moment2.network.encoder.4.mlp2.batch_norm.beta
+        , %para583 : Ref[Tensor(F32)][1024]    # moment2.network.encoder.4.shortcut.conv.bias
+        , %para584 : Ref[Tensor(F32)][1024]    # moment2.network.encoder.4.shortcut.batch_norm.gamma
+        , %para585 : Ref[Tensor(F32)][1024]    # moment2.network.encoder.4.shortcut.batch_norm.beta
+        , %para586 : Ref[Tensor(F32)][256]    # moment2.network.encoder.4.lse1.mlp.conv.bias
+        , %para587 : Ref[Tensor(F32)][256]    # moment2.network.encoder.4.lse1.mlp.batch_norm.gamma
+        , %para588 : Ref[Tensor(F32)][256]    # moment2.network.encoder.4.lse1.mlp.batch_norm.beta
+        , %para589 : Ref[Tensor(F32)][256]    # moment2.network.encoder.4.lse2.mlp.conv.bias
+        , %para590 : Ref[Tensor(F32)][256]    # moment2.network.encoder.4.lse2.mlp.batch_norm.gamma
+        , %para591 : Ref[Tensor(F32)][256]    # moment2.network.encoder.4.lse2.mlp.batch_norm.beta
+        , %para592 : Ref[Tensor(F32)][256]    # moment2.network.encoder.4.pool1.mlp.conv.bias
+        , %para593 : Ref[Tensor(F32)][256]    # moment2.network.encoder.4.pool1.mlp.batch_norm.gamma
+        , %para594 : Ref[Tensor(F32)][256]    # moment2.network.encoder.4.pool1.mlp.batch_norm.beta
+        , %para595 : Ref[Tensor(F32)][512]    # moment2.network.encoder.4.pool2.mlp.conv.bias
+        , %para596 : Ref[Tensor(F32)][512]    # moment2.network.encoder.4.pool2.mlp.batch_norm.gamma
+        , %para597 : Ref[Tensor(F32)][512]    # moment2.network.encoder.4.pool2.mlp.batch_norm.beta
+        , %para598 : Ref[Tensor(F32)][1024]    # moment2.network.mlp.conv.bias
+        , %para599 : Ref[Tensor(F32)][1024]    # moment2.network.mlp.batch_norm.gamma
+        , %para600 : Ref[Tensor(F32)][1024]    # moment2.network.mlp.batch_norm.beta
+        , %para601 : Ref[Tensor(F32)][13]    # moment2.network.supervise.0.conv.bias
+        , %para602 : Ref[Tensor(F32)][13]    # moment2.network.supervise.0.batch_norm.gamma
+        , %para603 : Ref[Tensor(F32)][13]    # moment2.network.supervise.0.batch_norm.beta
+        , %para604 : Ref[Tensor(F32)][13]    # moment2.network.supervise.1.conv.bias
+        , %para605 : Ref[Tensor(F32)][13]    # moment2.network.supervise.1.batch_norm.gamma
+        , %para606 : Ref[Tensor(F32)][13]    # moment2.network.supervise.1.batch_norm.beta
+        , %para607 : Ref[Tensor(F32)][13]    # moment2.network.supervise.2.conv.bias
+        , %para608 : Ref[Tensor(F32)][13]    # moment2.network.supervise.2.batch_norm.gamma
+        , %para609 : Ref[Tensor(F32)][13]    # moment2.network.supervise.2.batch_norm.beta
+        , %para610 : Ref[Tensor(F32)][13]    # moment2.network.supervise.3.conv.bias
+        , %para611 : Ref[Tensor(F32)][13]    # moment2.network.supervise.3.batch_norm.gamma
+        , %para612 : Ref[Tensor(F32)][13]    # moment2.network.supervise.3.batch_norm.beta
+        , %para613 : Ref[Tensor(F32)][13]    # moment2.network.supervise.4.conv.bias
+        , %para614 : Ref[Tensor(F32)][13]    # moment2.network.supervise.4.batch_norm.gamma
+        , %para615 : Ref[Tensor(F32)][13]    # moment2.network.supervise.4.batch_norm.beta
+        , %para616 : Ref[Tensor(F32)][13]    # moment2.network.supervise.5.conv.bias
+        , %para617 : Ref[Tensor(F32)][13]    # moment2.network.supervise.5.batch_norm.gamma
+        , %para618 : Ref[Tensor(F32)][13]    # moment2.network.supervise.5.batch_norm.beta
+        , %para619 : Ref[Tensor(F32)][10]    # moment2.network.Se.0.conv.bias
+        , %para620 : Ref[Tensor(F32)][10]    # moment2.network.Se.0.batch_norm.gamma
+        , %para621 : Ref[Tensor(F32)][10]    # moment2.network.Se.0.batch_norm.beta
+        , %para622 : Ref[Tensor(F32)][10]    # moment2.network.Se.1.conv.bias
+        , %para623 : Ref[Tensor(F32)][10]    # moment2.network.Se.1.batch_norm.gamma
+        , %para624 : Ref[Tensor(F32)][10]    # moment2.network.Se.1.batch_norm.beta
+        , %para625 : Ref[Tensor(F32)][10]    # moment2.network.Se.2.conv.bias
+        , %para626 : Ref[Tensor(F32)][10]    # moment2.network.Se.2.batch_norm.gamma
+        , %para627 : Ref[Tensor(F32)][10]    # moment2.network.Se.2.batch_norm.beta
+        , %para628 : Ref[Tensor(F32)][10]    # moment2.network.Se.3.conv.bias
+        , %para629 : Ref[Tensor(F32)][10]    # moment2.network.Se.3.batch_norm.gamma
+        , %para630 : Ref[Tensor(F32)][10]    # moment2.network.Se.3.batch_norm.beta
+        , %para631 : Ref[Tensor(F32)][512]    # moment2.network.decoder.0.conv.bias
+        , %para632 : Ref[Tensor(F32)][512]    # moment2.network.decoder.0.batch_norm.gamma
+        , %para633 : Ref[Tensor(F32)][512]    # moment2.network.decoder.0.batch_norm.beta
+        , %para634 : Ref[Tensor(F32)][256]    # moment2.network.decoder.1.conv.bias
+        , %para635 : Ref[Tensor(F32)][256]    # moment2.network.decoder.1.batch_norm.gamma
+        , %para636 : Ref[Tensor(F32)][256]    # moment2.network.decoder.1.batch_norm.beta
+        , %para637 : Ref[Tensor(F32)][128]    # moment2.network.decoder.2.conv.bias
+        , %para638 : Ref[Tensor(F32)][128]    # moment2.network.decoder.2.batch_norm.gamma
+        , %para639 : Ref[Tensor(F32)][128]    # moment2.network.decoder.2.batch_norm.beta
+        , %para640 : Ref[Tensor(F32)][32]    # moment2.network.decoder.3.conv.bias
+        , %para641 : Ref[Tensor(F32)][32]    # moment2.network.decoder.3.batch_norm.gamma
+        , %para642 : Ref[Tensor(F32)][32]    # moment2.network.decoder.3.batch_norm.beta
+        , %para643 : Ref[Tensor(F32)][32]    # moment2.network.decoder.4.conv.bias
+        , %para644 : Ref[Tensor(F32)][32]    # moment2.network.decoder.4.batch_norm.gamma
+        , %para645 : Ref[Tensor(F32)][32]    # moment2.network.decoder.4.batch_norm.beta
+        , %para646 : Ref[Tensor(F32)][64]    # moment2.network.fc_end.0.conv.bias
+        , %para647 : Ref[Tensor(F32)][64]    # moment2.network.fc_end.0.batch_norm.gamma
+        , %para648 : Ref[Tensor(F32)][64]    # moment2.network.fc_end.0.batch_norm.beta
+        , %para649 : Ref[Tensor(F32)][32]    # moment2.network.fc_end.1.conv.bias
+        , %para650 : Ref[Tensor(F32)][32]    # moment2.network.fc_end.1.batch_norm.gamma
+        , %para651 : Ref[Tensor(F32)][32]    # moment2.network.fc_end.1.batch_norm.beta
+        , %para652 : Ref[Tensor(F32)][13]    # moment2.network.fc_end.3.conv.bias
+        , %para653 : Ref[Tensor(F32)][13]    # moment2.network.fc_end.3.batch_norm.gamma
+        , %para654 : Ref[Tensor(F32)][13]    # moment2.network.fc_end.3.batch_norm.beta
+        , %para655 : Ref[Tensor(F32)][8, 6]    # moment2.network.fc_start.weight
+        , %para656 : Ref[Tensor(F32)][8, 8, 1, 1]    # moment2.network.encoder.0.mlp1.conv.weight
+        , %para657 : Ref[Tensor(F32)][32, 16, 1, 1]    # moment2.network.encoder.0.mlp2.conv.weight
+        , %para658 : Ref[Tensor(F32)][32, 8, 1, 1]    # moment2.network.encoder.0.shortcut.conv.weight
+        , %para659 : Ref[Tensor(F32)][8, 10, 1, 1]    # moment2.network.encoder.0.lse1.mlp.conv.weight
+        , %para660 : Ref[Tensor(F32)][8, 8, 1, 1]    # moment2.network.encoder.0.lse2.mlp.conv.weight
+        , %para661 : Ref[Tensor(F32)][16, 16]    # moment2.network.encoder.0.pool1.score_fn.0.weight
+        , %para662 : Ref[Tensor(F32)][8, 16, 1, 1]    # moment2.network.encoder.0.pool1.mlp.conv.weight
+        , %para663 : Ref[Tensor(F32)][16, 16]    # moment2.network.encoder.0.pool2.score_fn.0.weight
+        , %para664 : Ref[Tensor(F32)][16, 16, 1, 1]    # moment2.network.encoder.0.pool2.mlp.conv.weight
+        , %para665 : Ref[Tensor(F32)][32, 32, 1, 1]    # moment2.network.encoder.1.mlp1.conv.weight
+        , %para666 : Ref[Tensor(F32)][128, 64, 1, 1]    # moment2.network.encoder.1.mlp2.conv.weight
+        , %para667 : Ref[Tensor(F32)][128, 32, 1, 1]    # moment2.network.encoder.1.shortcut.conv.weight
+        , %para668 : Ref[Tensor(F32)][32, 10, 1, 1]    # moment2.network.encoder.1.lse1.mlp.conv.weight
+        , %para669 : Ref[Tensor(F32)][32, 32, 1, 1]    # moment2.network.encoder.1.lse2.mlp.conv.weight
+        , %para670 : Ref[Tensor(F32)][64, 64]    # moment2.network.encoder.1.pool1.score_fn.0.weight
+        , %para671 : Ref[Tensor(F32)][32, 64, 1, 1]    # moment2.network.encoder.1.pool1.mlp.conv.weight
+        , %para672 : Ref[Tensor(F32)][64, 64]    # moment2.network.encoder.1.pool2.score_fn.0.weight
+        , %para673 : Ref[Tensor(F32)][64, 64, 1, 1]    # moment2.network.encoder.1.pool2.mlp.conv.weight
+        , %para674 : Ref[Tensor(F32)][64, 128, 1, 1]    # moment2.network.encoder.2.mlp1.conv.weight
+        , %para675 : Ref[Tensor(F32)][256, 128, 1, 1]    # moment2.network.encoder.2.mlp2.conv.weight
+        , %para676 : Ref[Tensor(F32)][256, 128, 1, 1]    # moment2.network.encoder.2.shortcut.conv.weight
+        , %para677 : Ref[Tensor(F32)][64, 10, 1, 1]    # moment2.network.encoder.2.lse1.mlp.conv.weight
+        , %para678 : Ref[Tensor(F32)][64, 64, 1, 1]    # moment2.network.encoder.2.lse2.mlp.conv.weight
+        , %para679 : Ref[Tensor(F32)][128, 128]    # moment2.network.encoder.2.pool1.score_fn.0.weight
+        , %para680 : Ref[Tensor(F32)][64, 128, 1, 1]    # moment2.network.encoder.2.pool1.mlp.conv.weight
+        , %para681 : Ref[Tensor(F32)][128, 128]    # moment2.network.encoder.2.pool2.score_fn.0.weight
+        , %para682 : Ref[Tensor(F32)][128, 128, 1, 1]    # moment2.network.encoder.2.pool2.mlp.conv.weight
+        , %para683 : Ref[Tensor(F32)][128, 256, 1, 1]    # moment2.network.encoder.3.mlp1.conv.weight
+        , %para684 : Ref[Tensor(F32)][512, 256, 1, 1]    # moment2.network.encoder.3.mlp2.conv.weight
+        , %para685 : Ref[Tensor(F32)][512, 256, 1, 1]    # moment2.network.encoder.3.shortcut.conv.weight
+        , %para686 : Ref[Tensor(F32)][128, 10, 1, 1]    # moment2.network.encoder.3.lse1.mlp.conv.weight
+        , %para687 : Ref[Tensor(F32)][128, 128, 1, 1]    # moment2.network.encoder.3.lse2.mlp.conv.weight
+        , %para688 : Ref[Tensor(F32)][256, 256]    # moment2.network.encoder.3.pool1.score_fn.0.weight
+        , %para689 : Ref[Tensor(F32)][128, 256, 1, 1]    # moment2.network.encoder.3.pool1.mlp.conv.weight
+        , %para690 : Ref[Tensor(F32)][256, 256]    # moment2.network.encoder.3.pool2.score_fn.0.weight
+        , %para691 : Ref[Tensor(F32)][256, 256, 1, 1]    # moment2.network.encoder.3.pool2.mlp.conv.weight
+        , %para692 : Ref[Tensor(F32)][256, 512, 1, 1]    # moment2.network.encoder.4.mlp1.conv.weight
+        , %para693 : Ref[Tensor(F32)][1024, 512, 1, 1]    # moment2.network.encoder.4.mlp2.conv.weight
+        , %para694 : Ref[Tensor(F32)][1024, 512, 1, 1]    # moment2.network.encoder.4.shortcut.conv.weight
+        , %para695 : Ref[Tensor(F32)][256, 10, 1, 1]    # moment2.network.encoder.4.lse1.mlp.conv.weight
+        , %para696 : Ref[Tensor(F32)][256, 256, 1, 1]    # moment2.network.encoder.4.lse2.mlp.conv.weight
+        , %para697 : Ref[Tensor(F32)][512, 512]    # moment2.network.encoder.4.pool1.score_fn.0.weight
+        , %para698 : Ref[Tensor(F32)][256, 512, 1, 1]    # moment2.network.encoder.4.pool1.mlp.conv.weight
+        , %para699 : Ref[Tensor(F32)][512, 512]    # moment2.network.encoder.4.pool2.score_fn.0.weight
+        , %para700 : Ref[Tensor(F32)][512, 512, 1, 1]    # moment2.network.encoder.4.pool2.mlp.conv.weight
+        , %para701 : Ref[Tensor(F32)][1024, 1024, 1, 1]    # moment2.network.mlp.conv.weight
+        , %para702 : Ref[Tensor(F32)][13, 1024, 1, 1]    # moment2.network.supervise.0.conv.weight
+        , %para703 : Ref[Tensor(F32)][13, 512, 1, 1]    # moment2.network.supervise.1.conv.weight
+        , %para704 : Ref[Tensor(F32)][13, 256, 1, 1]    # moment2.network.supervise.2.conv.weight
+        , %para705 : Ref[Tensor(F32)][13, 128, 1, 1]    # moment2.network.supervise.3.conv.weight
+        , %para706 : Ref[Tensor(F32)][13, 32, 1, 1]    # moment2.network.supervise.4.conv.weight
+        , %para707 : Ref[Tensor(F32)][13, 32, 1, 1]    # moment2.network.supervise.5.conv.weight
+        , %para708 : Ref[Tensor(F32)][10, 512, 1, 1]    # moment2.network.Se.0.conv.weight
+        , %para709 : Ref[Tensor(F32)][10, 256, 1, 1]    # moment2.network.Se.1.conv.weight
+        , %para710 : Ref[Tensor(F32)][10, 128, 1, 1]    # moment2.network.Se.2.conv.weight
+        , %para711 : Ref[Tensor(F32)][10, 32, 1, 1]    # moment2.network.Se.3.conv.weight
+        , %para712 : Ref[Tensor(F32)][1536, 512, 1, 1]    # moment2.network.decoder.0.conv.weight
+        , %para713 : Ref[Tensor(F32)][768, 256, 1, 1]    # moment2.network.decoder.1.conv.weight
+        , %para714 : Ref[Tensor(F32)][384, 128, 1, 1]    # moment2.network.decoder.2.conv.weight
+        , %para715 : Ref[Tensor(F32)][160, 32, 1, 1]    # moment2.network.decoder.3.conv.weight
+        , %para716 : Ref[Tensor(F32)][64, 32, 1, 1]    # moment2.network.decoder.4.conv.weight
+        , %para717 : Ref[Tensor(F32)][64, 32, 1, 1]    # moment2.network.fc_end.0.conv.weight
+        , %para718 : Ref[Tensor(F32)][32, 64, 1, 1]    # moment2.network.fc_end.1.conv.weight
+        , %para719 : Ref[Tensor(F32)][13, 32, 1, 1]    # moment2.network.fc_end.3.conv.weight
+        , %para720 : Ref[Tensor(F32)][8]    # vhat.network.fc_start.bias
+        , %para721 : Ref[Tensor(F32)][8]    # vhat.network.bn_start.0.gamma
+        , %para722 : Ref[Tensor(F32)][8]    # vhat.network.bn_start.0.beta
+        , %para723 : Ref[Tensor(F32)][8]    # vhat.network.encoder.0.mlp1.conv.bias
+        , %para724 : Ref[Tensor(F32)][8]    # vhat.network.encoder.0.mlp1.batch_norm.gamma
+        , %para725 : Ref[Tensor(F32)][8]    # vhat.network.encoder.0.mlp1.batch_norm.beta
+        , %para726 : Ref[Tensor(F32)][32]    # vhat.network.encoder.0.mlp2.conv.bias
+        , %para727 : Ref[Tensor(F32)][32]    # vhat.network.encoder.0.mlp2.batch_norm.gamma
+        , %para728 : Ref[Tensor(F32)][32]    # vhat.network.encoder.0.mlp2.batch_norm.beta
+        , %para729 : Ref[Tensor(F32)][32]    # vhat.network.encoder.0.shortcut.conv.bias
+        , %para730 : Ref[Tensor(F32)][32]    # vhat.network.encoder.0.shortcut.batch_norm.gamma
+        , %para731 : Ref[Tensor(F32)][32]    # vhat.network.encoder.0.shortcut.batch_norm.beta
+        , %para732 : Ref[Tensor(F32)][8]    # vhat.network.encoder.0.lse1.mlp.conv.bias
+        , %para733 : Ref[Tensor(F32)][8]    # vhat.network.encoder.0.lse1.mlp.batch_norm.gamma
+        , %para734 : Ref[Tensor(F32)][8]    # vhat.network.encoder.0.lse1.mlp.batch_norm.beta
+        , %para735 : Ref[Tensor(F32)][8]    # vhat.network.encoder.0.lse2.mlp.conv.bias
+        , %para736 : Ref[Tensor(F32)][8]    # vhat.network.encoder.0.lse2.mlp.batch_norm.gamma
+        , %para737 : Ref[Tensor(F32)][8]    # vhat.network.encoder.0.lse2.mlp.batch_norm.beta
+        , %para738 : Ref[Tensor(F32)][8]    # vhat.network.encoder.0.pool1.mlp.conv.bias
+        , %para739 : Ref[Tensor(F32)][8]    # vhat.network.encoder.0.pool1.mlp.batch_norm.gamma
+        , %para740 : Ref[Tensor(F32)][8]    # vhat.network.encoder.0.pool1.mlp.batch_norm.beta
+        , %para741 : Ref[Tensor(F32)][16]    # vhat.network.encoder.0.pool2.mlp.conv.bias
+        , %para742 : Ref[Tensor(F32)][16]    # vhat.network.encoder.0.pool2.mlp.batch_norm.gamma
+        , %para743 : Ref[Tensor(F32)][16]    # vhat.network.encoder.0.pool2.mlp.batch_norm.beta
+        , %para744 : Ref[Tensor(F32)][32]    # vhat.network.encoder.1.mlp1.conv.bias
+        , %para745 : Ref[Tensor(F32)][32]    # vhat.network.encoder.1.mlp1.batch_norm.gamma
+        , %para746 : Ref[Tensor(F32)][32]    # vhat.network.encoder.1.mlp1.batch_norm.beta
+        , %para747 : Ref[Tensor(F32)][128]    # vhat.network.encoder.1.mlp2.conv.bias
+        , %para748 : Ref[Tensor(F32)][128]    # vhat.network.encoder.1.mlp2.batch_norm.gamma
+        , %para749 : Ref[Tensor(F32)][128]    # vhat.network.encoder.1.mlp2.batch_norm.beta
+        , %para750 : Ref[Tensor(F32)][128]    # vhat.network.encoder.1.shortcut.conv.bias
+        , %para751 : Ref[Tensor(F32)][128]    # vhat.network.encoder.1.shortcut.batch_norm.gamma
+        , %para752 : Ref[Tensor(F32)][128]    # vhat.network.encoder.1.shortcut.batch_norm.beta
+        , %para753 : Ref[Tensor(F32)][32]    # vhat.network.encoder.1.lse1.mlp.conv.bias
+        , %para754 : Ref[Tensor(F32)][32]    # vhat.network.encoder.1.lse1.mlp.batch_norm.gamma
+        , %para755 : Ref[Tensor(F32)][32]    # vhat.network.encoder.1.lse1.mlp.batch_norm.beta
+        , %para756 : Ref[Tensor(F32)][32]    # vhat.network.encoder.1.lse2.mlp.conv.bias
+        , %para757 : Ref[Tensor(F32)][32]    # vhat.network.encoder.1.lse2.mlp.batch_norm.gamma
+        , %para758 : Ref[Tensor(F32)][32]    # vhat.network.encoder.1.lse2.mlp.batch_norm.beta
+        , %para759 : Ref[Tensor(F32)][32]    # vhat.network.encoder.1.pool1.mlp.conv.bias
+        , %para760 : Ref[Tensor(F32)][32]    # vhat.network.encoder.1.pool1.mlp.batch_norm.gamma
+        , %para761 : Ref[Tensor(F32)][32]    # vhat.network.encoder.1.pool1.mlp.batch_norm.beta
+        , %para762 : Ref[Tensor(F32)][64]    # vhat.network.encoder.1.pool2.mlp.conv.bias
+        , %para763 : Ref[Tensor(F32)][64]    # vhat.network.encoder.1.pool2.mlp.batch_norm.gamma
+        , %para764 : Ref[Tensor(F32)][64]    # vhat.network.encoder.1.pool2.mlp.batch_norm.beta
+        , %para765 : Ref[Tensor(F32)][64]    # vhat.network.encoder.2.mlp1.conv.bias
+        , %para766 : Ref[Tensor(F32)][64]    # vhat.network.encoder.2.mlp1.batch_norm.gamma
+        , %para767 : Ref[Tensor(F32)][64]    # vhat.network.encoder.2.mlp1.batch_norm.beta
+        , %para768 : Ref[Tensor(F32)][256]    # vhat.network.encoder.2.mlp2.conv.bias
+        , %para769 : Ref[Tensor(F32)][256]    # vhat.network.encoder.2.mlp2.batch_norm.gamma
+        , %para770 : Ref[Tensor(F32)][256]    # vhat.network.encoder.2.mlp2.batch_norm.beta
+        , %para771 : Ref[Tensor(F32)][256]    # vhat.network.encoder.2.shortcut.conv.bias
+        , %para772 : Ref[Tensor(F32)][256]    # vhat.network.encoder.2.shortcut.batch_norm.gamma
+        , %para773 : Ref[Tensor(F32)][256]    # vhat.network.encoder.2.shortcut.batch_norm.beta
+        , %para774 : Ref[Tensor(F32)][64]    # vhat.network.encoder.2.lse1.mlp.conv.bias
+        , %para775 : Ref[Tensor(F32)][64]    # vhat.network.encoder.2.lse1.mlp.batch_norm.gamma
+        , %para776 : Ref[Tensor(F32)][64]    # vhat.network.encoder.2.lse1.mlp.batch_norm.beta
+        , %para777 : Ref[Tensor(F32)][64]    # vhat.network.encoder.2.lse2.mlp.conv.bias
+        , %para778 : Ref[Tensor(F32)][64]    # vhat.network.encoder.2.lse2.mlp.batch_norm.gamma
+        , %para779 : Ref[Tensor(F32)][64]    # vhat.network.encoder.2.lse2.mlp.batch_norm.beta
+        , %para780 : Ref[Tensor(F32)][64]    # vhat.network.encoder.2.pool1.mlp.conv.bias
+        , %para781 : Ref[Tensor(F32)][64]    # vhat.network.encoder.2.pool1.mlp.batch_norm.gamma
+        , %para782 : Ref[Tensor(F32)][64]    # vhat.network.encoder.2.pool1.mlp.batch_norm.beta
+        , %para783 : Ref[Tensor(F32)][128]    # vhat.network.encoder.2.pool2.mlp.conv.bias
+        , %para784 : Ref[Tensor(F32)][128]    # vhat.network.encoder.2.pool2.mlp.batch_norm.gamma
+        , %para785 : Ref[Tensor(F32)][128]    # vhat.network.encoder.2.pool2.mlp.batch_norm.beta
+        , %para786 : Ref[Tensor(F32)][128]    # vhat.network.encoder.3.mlp1.conv.bias
+        , %para787 : Ref[Tensor(F32)][128]    # vhat.network.encoder.3.mlp1.batch_norm.gamma
+        , %para788 : Ref[Tensor(F32)][128]    # vhat.network.encoder.3.mlp1.batch_norm.beta
+        , %para789 : Ref[Tensor(F32)][512]    # vhat.network.encoder.3.mlp2.conv.bias
+        , %para790 : Ref[Tensor(F32)][512]    # vhat.network.encoder.3.mlp2.batch_norm.gamma
+        , %para791 : Ref[Tensor(F32)][512]    # vhat.network.encoder.3.mlp2.batch_norm.beta
+        , %para792 : Ref[Tensor(F32)][512]    # vhat.network.encoder.3.shortcut.conv.bias
+        , %para793 : Ref[Tensor(F32)][512]    # vhat.network.encoder.3.shortcut.batch_norm.gamma
+        , %para794 : Ref[Tensor(F32)][512]    # vhat.network.encoder.3.shortcut.batch_norm.beta
+        , %para795 : Ref[Tensor(F32)][128]    # vhat.network.encoder.3.lse1.mlp.conv.bias
+        , %para796 : Ref[Tensor(F32)][128]    # vhat.network.encoder.3.lse1.mlp.batch_norm.gamma
+        , %para797 : Ref[Tensor(F32)][128]    # vhat.network.encoder.3.lse1.mlp.batch_norm.beta
+        , %para798 : Ref[Tensor(F32)][128]    # vhat.network.encoder.3.lse2.mlp.conv.bias
+        , %para799 : Ref[Tensor(F32)][128]    # vhat.network.encoder.3.lse2.mlp.batch_norm.gamma
+        , %para800 : Ref[Tensor(F32)][128]    # vhat.network.encoder.3.lse2.mlp.batch_norm.beta
+        , %para801 : Ref[Tensor(F32)][128]    # vhat.network.encoder.3.pool1.mlp.conv.bias
+        , %para802 : Ref[Tensor(F32)][128]    # vhat.network.encoder.3.pool1.mlp.batch_norm.gamma
+        , %para803 : Ref[Tensor(F32)][128]    # vhat.network.encoder.3.pool1.mlp.batch_norm.beta
+        , %para804 : Ref[Tensor(F32)][256]    # vhat.network.encoder.3.pool2.mlp.conv.bias
+        , %para805 : Ref[Tensor(F32)][256]    # vhat.network.encoder.3.pool2.mlp.batch_norm.gamma
+        , %para806 : Ref[Tensor(F32)][256]    # vhat.network.encoder.3.pool2.mlp.batch_norm.beta
+        , %para807 : Ref[Tensor(F32)][256]    # vhat.network.encoder.4.mlp1.conv.bias
+        , %para808 : Ref[Tensor(F32)][256]    # vhat.network.encoder.4.mlp1.batch_norm.gamma
+        , %para809 : Ref[Tensor(F32)][256]    # vhat.network.encoder.4.mlp1.batch_norm.beta
+        , %para810 : Ref[Tensor(F32)][1024]    # vhat.network.encoder.4.mlp2.conv.bias
+        , %para811 : Ref[Tensor(F32)][1024]    # vhat.network.encoder.4.mlp2.batch_norm.gamma
+        , %para812 : Ref[Tensor(F32)][1024]    # vhat.network.encoder.4.mlp2.batch_norm.beta
+        , %para813 : Ref[Tensor(F32)][1024]    # vhat.network.encoder.4.shortcut.conv.bias
+        , %para814 : Ref[Tensor(F32)][1024]    # vhat.network.encoder.4.shortcut.batch_norm.gamma
+        , %para815 : Ref[Tensor(F32)][1024]    # vhat.network.encoder.4.shortcut.batch_norm.beta
+        , %para816 : Ref[Tensor(F32)][256]    # vhat.network.encoder.4.lse1.mlp.conv.bias
+        , %para817 : Ref[Tensor(F32)][256]    # vhat.network.encoder.4.lse1.mlp.batch_norm.gamma
+        , %para818 : Ref[Tensor(F32)][256]    # vhat.network.encoder.4.lse1.mlp.batch_norm.beta
+        , %para819 : Ref[Tensor(F32)][256]    # vhat.network.encoder.4.lse2.mlp.conv.bias
+        , %para820 : Ref[Tensor(F32)][256]    # vhat.network.encoder.4.lse2.mlp.batch_norm.gamma
+        , %para821 : Ref[Tensor(F32)][256]    # vhat.network.encoder.4.lse2.mlp.batch_norm.beta
+        , %para822 : Ref[Tensor(F32)][256]    # vhat.network.encoder.4.pool1.mlp.conv.bias
+        , %para823 : Ref[Tensor(F32)][256]    # vhat.network.encoder.4.pool1.mlp.batch_norm.gamma
+        , %para824 : Ref[Tensor(F32)][256]    # vhat.network.encoder.4.pool1.mlp.batch_norm.beta
+        , %para825 : Ref[Tensor(F32)][512]    # vhat.network.encoder.4.pool2.mlp.conv.bias
+        , %para826 : Ref[Tensor(F32)][512]    # vhat.network.encoder.4.pool2.mlp.batch_norm.gamma
+        , %para827 : Ref[Tensor(F32)][512]    # vhat.network.encoder.4.pool2.mlp.batch_norm.beta
+        , %para828 : Ref[Tensor(F32)][1024]    # vhat.network.mlp.conv.bias
+        , %para829 : Ref[Tensor(F32)][1024]    # vhat.network.mlp.batch_norm.gamma
+        , %para830 : Ref[Tensor(F32)][1024]    # vhat.network.mlp.batch_norm.beta
+        , %para831 : Ref[Tensor(F32)][13]    # vhat.network.supervise.0.conv.bias
+        , %para832 : Ref[Tensor(F32)][13]    # vhat.network.supervise.0.batch_norm.gamma
+        , %para833 : Ref[Tensor(F32)][13]    # vhat.network.supervise.0.batch_norm.beta
+        , %para834 : Ref[Tensor(F32)][13]    # vhat.network.supervise.1.conv.bias
+        , %para835 : Ref[Tensor(F32)][13]    # vhat.network.supervise.1.batch_norm.gamma
+        , %para836 : Ref[Tensor(F32)][13]    # vhat.network.supervise.1.batch_norm.beta
+        , %para837 : Ref[Tensor(F32)][13]    # vhat.network.supervise.2.conv.bias
+        , %para838 : Ref[Tensor(F32)][13]    # vhat.network.supervise.2.batch_norm.gamma
+        , %para839 : Ref[Tensor(F32)][13]    # vhat.network.supervise.2.batch_norm.beta
+        , %para840 : Ref[Tensor(F32)][13]    # vhat.network.supervise.3.conv.bias
+        , %para841 : Ref[Tensor(F32)][13]    # vhat.network.supervise.3.batch_norm.gamma
+        , %para842 : Ref[Tensor(F32)][13]    # vhat.network.supervise.3.batch_norm.beta
+        , %para843 : Ref[Tensor(F32)][13]    # vhat.network.supervise.4.conv.bias
+        , %para844 : Ref[Tensor(F32)][13]    # vhat.network.supervise.4.batch_norm.gamma
+        , %para845 : Ref[Tensor(F32)][13]    # vhat.network.supervise.4.batch_norm.beta
+        , %para846 : Ref[Tensor(F32)][13]    # vhat.network.supervise.5.conv.bias
+        , %para847 : Ref[Tensor(F32)][13]    # vhat.network.supervise.5.batch_norm.gamma
+        , %para848 : Ref[Tensor(F32)][13]    # vhat.network.supervise.5.batch_norm.beta
+        , %para849 : Ref[Tensor(F32)][10]    # vhat.network.Se.0.conv.bias
+        , %para850 : Ref[Tensor(F32)][10]    # vhat.network.Se.0.batch_norm.gamma
+        , %para851 : Ref[Tensor(F32)][10]    # vhat.network.Se.0.batch_norm.beta
+        , %para852 : Ref[Tensor(F32)][10]    # vhat.network.Se.1.conv.bias
+        , %para853 : Ref[Tensor(F32)][10]    # vhat.network.Se.1.batch_norm.gamma
+        , %para854 : Ref[Tensor(F32)][10]    # vhat.network.Se.1.batch_norm.beta
+        , %para855 : Ref[Tensor(F32)][10]    # vhat.network.Se.2.conv.bias
+        , %para856 : Ref[Tensor(F32)][10]    # vhat.network.Se.2.batch_norm.gamma
+        , %para857 : Ref[Tensor(F32)][10]    # vhat.network.Se.2.batch_norm.beta
+        , %para858 : Ref[Tensor(F32)][10]    # vhat.network.Se.3.conv.bias
+        , %para859 : Ref[Tensor(F32)][10]    # vhat.network.Se.3.batch_norm.gamma
+        , %para860 : Ref[Tensor(F32)][10]    # vhat.network.Se.3.batch_norm.beta
+        , %para861 : Ref[Tensor(F32)][512]    # vhat.network.decoder.0.conv.bias
+        , %para862 : Ref[Tensor(F32)][512]    # vhat.network.decoder.0.batch_norm.gamma
+        , %para863 : Ref[Tensor(F32)][512]    # vhat.network.decoder.0.batch_norm.beta
+        , %para864 : Ref[Tensor(F32)][256]    # vhat.network.decoder.1.conv.bias
+        , %para865 : Ref[Tensor(F32)][256]    # vhat.network.decoder.1.batch_norm.gamma
+        , %para866 : Ref[Tensor(F32)][256]    # vhat.network.decoder.1.batch_norm.beta
+        , %para867 : Ref[Tensor(F32)][128]    # vhat.network.decoder.2.conv.bias
+        , %para868 : Ref[Tensor(F32)][128]    # vhat.network.decoder.2.batch_norm.gamma
+        , %para869 : Ref[Tensor(F32)][128]    # vhat.network.decoder.2.batch_norm.beta
+        , %para870 : Ref[Tensor(F32)][32]    # vhat.network.decoder.3.conv.bias
+        , %para871 : Ref[Tensor(F32)][32]    # vhat.network.decoder.3.batch_norm.gamma
+        , %para872 : Ref[Tensor(F32)][32]    # vhat.network.decoder.3.batch_norm.beta
+        , %para873 : Ref[Tensor(F32)][32]    # vhat.network.decoder.4.conv.bias
+        , %para874 : Ref[Tensor(F32)][32]    # vhat.network.decoder.4.batch_norm.gamma
+        , %para875 : Ref[Tensor(F32)][32]    # vhat.network.decoder.4.batch_norm.beta
+        , %para876 : Ref[Tensor(F32)][64]    # vhat.network.fc_end.0.conv.bias
+        , %para877 : Ref[Tensor(F32)][64]    # vhat.network.fc_end.0.batch_norm.gamma
+        , %para878 : Ref[Tensor(F32)][64]    # vhat.network.fc_end.0.batch_norm.beta
+        , %para879 : Ref[Tensor(F32)][32]    # vhat.network.fc_end.1.conv.bias
+        , %para880 : Ref[Tensor(F32)][32]    # vhat.network.fc_end.1.batch_norm.gamma
+        , %para881 : Ref[Tensor(F32)][32]    # vhat.network.fc_end.1.batch_norm.beta
+        , %para882 : Ref[Tensor(F32)][13]    # vhat.network.fc_end.3.conv.bias
+        , %para883 : Ref[Tensor(F32)][13]    # vhat.network.fc_end.3.batch_norm.gamma
+        , %para884 : Ref[Tensor(F32)][13]    # vhat.network.fc_end.3.batch_norm.beta
+        , %para885 : Ref[Tensor(F32)][8, 6]    # vhat.network.fc_start.weight
+        , %para886 : Ref[Tensor(F32)][8, 8, 1, 1]    # vhat.network.encoder.0.mlp1.conv.weight
+        , %para887 : Ref[Tensor(F32)][32, 16, 1, 1]    # vhat.network.encoder.0.mlp2.conv.weight
+        , %para888 : Ref[Tensor(F32)][32, 8, 1, 1]    # vhat.network.encoder.0.shortcut.conv.weight
+        , %para889 : Ref[Tensor(F32)][8, 10, 1, 1]    # vhat.network.encoder.0.lse1.mlp.conv.weight
+        , %para890 : Ref[Tensor(F32)][8, 8, 1, 1]    # vhat.network.encoder.0.lse2.mlp.conv.weight
+        , %para891 : Ref[Tensor(F32)][16, 16]    # vhat.network.encoder.0.pool1.score_fn.0.weight
+        , %para892 : Ref[Tensor(F32)][8, 16, 1, 1]    # vhat.network.encoder.0.pool1.mlp.conv.weight
+        , %para893 : Ref[Tensor(F32)][16, 16]    # vhat.network.encoder.0.pool2.score_fn.0.weight
+        , %para894 : Ref[Tensor(F32)][16, 16, 1, 1]    # vhat.network.encoder.0.pool2.mlp.conv.weight
+        , %para895 : Ref[Tensor(F32)][32, 32, 1, 1]    # vhat.network.encoder.1.mlp1.conv.weight
+        , %para896 : Ref[Tensor(F32)][128, 64, 1, 1]    # vhat.network.encoder.1.mlp2.conv.weight
+        , %para897 : Ref[Tensor(F32)][128, 32, 1, 1]    # vhat.network.encoder.1.shortcut.conv.weight
+        , %para898 : Ref[Tensor(F32)][32, 10, 1, 1]    # vhat.network.encoder.1.lse1.mlp.conv.weight
+        , %para899 : Ref[Tensor(F32)][32, 32, 1, 1]    # vhat.network.encoder.1.lse2.mlp.conv.weight
+        , %para900 : Ref[Tensor(F32)][64, 64]    # vhat.network.encoder.1.pool1.score_fn.0.weight
+        , %para901 : Ref[Tensor(F32)][32, 64, 1, 1]    # vhat.network.encoder.1.pool1.mlp.conv.weight
+        , %para902 : Ref[Tensor(F32)][64, 64]    # vhat.network.encoder.1.pool2.score_fn.0.weight
+        , %para903 : Ref[Tensor(F32)][64, 64, 1, 1]    # vhat.network.encoder.1.pool2.mlp.conv.weight
+        , %para904 : Ref[Tensor(F32)][64, 128, 1, 1]    # vhat.network.encoder.2.mlp1.conv.weight
+        , %para905 : Ref[Tensor(F32)][256, 128, 1, 1]    # vhat.network.encoder.2.mlp2.conv.weight
+        , %para906 : Ref[Tensor(F32)][256, 128, 1, 1]    # vhat.network.encoder.2.shortcut.conv.weight
+        , %para907 : Ref[Tensor(F32)][64, 10, 1, 1]    # vhat.network.encoder.2.lse1.mlp.conv.weight
+        , %para908 : Ref[Tensor(F32)][64, 64, 1, 1]    # vhat.network.encoder.2.lse2.mlp.conv.weight
+        , %para909 : Ref[Tensor(F32)][128, 128]    # vhat.network.encoder.2.pool1.score_fn.0.weight
+        , %para910 : Ref[Tensor(F32)][64, 128, 1, 1]    # vhat.network.encoder.2.pool1.mlp.conv.weight
+        , %para911 : Ref[Tensor(F32)][128, 128]    # vhat.network.encoder.2.pool2.score_fn.0.weight
+        , %para912 : Ref[Tensor(F32)][128, 128, 1, 1]    # vhat.network.encoder.2.pool2.mlp.conv.weight
+        , %para913 : Ref[Tensor(F32)][128, 256, 1, 1]    # vhat.network.encoder.3.mlp1.conv.weight
+        , %para914 : Ref[Tensor(F32)][512, 256, 1, 1]    # vhat.network.encoder.3.mlp2.conv.weight
+        , %para915 : Ref[Tensor(F32)][512, 256, 1, 1]    # vhat.network.encoder.3.shortcut.conv.weight
+        , %para916 : Ref[Tensor(F32)][128, 10, 1, 1]    # vhat.network.encoder.3.lse1.mlp.conv.weight
+        , %para917 : Ref[Tensor(F32)][128, 128, 1, 1]    # vhat.network.encoder.3.lse2.mlp.conv.weight
+        , %para918 : Ref[Tensor(F32)][256, 256]    # vhat.network.encoder.3.pool1.score_fn.0.weight
+        , %para919 : Ref[Tensor(F32)][128, 256, 1, 1]    # vhat.network.encoder.3.pool1.mlp.conv.weight
+        , %para920 : Ref[Tensor(F32)][256, 256]    # vhat.network.encoder.3.pool2.score_fn.0.weight
+        , %para921 : Ref[Tensor(F32)][256, 256, 1, 1]    # vhat.network.encoder.3.pool2.mlp.conv.weight
+        , %para922 : Ref[Tensor(F32)][256, 512, 1, 1]    # vhat.network.encoder.4.mlp1.conv.weight
+        , %para923 : Ref[Tensor(F32)][1024, 512, 1, 1]    # vhat.network.encoder.4.mlp2.conv.weight
+        , %para924 : Ref[Tensor(F32)][1024, 512, 1, 1]    # vhat.network.encoder.4.shortcut.conv.weight
+        , %para925 : Ref[Tensor(F32)][256, 10, 1, 1]    # vhat.network.encoder.4.lse1.mlp.conv.weight
+        , %para926 : Ref[Tensor(F32)][256, 256, 1, 1]    # vhat.network.encoder.4.lse2.mlp.conv.weight
+        , %para927 : Ref[Tensor(F32)][512, 512]    # vhat.network.encoder.4.pool1.score_fn.0.weight
+        , %para928 : Ref[Tensor(F32)][256, 512, 1, 1]    # vhat.network.encoder.4.pool1.mlp.conv.weight
+        , %para929 : Ref[Tensor(F32)][512, 512]    # vhat.network.encoder.4.pool2.score_fn.0.weight
+        , %para930 : Ref[Tensor(F32)][512, 512, 1, 1]    # vhat.network.encoder.4.pool2.mlp.conv.weight
+        , %para931 : Ref[Tensor(F32)][1024, 1024, 1, 1]    # vhat.network.mlp.conv.weight
+        , %para932 : Ref[Tensor(F32)][13, 1024, 1, 1]    # vhat.network.supervise.0.conv.weight
+        , %para933 : Ref[Tensor(F32)][13, 512, 1, 1]    # vhat.network.supervise.1.conv.weight
+        , %para934 : Ref[Tensor(F32)][13, 256, 1, 1]    # vhat.network.supervise.2.conv.weight
+        , %para935 : Ref[Tensor(F32)][13, 128, 1, 1]    # vhat.network.supervise.3.conv.weight
+        , %para936 : Ref[Tensor(F32)][13, 32, 1, 1]    # vhat.network.supervise.4.conv.weight
+        , %para937 : Ref[Tensor(F32)][13, 32, 1, 1]    # vhat.network.supervise.5.conv.weight
+        , %para938 : Ref[Tensor(F32)][10, 512, 1, 1]    # vhat.network.Se.0.conv.weight
+        , %para939 : Ref[Tensor(F32)][10, 256, 1, 1]    # vhat.network.Se.1.conv.weight
+        , %para940 : Ref[Tensor(F32)][10, 128, 1, 1]    # vhat.network.Se.2.conv.weight
+        , %para941 : Ref[Tensor(F32)][10, 32, 1, 1]    # vhat.network.Se.3.conv.weight
+        , %para942 : Ref[Tensor(F32)][1536, 512, 1, 1]    # vhat.network.decoder.0.conv.weight
+        , %para943 : Ref[Tensor(F32)][768, 256, 1, 1]    # vhat.network.decoder.1.conv.weight
+        , %para944 : Ref[Tensor(F32)][384, 128, 1, 1]    # vhat.network.decoder.2.conv.weight
+        , %para945 : Ref[Tensor(F32)][160, 32, 1, 1]    # vhat.network.decoder.3.conv.weight
+        , %para946 : Ref[Tensor(F32)][64, 32, 1, 1]    # vhat.network.decoder.4.conv.weight
+        , %para947 : Ref[Tensor(F32)][64, 32, 1, 1]    # vhat.network.fc_end.0.conv.weight
+        , %para948 : Ref[Tensor(F32)][32, 64, 1, 1]    # vhat.network.fc_end.1.conv.weight
+        , %para949 : Ref[Tensor(F32)][13, 32, 1, 1]    # vhat.network.fc_end.3.conv.weight
+        , %para950 : Ref[Tensor(I32)][]    # last_overflow_iterator_step
+        , %para951 : Ref[Tensor(F32)][]    # h_loss.lambda_nl
+        , %para952 : Ref[Tensor(F32)][]    # h_loss.lambda_pl
+        , %para953 : Ref[Tensor(I32)][1]    # global_step
+        , %para954 : Ref[Tensor(F32)][8]    # network.bn_start.0.moving_mean
+        , %para955 : Ref[Tensor(F32)][8]    # network.bn_start.0.moving_variance
+        , %para956 : Ref[Tensor(F32)][1024]    # network.mlp.batch_norm.moving_mean
+        , %para957 : Ref[Tensor(F32)][1024]    # network.mlp.batch_norm.moving_variance
+        , %para958 : Ref[Tensor(F32)][13]    # network.supervise.0.batch_norm.moving_mean
+        , %para959 : Ref[Tensor(F32)][13]    # network.supervise.0.batch_norm.moving_variance
+        , %para960 : Ref[Tensor(F32)][13]    # network.supervise.1.batch_norm.moving_mean
+        , %para961 : Ref[Tensor(F32)][13]    # network.supervise.1.batch_norm.moving_variance
+        , %para962 : Ref[Tensor(F32)][13]    # network.supervise.2.batch_norm.moving_mean
+        , %para963 : Ref[Tensor(F32)][13]    # network.supervise.2.batch_norm.moving_variance
+        , %para964 : Ref[Tensor(F32)][13]    # network.supervise.3.batch_norm.moving_mean
+        , %para965 : Ref[Tensor(F32)][13]    # network.supervise.3.batch_norm.moving_variance
+        , %para966 : Ref[Tensor(F32)][13]    # network.supervise.4.batch_norm.moving_mean
+        , %para967 : Ref[Tensor(F32)][13]    # network.supervise.4.batch_norm.moving_variance
+        , %para968 : Ref[Tensor(F32)][13]    # network.supervise.5.batch_norm.moving_mean
+        , %para969 : Ref[Tensor(F32)][13]    # network.supervise.5.batch_norm.moving_variance
+        , %para970 : Ref[Tensor(F32)][32]    # network.encoder.0.mlp2.batch_norm.moving_mean
+        , %para971 : Ref[Tensor(F32)][32]    # network.encoder.0.mlp2.batch_norm.moving_variance
+        , %para972 : Ref[Tensor(F32)][32]    # network.encoder.0.shortcut.batch_norm.moving_mean
+        , %para973 : Ref[Tensor(F32)][32]    # network.encoder.0.shortcut.batch_norm.moving_variance
+        , %para974 : Ref[Tensor(F32)][128]    # network.encoder.1.mlp2.batch_norm.moving_mean
+        , %para975 : Ref[Tensor(F32)][128]    # network.encoder.1.mlp2.batch_norm.moving_variance
+        , %para976 : Ref[Tensor(F32)][128]    # network.encoder.1.shortcut.batch_norm.moving_mean
+        , %para977 : Ref[Tensor(F32)][128]    # network.encoder.1.shortcut.batch_norm.moving_variance
+        , %para978 : Ref[Tensor(F32)][256]    # network.encoder.2.mlp2.batch_norm.moving_mean
+        , %para979 : Ref[Tensor(F32)][256]    # network.encoder.2.mlp2.batch_norm.moving_variance
+        , %para980 : Ref[Tensor(F32)][256]    # network.encoder.2.shortcut.batch_norm.moving_mean
+        , %para981 : Ref[Tensor(F32)][256]    # network.encoder.2.shortcut.batch_norm.moving_variance
+        , %para982 : Ref[Tensor(F32)][512]    # network.encoder.3.mlp2.batch_norm.moving_mean
+        , %para983 : Ref[Tensor(F32)][512]    # network.encoder.3.mlp2.batch_norm.moving_variance
+        , %para984 : Ref[Tensor(F32)][512]    # network.encoder.3.shortcut.batch_norm.moving_mean
+        , %para985 : Ref[Tensor(F32)][512]    # network.encoder.3.shortcut.batch_norm.moving_variance
+        , %para986 : Ref[Tensor(F32)][1024]    # network.encoder.4.mlp2.batch_norm.moving_mean
+        , %para987 : Ref[Tensor(F32)][1024]    # network.encoder.4.mlp2.batch_norm.moving_variance
+        , %para988 : Ref[Tensor(F32)][1024]    # network.encoder.4.shortcut.batch_norm.moving_mean
+        , %para989 : Ref[Tensor(F32)][1024]    # network.encoder.4.shortcut.batch_norm.moving_variance
+        , %para990 : Ref[Tensor(F32)][512]    # network.decoder.0.batch_norm.moving_mean
+        , %para991 : Ref[Tensor(F32)][512]    # network.decoder.0.batch_norm.moving_variance
+        , %para992 : Ref[Tensor(F32)][256]    # network.decoder.1.batch_norm.moving_mean
+        , %para993 : Ref[Tensor(F32)][256]    # network.decoder.1.batch_norm.moving_variance
+        , %para994 : Ref[Tensor(F32)][128]    # network.decoder.2.batch_norm.moving_mean
+        , %para995 : Ref[Tensor(F32)][128]    # network.decoder.2.batch_norm.moving_variance
+        , %para996 : Ref[Tensor(F32)][32]    # network.decoder.3.batch_norm.moving_mean
+        , %para997 : Ref[Tensor(F32)][32]    # network.decoder.3.batch_norm.moving_variance
+        , %para998 : Ref[Tensor(F32)][32]    # network.decoder.4.batch_norm.moving_mean
+        , %para999 : Ref[Tensor(F32)][32]    # network.decoder.4.batch_norm.moving_variance
+        , %para1000 : Ref[Tensor(F32)][10]    # network.Se.0.batch_norm.moving_mean
+        , %para1001 : Ref[Tensor(F32)][10]    # network.Se.0.batch_norm.moving_variance
+        , %para1002 : Ref[Tensor(F32)][10]    # network.Se.1.batch_norm.moving_mean
+        , %para1003 : Ref[Tensor(F32)][10]    # network.Se.1.batch_norm.moving_variance
+        , %para1004 : Ref[Tensor(F32)][10]    # network.Se.2.batch_norm.moving_mean
+        , %para1005 : Ref[Tensor(F32)][10]    # network.Se.2.batch_norm.moving_variance
+        , %para1006 : Ref[Tensor(F32)][10]    # network.Se.3.batch_norm.moving_mean
+        , %para1007 : Ref[Tensor(F32)][10]    # network.Se.3.batch_norm.moving_variance
+        , %para1008 : Ref[Tensor(F32)][16]    # network.encoder.0.pool2.mlp.batch_norm.moving_mean
+        , %para1009 : Ref[Tensor(F32)][16]    # network.encoder.0.pool2.mlp.batch_norm.moving_variance
+        , %para1010 : Ref[Tensor(F32)][64]    # network.encoder.1.pool2.mlp.batch_norm.moving_mean
+        , %para1011 : Ref[Tensor(F32)][64]    # network.encoder.1.pool2.mlp.batch_norm.moving_variance
+        , %para1012 : Ref[Tensor(F32)][128]    # network.encoder.2.pool2.mlp.batch_norm.moving_mean
+        , %para1013 : Ref[Tensor(F32)][128]    # network.encoder.2.pool2.mlp.batch_norm.moving_variance
+        , %para1014 : Ref[Tensor(F32)][256]    # network.encoder.3.pool2.mlp.batch_norm.moving_mean
+        , %para1015 : Ref[Tensor(F32)][256]    # network.encoder.3.pool2.mlp.batch_norm.moving_variance
+        , %para1016 : Ref[Tensor(F32)][512]    # network.encoder.4.pool2.mlp.batch_norm.moving_mean
+        , %para1017 : Ref[Tensor(F32)][512]    # network.encoder.4.pool2.mlp.batch_norm.moving_variance
+        , %para1018 : Ref[Tensor(F32)][8]    # network.encoder.0.mlp1.batch_norm.moving_mean
+        , %para1019 : Ref[Tensor(F32)][8]    # network.encoder.0.mlp1.batch_norm.moving_variance
+        , %para1020 : Ref[Tensor(F32)][8]    # network.encoder.0.pool1.mlp.batch_norm.moving_mean
+        , %para1021 : Ref[Tensor(F32)][8]    # network.encoder.0.pool1.mlp.batch_norm.moving_variance
+        , %para1022 : Ref[Tensor(F32)][32]    # network.encoder.1.mlp1.batch_norm.moving_mean
+        , %para1023 : Ref[Tensor(F32)][32]    # network.encoder.1.mlp1.batch_norm.moving_variance
+        , %para1024 : Ref[Tensor(F32)][32]    # network.encoder.1.pool1.mlp.batch_norm.moving_mean
+        , %para1025 : Ref[Tensor(F32)][32]    # network.encoder.1.pool1.mlp.batch_norm.moving_variance
+        , %para1026 : Ref[Tensor(F32)][64]    # network.encoder.2.mlp1.batch_norm.moving_mean
+        , %para1027 : Ref[Tensor(F32)][64]    # network.encoder.2.mlp1.batch_norm.moving_variance
+        , %para1028 : Ref[Tensor(F32)][64]    # network.encoder.2.pool1.mlp.batch_norm.moving_mean
+        , %para1029 : Ref[Tensor(F32)][64]    # network.encoder.2.pool1.mlp.batch_norm.moving_variance
+        , %para1030 : Ref[Tensor(F32)][128]    # network.encoder.3.mlp1.batch_norm.moving_mean
+        , %para1031 : Ref[Tensor(F32)][128]    # network.encoder.3.mlp1.batch_norm.moving_variance
+        , %para1032 : Ref[Tensor(F32)][128]    # network.encoder.3.pool1.mlp.batch_norm.moving_mean
+        , %para1033 : Ref[Tensor(F32)][128]    # network.encoder.3.pool1.mlp.batch_norm.moving_variance
+        , %para1034 : Ref[Tensor(F32)][256]    # network.encoder.4.mlp1.batch_norm.moving_mean
+        , %para1035 : Ref[Tensor(F32)][256]    # network.encoder.4.mlp1.batch_norm.moving_variance
+        , %para1036 : Ref[Tensor(F32)][256]    # network.encoder.4.pool1.mlp.batch_norm.moving_mean
+        , %para1037 : Ref[Tensor(F32)][256]    # network.encoder.4.pool1.mlp.batch_norm.moving_variance
+        , %para1038 : Ref[Tensor(F32)][64]    # network.fc_end.0.batch_norm.moving_mean
+        , %para1039 : Ref[Tensor(F32)][64]    # network.fc_end.0.batch_norm.moving_variance
+        , %para1040 : Ref[Tensor(F32)][32]    # network.fc_end.1.batch_norm.moving_mean
+        , %para1041 : Ref[Tensor(F32)][32]    # network.fc_end.1.batch_norm.moving_variance
+        , %para1042 : Ref[Tensor(F32)][13]    # network.fc_end.3.batch_norm.moving_mean
+        , %para1043 : Ref[Tensor(F32)][13]    # network.fc_end.3.batch_norm.moving_variance
+        , %para1044 : Ref[Tensor(F32)][8]    # network.encoder.0.lse2.mlp.batch_norm.moving_mean
+        , %para1045 : Ref[Tensor(F32)][8]    # network.encoder.0.lse2.mlp.batch_norm.moving_variance
+        , %para1046 : Ref[Tensor(F32)][32]    # network.encoder.1.lse2.mlp.batch_norm.moving_mean
+        , %para1047 : Ref[Tensor(F32)][32]    # network.encoder.1.lse2.mlp.batch_norm.moving_variance
+        , %para1048 : Ref[Tensor(F32)][64]    # network.encoder.2.lse2.mlp.batch_norm.moving_mean
+        , %para1049 : Ref[Tensor(F32)][64]    # network.encoder.2.lse2.mlp.batch_norm.moving_variance
+        , %para1050 : Ref[Tensor(F32)][128]    # network.encoder.3.lse2.mlp.batch_norm.moving_mean
+        , %para1051 : Ref[Tensor(F32)][128]    # network.encoder.3.lse2.mlp.batch_norm.moving_variance
+        , %para1052 : Ref[Tensor(F32)][256]    # network.encoder.4.lse2.mlp.batch_norm.moving_mean
+        , %para1053 : Ref[Tensor(F32)][256]    # network.encoder.4.lse2.mlp.batch_norm.moving_variance
+        , %para1054 : Ref[Tensor(F32)][8]    # network.encoder.0.lse1.mlp.batch_norm.moving_mean
+        , %para1055 : Ref[Tensor(F32)][8]    # network.encoder.0.lse1.mlp.batch_norm.moving_variance
+        , %para1056 : Ref[Tensor(F32)][32]    # network.encoder.1.lse1.mlp.batch_norm.moving_mean
+        , %para1057 : Ref[Tensor(F32)][32]    # network.encoder.1.lse1.mlp.batch_norm.moving_variance
+        , %para1058 : Ref[Tensor(F32)][64]    # network.encoder.2.lse1.mlp.batch_norm.moving_mean
+        , %para1059 : Ref[Tensor(F32)][64]    # network.encoder.2.lse1.mlp.batch_norm.moving_variance
+        , %para1060 : Ref[Tensor(F32)][128]    # network.encoder.3.lse1.mlp.batch_norm.moving_mean
+        , %para1061 : Ref[Tensor(F32)][128]    # network.encoder.3.lse1.mlp.batch_norm.moving_variance
+        , %para1062 : Ref[Tensor(F32)][256]    # network.encoder.4.lse1.mlp.batch_norm.moving_mean
+        , %para1063 : Ref[Tensor(F32)][256]    # network.encoder.4.lse1.mlp.batch_norm.moving_variance
+    ) {
+    %1 : Tuple[Tensor(F32),Tensor(I32)*3,Tensor(F32)*5,Tensor(I32)*15] = Primitive::MakeTuple{prim_type=1}(%para1, %para2, %para3, %para4, %para5, %para6, %para7, %para8, %para9, %para10, %para11, %para12, %para13, %para14, %para15, %para16, %para17, %para18, %para19, %para20, %para21, %para22, %para23, %para24)    #(Tensor(F32)[3, 40960, 6], Tensor(I32)[3, 40960], Tensor(I32)[3, 40960], Tensor(I32)[3, 1], Tensor(F32)[3, 40960, 3], Tensor(F32)[3, 10240, 3], Tensor(F32)[3, 2560, 3], Tensor(F32)[3, 640, 3], Tensor(F32)[3, 160, 3], Tensor(I32)[3, 40960, 16], Tensor(I32)[3, 10240, 16], Tensor(I32)[3, 2560, 16], Tensor(I32)[3, 640, 16], Tensor(I32)[3, 160, 16], Tensor(I32)[3, 10240, 16], Tensor(I32)[3, 2560, 16], Tensor(I32)[3, 640, 16], Tensor(I32)[3, 160, 16], Tensor(I32)[3, 80, 16], Tensor(I32)[3, 40960, 1], Tensor(I32)[3, 10240, 1], Tensor(I32)[3, 2560, 1], Tensor(I32)[3, 640, 1], Tensor(I32)[3, 160, 1]) #scope: Default
+#[CNode]55
+
+#------------------------> 0
+    %2 = UnpackCall::unpack_call(FuncGraph::fg_56, %1)    #(Func, Tuple[Tensor(F32),Tensor(I32)*3,Tensor(F32)*5,Tensor(I32)*15])    # fg_56=construct.56 #scope: Default
+#[CNode]57
+    Primitive::Return{prim_type=1}(%2)    #(Undefined) #scope: Default
+      # In file /home/hjh/.conda/envs/md17/lib/python3.9/site-packages/mindspore/nn/wrap/loss_scale.py(347)/        if not overflow:/#[CNode]58
+}
+# order:
+#   1: construct_wrapper.42:[CNode]57{[0]: ValueNode<UnpackCall> unpack_call.59, [1]: ValueNode<FuncGraph> construct.56, [2]: [CNode]55}
+#   2: construct_wrapper.42:[CNode]58{[0]: ValueNode<Primitive> Return, [1]: [CNode]57}
+
+
+# [No.2] UnpackCall.43
+
+funcgraph fg_43(
+        %para1064 : Func    # 44
+        , %para1065 : Tuple[Tensor(F32),Tensor(I32)*3,Tensor(F32)*5,Tensor(I32)*15]    # 45
+    ) {
+    %1 : Tensor(F32)[3, 40960, 6] = Primitive::TupleGetItem{prim_type=1}(%para1065, I64(0))    #(Tuple[Tensor(F32),Tensor(I32)*3,Tensor(F32)*5,Tensor(I32)*15], I64) #scope: Default
+#60
+    %2 : Tensor(I32)[3, 40960] = Primitive::TupleGetItem{prim_type=1}(%para1065, I64(1))    #(Tuple[Tensor(F32),Tensor(I32)*3,Tensor(F32)*5,Tensor(I32)*15], I64) #scope: Default
+#61
+    %3 : Tensor(I32)[3, 40960] = Primitive::TupleGetItem{prim_type=1}(%para1065, I64(2))    #(Tuple[Tensor(F32),Tensor(I32)*3,Tensor(F32)*5,Tensor(I32)*15], I64) #scope: Default
+#62
+    %4 : Tensor(I32)[3, 1] = Primitive::TupleGetItem{prim_type=1}(%para1065, I64(3))    #(Tuple[Tensor(F32),Tensor(I32)*3,Tensor(F32)*5,Tensor(I32)*15], I64) #scope: Default
+#63
+    %5 : Tensor(F32)[3, 40960, 3] = Primitive::TupleGetItem{prim_type=1}(%para1065, I64(4))    #(Tuple[Tensor(F32),Tensor(I32)*3,Tensor(F32)*5,Tensor(I32)*15], I64) #scope: Default
+#64
+    %6 : Tensor(F32)[3, 10240, 3] = Primitive::TupleGetItem{prim_type=1}(%para1065, I64(5))    #(Tuple[Tensor(F32),Tensor(I32)*3,Tensor(F32)*5,Tensor(I32)*15], I64) #scope: Default
+#65
+    %7 : Tensor(F32)[3, 2560, 3] = Primitive::TupleGetItem{prim_type=1}(%para1065, I64(6))    #(Tuple[Tensor(F32),Tensor(I32)*3,Tensor(F32)*5,Tensor(I32)*15], I64) #scope: Default
+#66
+    %8 : Tensor(F32)[3, 640, 3] = Primitive::TupleGetItem{prim_type=1}(%para1065, I64(7))    #(Tuple[Tensor(F32),Tensor(I32)*3,Tensor(F32)*5,Tensor(I32)*15], I64) #scope: Default
+#67
+    %9 : Tensor(F32)[3, 160, 3] = Primitive::TupleGetItem{prim_type=1}(%para1065, I64(8))    #(Tuple[Tensor(F32),Tensor(I32)*3,Tensor(F32)*5,Tensor(I32)*15], I64) #scope: Default
+#68
+    %10 : Tensor(I32)[3, 40960, 16] = Primitive::TupleGetItem{prim_type=1}(%para1065, I64(9))    #(Tuple[Tensor(F32),Tensor(I32)*3,Tensor(F32)*5,Tensor(I32)*15], I64) #scope: Default
+#69
+    %11 : Tensor(I32)[3, 10240, 16] = Primitive::TupleGetItem{prim_type=1}(%para1065, I64(10))    #(Tuple[Tensor(F32),Tensor(I32)*3,Tensor(F32)*5,Tensor(I32)*15], I64) #scope: Default
+#70
+    %12 : Tensor(I32)[3, 2560, 16] = Primitive::TupleGetItem{prim_type=1}(%para1065, I64(11))    #(Tuple[Tensor(F32),Tensor(I32)*3,Tensor(F32)*5,Tensor(I32)*15], I64) #scope: Default
+#71
+    %13 : Tensor(I32)[3, 640, 16] = Primitive::TupleGetItem{prim_type=1}(%para1065, I64(12))    #(Tuple[Tensor(F32),Tensor(I32)*3,Tensor(F32)*5,Tensor(I32)*15], I64) #scope: Default
+#72
+    %14 : Tensor(I32)[3, 160, 16] = Primitive::TupleGetItem{prim_type=1}(%para1065, I64(13))    #(Tuple[Tensor(F32),Tensor(I32)*3,Tensor(F32)*5,Tensor(I32)*15], I64) #scope: Default
+#73
+    %15 : Tensor(I32)[3, 10240, 16] = Primitive::TupleGetItem{prim_type=1}(%para1065, I64(14))    #(Tuple[Tensor(F32),Tensor(I32)*3,Tensor(F32)*5,Tensor(I32)*15], I64) #scope: Default
+#74
+    %16 : Tensor(I32)[3, 2560, 16] = Primitive::TupleGetItem{prim_type=1}(%para1065, I64(15))    #(Tuple[Tensor(F32),Tensor(I32)*3,Tensor(F32)*5,Tensor(I32)*15], I64) #scope: Default
+#75
+    %17 : Tensor(I32)[3, 640, 16] = Primitive::TupleGetItem{prim_type=1}(%para1065, I64(16))    #(Tuple[Tensor(F32),Tensor(I32)*3,Tensor(F32)*5,Tensor(I32)*15], I64) #scope: Default
+#76
+    %18 : Tensor(I32)[3, 160, 16] = Primitive::TupleGetItem{prim_type=1}(%para1065, I64(17))    #(Tuple[Tensor(F32),Tensor(I32)*3,Tensor(F32)*5,Tensor(I32)*15], I64) #scope: Default
+#77
+    %19 : Tensor(I32)[3, 80, 16] = Primitive::TupleGetItem{prim_type=1}(%para1065, I64(18))    #(Tuple[Tensor(F32),Tensor(I32)*3,Tensor(F32)*5,Tensor(I32)*15], I64) #scope: Default
+#78
+    %20 : Tensor(I32)[3, 40960, 1] = Primitive::TupleGetItem{prim_type=1}(%para1065, I64(19))    #(Tuple[Tensor(F32),Tensor(I32)*3,Tensor(F32)*5,Tensor(I32)*15], I64) #scope: Default
+#79
+    %21 : Tensor(I32)[3, 10240, 1] = Primitive::TupleGetItem{prim_type=1}(%para1065, I64(20))    #(Tuple[Tensor(F32),Tensor(I32)*3,Tensor(F32)*5,Tensor(I32)*15], I64) #scope: Default
+#80
+    %22 : Tensor(I32)[3, 2560, 1] = Primitive::TupleGetItem{prim_type=1}(%para1065, I64(21))    #(Tuple[Tensor(F32),Tensor(I32)*3,Tensor(F32)*5,Tensor(I32)*15], I64) #scope: Default
+#81
+    %23 : Tensor(I32)[3, 640, 1] = Primitive::TupleGetItem{prim_type=1}(%para1065, I64(22))    #(Tuple[Tensor(F32),Tensor(I32)*3,Tensor(F32)*5,Tensor(I32)*15], I64) #scope: Default
+#82
+    %24 : Tensor(I32)[3, 160, 1] = Primitive::TupleGetItem{prim_type=1}(%para1065, I64(23))    #(Tuple[Tensor(F32),Tensor(I32)*3,Tensor(F32)*5,Tensor(I32)*15], I64) #scope: Default
+#83
+
+#------------------------> 1
+    %25 = %para1064(%1, %2, %3, %4, %5, %6, %7, %8, %9, %10, %11, %12, %13, %14, %15, %16, %17, %18, %19, %20, %21, %22, %23, %24)    #(Tensor(F32)[3, 40960, 6], Tensor(I32)[3, 40960], Tensor(I32)[3, 40960], Tensor(I32)[3, 1], Tensor(F32)[3, 40960, 3], Tensor(F32)[3, 10240, 3], Tensor(F32)[3, 2560, 3], Tensor(F32)[3, 640, 3], Tensor(F32)[3, 160, 3], Tensor(I32)[3, 40960, 16], Tensor(I32)[3, 10240, 16], Tensor(I32)[3, 2560, 16], Tensor(I32)[3, 640, 16], Tensor(I32)[3, 160, 16], Tensor(I32)[3, 10240, 16], Tensor(I32)[3, 2560, 16], Tensor(I32)[3, 640, 16], Tensor(I32)[3, 160, 16], Tensor(I32)[3, 80, 16], Tensor(I32)[3, 40960, 1], Tensor(I32)[3, 10240, 1], Tensor(I32)[3, 2560, 1], Tensor(I32)[3, 640, 1], Tensor(I32)[3, 160, 1]) #scope: Default
+#84
+    Primitive::Return{prim_type=1}(%25)    #(Undefined) #scope: Default
+#85
+}
+# order:
+#   1: UnpackCall.43:84{[0]: 44, [1]: 60, [2]: 61, [3]: 62, [4]: 63, [5]: 64, [6]: 65, [7]: 66, [8]: 67, [9]: 68, [10]: 69, [11]: 70, [12]: 71, [13]: 72, [14]: 73, [15]: 74, [16]: 75, [17]: 76, [18]: 77, [19]: 78, [20]: 79, [21]: 80, [22]: 81, [23]: 82, [24]: 83}
+#   2: UnpackCall.43:85{[0]: ValueNode<Primitive> Return, [1]: 84}
+
+
+# [No.3] construct.46
+# In file /home/hjh/.conda/envs/md17/lib/python3.9/site-packages/mindspore/nn/wrap/loss_scale.py(330)/    def construct(self, *inputs):/
+funcgraph fg_46[fg_42](
+        %para1066 : Tensor(F32)[3, 40960, 6]    # inputs0
+        , %para1067 : Tensor(I32)[3, 40960]    # inputs1
+        , %para1068 : Tensor(I32)[3, 40960]    # inputs2
+        , %para1069 : Tensor(I32)[3, 1]    # inputs3
+        , %para1070 : Tensor(F32)[3, 40960, 3]    # inputs4
+        , %para1071 : Tensor(F32)[3, 10240, 3]    # inputs5
+        , %para1072 : Tensor(F32)[3, 2560, 3]    # inputs6
+        , %para1073 : Tensor(F32)[3, 640, 3]    # inputs7
+        , %para1074 : Tensor(F32)[3, 160, 3]    # inputs8
+        , %para1075 : Tensor(I32)[3, 40960, 16]    # inputs9
+        , %para1076 : Tensor(I32)[3, 10240, 16]    # inputs10
+        , %para1077 : Tensor(I32)[3, 2560, 16]    # inputs11
+        , %para1078 : Tensor(I32)[3, 640, 16]    # inputs12
+        , %para1079 : Tensor(I32)[3, 160, 16]    # inputs13
+        , %para1080 : Tensor(I32)[3, 10240, 16]    # inputs14
+        , %para1081 : Tensor(I32)[3, 2560, 16]    # inputs15
+        , %para1082 : Tensor(I32)[3, 640, 16]    # inputs16
+        , %para1083 : Tensor(I32)[3, 160, 16]    # inputs17
+        , %para1084 : Tensor(I32)[3, 80, 16]    # inputs18
+        , %para1085 : Tensor(I32)[3, 40960, 1]    # inputs19
+        , %para1086 : Tensor(I32)[3, 10240, 1]    # inputs20
+        , %para1087 : Tensor(I32)[3, 2560, 1]    # inputs21
+        , %para1088 : Tensor(I32)[3, 640, 1]    # inputs22
+        , %para1089 : Tensor(I32)[3, 160, 1]    # inputs23
+    ) {
+    %1 : Tuple[Tensor(F32),Tensor(I32)*3,Tensor(F32)*5,Tensor(I32)*15] = Primitive::MakeTuple{prim_type=1}(%para1066, %para1067, %para1068, %para1069, %para1070, %para1071, %para1072, %para1073, %para1074, %para1075, %para1076, %para1077, %para1078, %para1079, %para1080, %para1081, %para1082, %para1083, %para1084, %para1085, %para1086, %para1087, %para1088, %para1089)    #(Tensor(F32)[3, 40960, 6], Tensor(I32)[3, 40960], Tensor(I32)[3, 40960], Tensor(I32)[3, 1], Tensor(F32)[3, 40960, 3], Tensor(F32)[3, 10240, 3], Tensor(F32)[3, 2560, 3], Tensor(F32)[3, 640, 3], Tensor(F32)[3, 160, 3], Tensor(I32)[3, 40960, 16], Tensor(I32)[3, 10240, 16], Tensor(I32)[3, 2560, 16], Tensor(I32)[3, 640, 16], Tensor(I32)[3, 160, 16], Tensor(I32)[3, 10240, 16], Tensor(I32)[3, 2560, 16], Tensor(I32)[3, 640, 16], Tensor(I32)[3, 160, 16], Tensor(I32)[3, 80, 16], Tensor(I32)[3, 40960, 1], Tensor(I32)[3, 10240, 1], Tensor(I32)[3, 2560, 1], Tensor(I32)[3, 640, 1], Tensor(I32)[3, 160, 1]) #scope: Default
+      # In file /home/hjh/.conda/envs/md17/lib/python3.9/site-packages/mindspore/nn/wrap/loss_scale.py(330)/    def construct(self, *inputs):/#[CNode]86
+
+#------------------------> 2
+    %2 = UnpackCall::unpack_call(FuncGraph::fg_50, %1)    #(Func, Tuple[Tensor(F32),Tensor(I32)*3,Tensor(F32)*5,Tensor(I32)*15])    # fg_50=construct.50 #scope: Default
+      # In file /home/hjh/.conda/envs/md17/lib/python3.9/site-packages/mindspore/nn/wrap/loss_scale.py(332)/        loss = self.network(*inputs)/#loss
+    %3 = FuncGraph::fg_87(%2, %para25)    #(Undefined, Ref[Tensor(F32)][])    # fg_87=start_overflow_check.87 #scope: Default
+      # In file /home/hjh/.conda/envs/md17/lib/python3.9/site-packages/mindspore/nn/wrap/loss_scale.py(335)/        status, scaling_sens = self.start_overflow_check(loss, scaling_sens)/#[CNode]88
+    %4 = DoSignaturePrimitive::S-Prim-getitem{prim_type=1}(%3, I64(0))    #(Undefined, Undefined) #scope: Default
+      # In file /home/hjh/.conda/envs/md17/lib/python3.9/site-packages/mindspore/nn/wrap/loss_scale.py(335)/        status, scaling_sens = self.start_overflow_check(loss, scaling_sens)/#status
+    %5 = DoSignaturePrimitive::S-Prim-getitem{prim_type=1}(%3, I64(1))    #(Undefined, Undefined) #scope: Default
+      # In file /home/hjh/.conda/envs/md17/lib/python3.9/site-packages/mindspore/nn/wrap/loss_scale.py(349)/        return loss, cond, scaling_sens/#Φscaling_sens
+    %6 = DoSignaturePrimitive::S-Prim-Partial{prim_type=1}[side_effect_propagate=I64(1)](DoSignaturePrimitive::S-Prim-grad_scale{prim_type=1}, %5)    #(Undefined, Undefined) #scope: Default
+      # In file /home/hjh/.conda/envs/md17/lib/python3.9/site-packages/mindspore/nn/wrap/loss_scale.py(339)/        grads = self.hyper_map(F.partial(_grad_scale, scaling_sens), grads)/#[CNode]89
+    %7 = DoSignaturePrimitive::S-Prim-hyper_map[ones_like_leaf]{prim_type=1}(%2)    #(Undefined) #scope: Default
+      # In file /home/hjh/.conda/envs/md17/lib/python3.9/site-packages/mindspore/nn/wrap/loss_scale.py(337)/        scaling_sens_filled = C.ones_like(loss) * F.cast(scaling_sens, F.dtype(loss))/#[CNode]90
+    %8 = DoSignaturePrimitive::S-Prim-DType{prim_type=1}(%2)    #(Undefined) #scope: Default
+      # In file /home/hjh/.conda/envs/md17/lib/python3.9/site-packages/mindspore/nn/wrap/loss_scale.py(337)/        scaling_sens_filled = C.ones_like(loss) * F.cast(scaling_sens, F.dtype(loss))/#[CNode]91
+    %9 = DoSignaturePrimitive::S-Prim-Cast{prim_type=1}[output_names=["output"], input_names=["x", "dst_type"], SrcT=I32, DstT=F32, dst_type=F32](%5, %8)    #(Undefined, Undefined) #scope: Default
+      # In file /home/hjh/.conda/envs/md17/lib/python3.9/site-packages/mindspore/nn/wrap/loss_scale.py(337)/        scaling_sens_filled = C.ones_like(loss) * F.cast(scaling_sens, F.dtype(loss))/#[CNode]92
+    %10 = DoSignaturePrimitive::S-Prim-mul{prim_type=1}(%7, %9)    #(Undefined, Undefined) #scope: Default
+      # In file /home/hjh/.conda/envs/md17/lib/python3.9/site-packages/mindspore/nn/wrap/loss_scale.py(337)/        scaling_sens_filled = C.ones_like(loss) * F.cast(scaling_sens, F.dtype(loss))/#scaling_sens_filled
+    %11 = DoSignaturePrimitive::S-Prim-MakeTuple{prim_type=1}(%10)    #(Undefined) #scope: Default
+      # In file /home/hjh/.conda/envs/md17/lib/python3.9/site-packages/mindspore/nn/wrap/loss_scale.py(338)/        grads = self.grad(self.network, weights)(*inputs, scaling_sens_filled)/#[CNode]93
+    %12 = UnpackGraphPrimitive::UnpackGraph{prim_type=1}(FuncGraph::fg_50, %1, %11)    #(Undefined, Tuple[Tensor(F32),Tensor(I32)*3,Tensor(F32)*5,Tensor(I32)*15], Undefined)    # fg_50=construct.50 #scope: Default
+      # In file /home/hjh/.conda/envs/md17/lib/python3.9/site-packages/mindspore/nn/wrap/loss_scale.py(338)/        grads = self.grad(self.network, weights)(*inputs, scaling_sens_filled)/#grads
+    %13 = Primitive::MakeTuple{prim_type=1}(%para26, %para27, %para28, %para29, %para30, %para31, %para32, %para33, %para34, %para35, %para36, %para37, %para38, %para39, %para40, %para41, %para42, %para43, %para44, %para45, %para46, %para47, %para48, %para49, %para50, %para51, %para52, %para53, %para54, %para55, %para56, %para57, %para58, %para59, %para60, %para61, %para62, %para63, %para64, %para65, %para66, %para67, %para68, %para69, %para70, %para71, %para72, %para73, %para74, %para75, %para76, %para77, %para78, %para79, %para80, %para81, %para82, %para83, %para84, %para85, %para86, %para87, %para88, %para89, %para90, %para91, %para92, %para93, %para94, %para95, %para96, %para97, %para98, %para99, %para100, %para101, %para102, %para103, %para104, %para105, %para106, %para107, %para108, %para109, %para110, %para111, %para112, %para113, %para114, %para115, %para116, %para117, %para118, %para119, %para120, %para121, %para122, %para123, %para124, %para125, %para126, %para127, %para128, %para129, %para130, %para131, %para132, %para133, %para134, %para135, %para136, %para137, %para138, %para139, %para140, %para141, %para142, %para143, %para144, %para145, %para146, %para147, %para148, %para149, %para150, %para151, %para152, %para153, %para154, %para155, %para156, %para157, %para158, %para159, %para160, %para161, %para162, %para163, %para164, %para165, %para166, %para167, %para168, %para169, %para170, %para171, %para172, %para173, %para174, %para175, %para176, %para177, %para178, %para179, %para180, %para181, %para182, %para183, %para184, %para185, %para186, %para187, %para188, %para189, %para190, %para191, %para192, %para193, %para194, %para195, %para196, %para197, %para198, %para199, %para200, %para201, %para202, %para203, %para204, %para205, %para206, %para207, %para208, %para209, %para210, %para211, %para212, %para213, %para214, %para215, %para216, %para217, %para218, %para219, %para220, %para221, %para222, %para223, %para224, %para225, %para226, %para227, %para228, %para229, %para230, %para231, %para232, %para233, %para234, %para235, %para236, %para237, %para238, %para239, %para240, %para241, %para242, %para243, %para244, %para245, %para246, %para247, %para248, %para249, %para250, %para251, %para252, %para253, %para254, %para255)    #(Ref[Tensor(F32)][8], Ref[Tensor(F32)][8], Ref[Tensor(F32)][8], Ref[Tensor(F32)][8], Ref[Tensor(F32)][8], Ref[Tensor(F32)][8], Ref[Tensor(F32)][32], Ref[Tensor(F32)][32], Ref[Tensor(F32)][32], Ref[Tensor(F32)][32], Ref[Tensor(F32)][32], Ref[Tensor(F32)][32], Ref[Tensor(F32)][8], Ref[Tensor(F32)][8], Ref[Tensor(F32)][8], Ref[Tensor(F32)][8], Ref[Tensor(F32)][8], Ref[Tensor(F32)][8], Ref[Tensor(F32)][8], Ref[Tensor(F32)][8], Ref[Tensor(F32)][8], Ref[Tensor(F32)][16], Ref[Tensor(F32)][16], Ref[Tensor(F32)][16], Ref[Tensor(F32)][32], Ref[Tensor(F32)][32], Ref[Tensor(F32)][32], Ref[Tensor(F32)][128], Ref[Tensor(F32)][128], Ref[Tensor(F32)][128], Ref[Tensor(F32)][128], Ref[Tensor(F32)][128], Ref[Tensor(F32)][128], Ref[Tensor(F32)][32], Ref[Tensor(F32)][32], Ref[Tensor(F32)][32], Ref[Tensor(F32)][32], Ref[Tensor(F32)][32], Ref[Tensor(F32)][32], Ref[Tensor(F32)][32], Ref[Tensor(F32)][32], Ref[Tensor(F32)][32], Ref[Tensor(F32)][64], Ref[Tensor(F32)][64], Ref[Tensor(F32)][64], Ref[Tensor(F32)][64], Ref[Tensor(F32)][64], Ref[Tensor(F32)][64], Ref[Tensor(F32)][256], Ref[Tensor(F32)][256], Ref[Tensor(F32)][256], Ref[Tensor(F32)][256], Ref[Tensor(F32)][256], Ref[Tensor(F32)][256], Ref[Tensor(F32)][64], Ref[Tensor(F32)][64], Ref[Tensor(F32)][64], Ref[Tensor(F32)][64], Ref[Tensor(F32)][64], Ref[Tensor(F32)][64], Ref[Tensor(F32)][64], Ref[Tensor(F32)][64], Ref[Tensor(F32)][64], Ref[Tensor(F32)][128], Ref[Tensor(F32)][128], Ref[Tensor(F32)][128], Ref[Tensor(F32)][128], Ref[Tensor(F32)][128], Ref[Tensor(F32)][128], Ref[Tensor(F32)][512], Ref[Tensor(F32)][512], Ref[Tensor(F32)][512], Ref[Tensor(F32)][512], Ref[Tensor(F32)][512], Ref[Tensor(F32)][512], Ref[Tensor(F32)][128], Ref[Tensor(F32)][128], Ref[Tensor(F32)][128], Ref[Tensor(F32)][128], Ref[Tensor(F32)][128], Ref[Tensor(F32)][128], Ref[Tensor(F32)][128], Ref[Tensor(F32)][128], Ref[Tensor(F32)][128], Ref[Tensor(F32)][256], Ref[Tensor(F32)][256], Ref[Tensor(F32)][256], Ref[Tensor(F32)][256], Ref[Tensor(F32)][256], Ref[Tensor(F32)][256], Ref[Tensor(F32)][1024], Ref[Tensor(F32)][1024], Ref[Tensor(F32)][1024], Ref[Tensor(F32)][1024], Ref[Tensor(F32)][1024], Ref[Tensor(F32)][1024], Ref[Tensor(F32)][256], Ref[Tensor(F32)][256], Ref[Tensor(F32)][256], Ref[Tensor(F32)][256], Ref[Tensor(F32)][256], Ref[Tensor(F32)][256], Ref[Tensor(F32)][256], Ref[Tensor(F32)][256], Ref[Tensor(F32)][256], Ref[Tensor(F32)][512], Ref[Tensor(F32)][512], Ref[Tensor(F32)][512], Ref[Tensor(F32)][1024], Ref[Tensor(F32)][1024], Ref[Tensor(F32)][1024], Ref[Tensor(F32)][13], Ref[Tensor(F32)][13], Ref[Tensor(F32)][13], Ref[Tensor(F32)][13], Ref[Tensor(F32)][13], Ref[Tensor(F32)][13], Ref[Tensor(F32)][13], Ref[Tensor(F32)][13], Ref[Tensor(F32)][13], Ref[Tensor(F32)][13], Ref[Tensor(F32)][13], Ref[Tensor(F32)][13], Ref[Tensor(F32)][13], Ref[Tensor(F32)][13], Ref[Tensor(F32)][13], Ref[Tensor(F32)][13], Ref[Tensor(F32)][13], Ref[Tensor(F32)][13], Ref[Tensor(F32)][10], Ref[Tensor(F32)][10], Ref[Tensor(F32)][10], Ref[Tensor(F32)][10], Ref[Tensor(F32)][10], Ref[Tensor(F32)][10], Ref[Tensor(F32)][10], Ref[Tensor(F32)][10], Ref[Tensor(F32)][10], Ref[Tensor(F32)][10], Ref[Tensor(F32)][10], Ref[Tensor(F32)][10], Ref[Tensor(F32)][512], Ref[Tensor(F32)][512], Ref[Tensor(F32)][512], Ref[Tensor(F32)][256], Ref[Tensor(F32)][256], Ref[Tensor(F32)][256], Ref[Tensor(F32)][128], Ref[Tensor(F32)][128], Ref[Tensor(F32)][128], Ref[Tensor(F32)][32], Ref[Tensor(F32)][32], Ref[Tensor(F32)][32], Ref[Tensor(F32)][32], Ref[Tensor(F32)][32], Ref[Tensor(F32)][32], Ref[Tensor(F32)][64], Ref[Tensor(F32)][64], Ref[Tensor(F32)][64], Ref[Tensor(F32)][32], Ref[Tensor(F32)][32], Ref[Tensor(F32)][32], Ref[Tensor(F32)][13], Ref[Tensor(F32)][13], Ref[Tensor(F32)][13], Ref[Tensor(F32)][8, 6], Ref[Tensor(F32)][8, 8, 1, 1], Ref[Tensor(F32)][32, 16, 1, 1], Ref[Tensor(F32)][32, 8, 1, 1], Ref[Tensor(F32)][8, 10, 1, 1], Ref[Tensor(F32)][8, 8, 1, 1], Ref[Tensor(F32)][16, 16], Ref[Tensor(F32)][8, 16, 1, 1], Ref[Tensor(F32)][16, 16], Ref[Tensor(F32)][16, 16, 1, 1], Ref[Tensor(F32)][32, 32, 1, 1], Ref[Tensor(F32)][128, 64, 1, 1], Ref[Tensor(F32)][128, 32, 1, 1], Ref[Tensor(F32)][32, 10, 1, 1], Ref[Tensor(F32)][32, 32, 1, 1], Ref[Tensor(F32)][64, 64], Ref[Tensor(F32)][32, 64, 1, 1], Ref[Tensor(F32)][64, 64], Ref[Tensor(F32)][64, 64, 1, 1], Ref[Tensor(F32)][64, 128, 1, 1], Ref[Tensor(F32)][256, 128, 1, 1], Ref[Tensor(F32)][256, 128, 1, 1], Ref[Tensor(F32)][64, 10, 1, 1], Ref[Tensor(F32)][64, 64, 1, 1], Ref[Tensor(F32)][128, 128], Ref[Tensor(F32)][64, 128, 1, 1], Ref[Tensor(F32)][128, 128], Ref[Tensor(F32)][128, 128, 1, 1], Ref[Tensor(F32)][128, 256, 1, 1], Ref[Tensor(F32)][512, 256, 1, 1], Ref[Tensor(F32)][512, 256, 1, 1], Ref[Tensor(F32)][128, 10, 1, 1], Ref[Tensor(F32)][128, 128, 1, 1], Ref[Tensor(F32)][256, 256], Ref[Tensor(F32)][128, 256, 1, 1], Ref[Tensor(F32)][256, 256], Ref[Tensor(F32)][256, 256, 1, 1], Ref[Tensor(F32)][256, 512, 1, 1], Ref[Tensor(F32)][1024, 512, 1, 1], Ref[Tensor(F32)][1024, 512, 1, 1], Ref[Tensor(F32)][256, 10, 1, 1], Ref[Tensor(F32)][256, 256, 1, 1], Ref[Tensor(F32)][512, 512], Ref[Tensor(F32)][256, 512, 1, 1], Ref[Tensor(F32)][512, 512], Ref[Tensor(F32)][512, 512, 1, 1], Ref[Tensor(F32)][1024, 1024, 1, 1], Ref[Tensor(F32)][13, 1024, 1, 1], Ref[Tensor(F32)][13, 512, 1, 1], Ref[Tensor(F32)][13, 256, 1, 1], Ref[Tensor(F32)][13, 128, 1, 1], Ref[Tensor(F32)][13, 32, 1, 1], Ref[Tensor(F32)][13, 32, 1, 1], Ref[Tensor(F32)][10, 512, 1, 1], Ref[Tensor(F32)][10, 256, 1, 1], Ref[Tensor(F32)][10, 128, 1, 1], Ref[Tensor(F32)][10, 32, 1, 1], Ref[Tensor(F32)][1536, 512, 1, 1], Ref[Tensor(F32)][768, 256, 1, 1], Ref[Tensor(F32)][384, 128, 1, 1], Ref[Tensor(F32)][160, 32, 1, 1], Ref[Tensor(F32)][64, 32, 1, 1], Ref[Tensor(F32)][64, 32, 1, 1], Ref[Tensor(F32)][32, 64, 1, 1], Ref[Tensor(F32)][13, 32, 1, 1]) #scope: Default
+      # In file /home/hjh/.conda/envs/md17/lib/python3.9/site-packages/mindspore/nn/wrap/loss_scale.py(331)/        weights = self.weights/#[CNode]94
+    %14 = DoSignaturePrimitive::S-Prim-grad{prim_type=1}(%12, %13)    #(Undefined, Undefined) #scope: Default
+      # In file /home/hjh/.conda/envs/md17/lib/python3.9/site-packages/mindspore/nn/wrap/loss_scale.py(338)/        grads = self.grad(self.network, weights)(*inputs, scaling_sens_filled)/#grads
+    %15 = UnpackCall::unpack_call(%14, %1, %11)    #(Undefined, Tuple[Tensor(F32),Tensor(I32)*3,Tensor(F32)*5,Tensor(I32)*15], Undefined) #scope: Default
+      # In file /home/hjh/.conda/envs/md17/lib/python3.9/site-packages/mindspore/nn/wrap/loss_scale.py(338)/        grads = self.grad(self.network, weights)(*inputs, scaling_sens_filled)/#grads
+    %16 = DoSignaturePrimitive::S-Prim-hyper_map{prim_type=1}(%6, %15)    #(Undefined, Undefined) #scope: Default
+      # In file /home/hjh/.conda/envs/md17/lib/python3.9/site-packages/mindspore/nn/wrap/loss_scale.py(339)/        grads = self.hyper_map(F.partial(_grad_scale, scaling_sens), grads)/#grads
+    %17 = DoSignaturePrimitive::S-Prim-identity{prim_type=1}[side_effect_propagate=I64(1)](%16)    #(Undefined) #scope: Default
+      # In file /home/hjh/.conda/envs/md17/lib/python3.9/site-packages/mindspore/nn/wrap/loss_scale.py(341)/        grads = self.grad_reducer(grads)/#grads
+    %18 = FuncGraph::fg_95(%4, %17)    #(Undefined, Undefined)    # fg_95=get_overflow_status.95 #scope: Default
+      # In file /home/hjh/.conda/envs/md17/lib/python3.9/site-packages/mindspore/nn/wrap/loss_scale.py(349)/        return loss, cond, scaling_sens/#Φcond
+    %19 = FuncGraph::fg_96(%18)    #(Undefined)    # fg_96=process_loss_scale.96 #scope: Default
+      # In file /home/hjh/.conda/envs/md17/lib/python3.9/site-packages/mindspore/nn/wrap/loss_scale.py(345)/        overflow = self.process_loss_scale(cond)/#overflow
+    %20 = DoSignaturePrimitive::S-Prim-logical_not{prim_type=1}(%19)    #(Undefined) #scope: Default
+      # In file /home/hjh/.conda/envs/md17/lib/python3.9/site-packages/mindspore/nn/wrap/loss_scale.py(347)/        if not overflow:/#[CNode]97
+    %21 = FuncGraph::fg_33(%20)    #(Undefined)    # fg_33=bool_.33 #scope: Default
+      # In file /home/hjh/.conda/envs/md17/lib/python3.9/site-packages/mindspore/nn/wrap/loss_scale.py(347)/        if not overflow:/#[CNode]98
+    %22 = Primitive::Switch{prim_type=1}(%21, FuncGraph::fg_99, FuncGraph::fg_100)    #(Undefined, Undefined, Undefined)    # fg_99=✓construct.99, fg_100=✗construct.100 #scope: Default
+      # In file /home/hjh/.conda/envs/md17/lib/python3.9/site-packages/mindspore/nn/wrap/loss_scale.py(347)/        if not overflow:/#[CNode]101
+    %23 = %22() #scope: Default
+      # In file /home/hjh/.conda/envs/md17/lib/python3.9/site-packages/mindspore/nn/wrap/loss_scale.py(347)/        if not overflow:/#[CNode]102
+    %24 = FuncGraph::fg_103(%23)    #(Undefined)    # fg_103=↓construct.103 #scope: Default
+#[CNode]104
+    Primitive::Return{prim_type=1}(%24)    #(Undefined) #scope: Default
+      # In file /home/hjh/.conda/envs/md17/lib/python3.9/site-packages/mindspore/nn/wrap/loss_scale.py(347)/        if not overflow:/#[CNode]105
+}
+# order:
+#   1: construct.46:loss{[0]: ValueNode<UnpackCall> unpack_call.106, [1]: ValueNode<FuncGraph> construct.50, [2]: [CNode]86}
+#   2: construct.46:[CNode]88{[0]: ValueNode<FuncGraph> start_overflow_check.87, [1]: loss, [2]: scale_sense}
+#   3: construct.46:status{[0]: ValueNode<DoSignaturePrimitive> S-Prim-getitem, [1]: [CNode]88, [2]: ValueNode<Int64Imm> 0}
+#   4: construct.46:Φscaling_sens{[0]: ValueNode<DoSignaturePrimitive> S-Prim-getitem, [1]: [CNode]88, [2]: ValueNode<Int64Imm> 1}
+#   5: construct.46:[CNode]90{[0]: ValueNode<DoSignaturePrimitive> S-Prim-hyper_map[ones_like_leaf], [1]: loss}
+#   6: construct.46:[CNode]91{[0]: ValueNode<DoSignaturePrimitive> S-Prim-DType, [1]: loss}
+#   7: construct.46:[CNode]92{[0]: ValueNode<DoSignaturePrimitive> S-Prim-Cast, [1]: Φscaling_sens, [2]: [CNode]91}
+#   8: construct.46:scaling_sens_filled{[0]: ValueNode<DoSignaturePrimitive> S-Prim-mul, [1]: [CNode]90, [2]: [CNode]92}
+#   9: construct.46:[CNode]93{[0]: ValueNode<DoSignaturePrimitive> S-Prim-MakeTuple, [1]: scaling_sens_filled}
+#  10: construct.46:grads{[0]: ValueNode<UnpackGraphPrimitive> UnpackGraph, [1]: ValueNode<FuncGraph> construct.50, [2]: [CNode]86, [3]: [CNode]93}
+#  11: construct.46:grads{[0]: ValueNode<DoSignaturePrimitive> S-Prim-grad, [1]: grads, [2]: [CNode]94}
+#  12: construct.46:grads{[0]: ValueNode<UnpackCall> unpack_call.107, [1]: grads, [2]: [CNode]86, [3]: [CNode]93}
+#  13: construct.46:[CNode]89{[0]: ValueNode<DoSignaturePrimitive> S-Prim-Partial, [1]: ValueNode<DoSignaturePrimitive> S-Prim-grad_scale, [2]: Φscaling_sens}
+#  14: construct.46:grads{[0]: ValueNode<DoSignaturePrimitive> S-Prim-hyper_map, [1]: [CNode]89, [2]: grads}
+#  15: construct.46:grads{[0]: ValueNode<DoSignaturePrimitive> S-Prim-identity, [1]: grads}
+#  16: construct.46:Φcond{[0]: ValueNode<FuncGraph> get_overflow_status.95, [1]: status, [2]: grads}
+#  17: construct.46:overflow{[0]: ValueNode<FuncGraph> process_loss_scale.96, [1]: Φcond}
+#  18: construct.46:[CNode]97{[0]: ValueNode<DoSignaturePrimitive> S-Prim-logical_not, [1]: overflow}
+#  19: construct.46:[CNode]98{[0]: ValueNode<FuncGraph> bool_.33, [1]: [CNode]97}
+#  20: construct.46:[CNode]101{[0]: ValueNode<Primitive> Switch, [1]: [CNode]98, [2]: ValueNode<FuncGraph> ✓construct.99, [3]: ValueNode<FuncGraph> ✗construct.100}
+#  21: construct.46:[CNode]102{[0]: [CNode]101}
+#  22: construct.46:[CNode]104{[0]: ValueNode<FuncGraph> ↓construct.103, [1]: [CNode]102}
+#  23: construct.46:[CNode]105{[0]: ValueNode<Primitive> Return, [1]: [CNode]104}
+
+
+# [No.4] UnpackCall.47
+
+funcgraph fg_47(
+        %para1090 : Func    # 48
+        , %para1091 : Tuple[Tensor(F32),Tensor(I32)*3,Tensor(F32)*5,Tensor(I32)*15]    # 49
+    ) {
+    %1 : Tensor(F32)[3, 40960, 6] = Primitive::TupleGetItem{prim_type=1}(%para1091, I64(0))    #(Tuple[Tensor(F32),Tensor(I32)*3,Tensor(F32)*5,Tensor(I32)*15], I64) #scope: Default
+#108
+    %2 : Tensor(I32)[3, 40960] = Primitive::TupleGetItem{prim_type=1}(%para1091, I64(1))    #(Tuple[Tensor(F32),Tensor(I32)*3,Tensor(F32)*5,Tensor(I32)*15], I64) #scope: Default
+#109
+    %3 : Tensor(I32)[3, 40960] = Primitive::TupleGetItem{prim_type=1}(%para1091, I64(2))    #(Tuple[Tensor(F32),Tensor(I32)*3,Tensor(F32)*5,Tensor(I32)*15], I64) #scope: Default
+#110
+    %4 : Tensor(I32)[3, 1] = Primitive::TupleGetItem{prim_type=1}(%para1091, I64(3))    #(Tuple[Tensor(F32),Tensor(I32)*3,Tensor(F32)*5,Tensor(I32)*15], I64) #scope: Default
+#111
+    %5 : Tensor(F32)[3, 40960, 3] = Primitive::TupleGetItem{prim_type=1}(%para1091, I64(4))    #(Tuple[Tensor(F32),Tensor(I32)*3,Tensor(F32)*5,Tensor(I32)*15], I64) #scope: Default
+#112
+    %6 : Tensor(F32)[3, 10240, 3] = Primitive::TupleGetItem{prim_type=1}(%para1091, I64(5))    #(Tuple[Tensor(F32),Tensor(I32)*3,Tensor(F32)*5,Tensor(I32)*15], I64) #scope: Default
+#113
+    %7 : Tensor(F32)[3, 2560, 3] = Primitive::TupleGetItem{prim_type=1}(%para1091, I64(6))    #(Tuple[Tensor(F32),Tensor(I32)*3,Tensor(F32)*5,Tensor(I32)*15], I64) #scope: Default
+#114
+    %8 : Tensor(F32)[3, 640, 3] = Primitive::TupleGetItem{prim_type=1}(%para1091, I64(7))    #(Tuple[Tensor(F32),Tensor(I32)*3,Tensor(F32)*5,Tensor(I32)*15], I64) #scope: Default
+#115
+    %9 : Tensor(F32)[3, 160, 3] = Primitive::TupleGetItem{prim_type=1}(%para1091, I64(8))    #(Tuple[Tensor(F32),Tensor(I32)*3,Tensor(F32)*5,Tensor(I32)*15], I64) #scope: Default
+#116
+    %10 : Tensor(I32)[3, 40960, 16] = Primitive::TupleGetItem{prim_type=1}(%para1091, I64(9))    #(Tuple[Tensor(F32),Tensor(I32)*3,Tensor(F32)*5,Tensor(I32)*15], I64) #scope: Default
+#117
+    %11 : Tensor(I32)[3, 10240, 16] = Primitive::TupleGetItem{prim_type=1}(%para1091, I64(10))    #(Tuple[Tensor(F32),Tensor(I32)*3,Tensor(F32)*5,Tensor(I32)*15], I64) #scope: Default
+#118
+    %12 : Tensor(I32)[3, 2560, 16] = Primitive::TupleGetItem{prim_type=1}(%para1091, I64(11))    #(Tuple[Tensor(F32),Tensor(I32)*3,Tensor(F32)*5,Tensor(I32)*15], I64) #scope: Default
+#119
+    %13 : Tensor(I32)[3, 640, 16] = Primitive::TupleGetItem{prim_type=1}(%para1091, I64(12))    #(Tuple[Tensor(F32),Tensor(I32)*3,Tensor(F32)*5,Tensor(I32)*15], I64) #scope: Default
+#120
+    %14 : Tensor(I32)[3, 160, 16] = Primitive::TupleGetItem{prim_type=1}(%para1091, I64(13))    #(Tuple[Tensor(F32),Tensor(I32)*3,Tensor(F32)*5,Tensor(I32)*15], I64) #scope: Default
+#121
+    %15 : Tensor(I32)[3, 10240, 16] = Primitive::TupleGetItem{prim_type=1}(%para1091, I64(14))    #(Tuple[Tensor(F32),Tensor(I32)*3,Tensor(F32)*5,Tensor(I32)*15], I64) #scope: Default
+#122
+    %16 : Tensor(I32)[3, 2560, 16] = Primitive::TupleGetItem{prim_type=1}(%para1091, I64(15))    #(Tuple[Tensor(F32),Tensor(I32)*3,Tensor(F32)*5,Tensor(I32)*15], I64) #scope: Default
+#123
+    %17 : Tensor(I32)[3, 640, 16] = Primitive::TupleGetItem{prim_type=1}(%para1091, I64(16))    #(Tuple[Tensor(F32),Tensor(I32)*3,Tensor(F32)*5,Tensor(I32)*15], I64) #scope: Default
+#124
+    %18 : Tensor(I32)[3, 160, 16] = Primitive::TupleGetItem{prim_type=1}(%para1091, I64(17))    #(Tuple[Tensor(F32),Tensor(I32)*3,Tensor(F32)*5,Tensor(I32)*15], I64) #scope: Default
+#125
+    %19 : Tensor(I32)[3, 80, 16] = Primitive::TupleGetItem{prim_type=1}(%para1091, I64(18))    #(Tuple[Tensor(F32),Tensor(I32)*3,Tensor(F32)*5,Tensor(I32)*15], I64) #scope: Default
+#126
+    %20 : Tensor(I32)[3, 40960, 1] = Primitive::TupleGetItem{prim_type=1}(%para1091, I64(19))    #(Tuple[Tensor(F32),Tensor(I32)*3,Tensor(F32)*5,Tensor(I32)*15], I64) #scope: Default
+#127
+    %21 : Tensor(I32)[3, 10240, 1] = Primitive::TupleGetItem{prim_type=1}(%para1091, I64(20))    #(Tuple[Tensor(F32),Tensor(I32)*3,Tensor(F32)*5,Tensor(I32)*15], I64) #scope: Default
+#128
+    %22 : Tensor(I32)[3, 2560, 1] = Primitive::TupleGetItem{prim_type=1}(%para1091, I64(21))    #(Tuple[Tensor(F32),Tensor(I32)*3,Tensor(F32)*5,Tensor(I32)*15], I64) #scope: Default
+#129
+    %23 : Tensor(I32)[3, 640, 1] = Primitive::TupleGetItem{prim_type=1}(%para1091, I64(22))    #(Tuple[Tensor(F32),Tensor(I32)*3,Tensor(F32)*5,Tensor(I32)*15], I64) #scope: Default
+#130
+    %24 : Tensor(I32)[3, 160, 1] = Primitive::TupleGetItem{prim_type=1}(%para1091, I64(23))    #(Tuple[Tensor(F32),Tensor(I32)*3,Tensor(F32)*5,Tensor(I32)*15], I64) #scope: Default
+#131
+
+#------------------------> 3
+    %25 = %para1090(%1, %2, %3, %4, %5, %6, %7, %8, %9, %10, %11, %12, %13, %14, %15, %16, %17, %18, %19, %20, %21, %22, %23, %24)    #(Tensor(F32)[3, 40960, 6], Tensor(I32)[3, 40960], Tensor(I32)[3, 40960], Tensor(I32)[3, 1], Tensor(F32)[3, 40960, 3], Tensor(F32)[3, 10240, 3], Tensor(F32)[3, 2560, 3], Tensor(F32)[3, 640, 3], Tensor(F32)[3, 160, 3], Tensor(I32)[3, 40960, 16], Tensor(I32)[3, 10240, 16], Tensor(I32)[3, 2560, 16], Tensor(I32)[3, 640, 16], Tensor(I32)[3, 160, 16], Tensor(I32)[3, 10240, 16], Tensor(I32)[3, 2560, 16], Tensor(I32)[3, 640, 16], Tensor(I32)[3, 160, 16], Tensor(I32)[3, 80, 16], Tensor(I32)[3, 40960, 1], Tensor(I32)[3, 10240, 1], Tensor(I32)[3, 2560, 1], Tensor(I32)[3, 640, 1], Tensor(I32)[3, 160, 1]) #scope: Default
+#132
+    Primitive::Return{prim_type=1}(%25)    #(Undefined) #scope: Default
+#133
+}
+# order:
+#   1: UnpackCall.47:132{[0]: 48, [1]: 108, [2]: 109, [3]: 110, [4]: 111, [5]: 112, [6]: 113, [7]: 114, [8]: 115, [9]: 116, [10]: 117, [11]: 118, [12]: 119, [13]: 120, [14]: 121, [15]: 122, [16]: 123, [17]: 124, [18]: 125, [19]: 126, [20]: 127, [21]: 128, [22]: 129, [23]: 130, [24]: 131}
+#   2: UnpackCall.47:133{[0]: ValueNode<Primitive> Return, [1]: 132}
+
+
+# [No.5] construct.50
+# In file /home/hjh/RFCR_NL_mindspore/src/model/model_weak_train.py(597)/    def construct(self, feature, labels, input_inds, cloud_inds, p0, p1, p2, p3, p4, n0, n1, n2, n3, n4, pl0, pl1, pl2,/
+funcgraph fg_50[fg_42](
+        %para1092 : Tensor(F32)[3, 40960, 6]    # feature
+        , %para1093 : Tensor(I32)[3, 40960]    # labels
+        , %para1094 : Tensor(I32)[3, 40960]    # input_inds
+        , %para1095 : Tensor(I32)[3, 1]    # cloud_inds
+        , %para1096 : Tensor(F32)[3, 40960, 3]    # p0
+        , %para1097 : Tensor(F32)[3, 10240, 3]    # p1
+        , %para1098 : Tensor(F32)[3, 2560, 3]    # p2
+        , %para1099 : Tensor(F32)[3, 640, 3]    # p3
+        , %para1100 : Tensor(F32)[3, 160, 3]    # p4
+        , %para1101 : Tensor(I32)[3, 40960, 16]    # n0
+        , %para1102 : Tensor(I32)[3, 10240, 16]    # n1
+        , %para1103 : Tensor(I32)[3, 2560, 16]    # n2
+        , %para1104 : Tensor(I32)[3, 640, 16]    # n3
+        , %para1105 : Tensor(I32)[3, 160, 16]    # n4
+        , %para1106 : Tensor(I32)[3, 10240, 16]    # pl0
+        , %para1107 : Tensor(I32)[3, 2560, 16]    # pl1
+        , %para1108 : Tensor(I32)[3, 640, 16]    # pl2
+        , %para1109 : Tensor(I32)[3, 160, 16]    # pl3
+        , %para1110 : Tensor(I32)[3, 80, 16]    # pl4
+        , %para1111 : Tensor(I32)[3, 40960, 1]    # u0
+        , %para1112 : Tensor(I32)[3, 10240, 1]    # u1
+        , %para1113 : Tensor(I32)[3, 2560, 1]    # u2
+        , %para1114 : Tensor(I32)[3, 640, 1]    # u3
+        , %para1115 : Tensor(I32)[3, 160, 1]    # u4
+    ) {
+    %1 : Func = Primitive::getattr{prim_type=1}(%para1093, "reshape")    #(Tensor(I32)[3, 40960], String) #scope: Default/network-RandLAWithLoss
+      # In file /home/hjh/RFCR_NL_mindspore/src/model/model_weak_train.py(605)/        labels = labels.reshape((-1,))/#[CNode]134
+    %2 : I64 = DoSignaturePrimitive::S-Prim-negative{prim_type=1}(I64(1))    #(I64) #scope: Default/network-RandLAWithLoss
+      # In file /home/hjh/RFCR_NL_mindspore/src/model/model_weak_train.py(605)/        labels = labels.reshape((-1,))/#[CNode]135
+    %3 : Tuple[I64] = DoSignaturePrimitive::S-Prim-MakeTuple{prim_type=1}(%2)    #(I64) #scope: Default/network-RandLAWithLoss
+      # In file /home/hjh/RFCR_NL_mindspore/src/model/model_weak_train.py(605)/        labels = labels.reshape((-1,))/#[CNode]136
+    %4 : Tensor(I32)[122880] = %1(%3)    #(Tuple[I64]) #scope: Default/network-RandLAWithLoss
+      # In file /home/hjh/RFCR_NL_mindspore/src/model/model_weak_train.py(609)/                ignore_mask, P.Equal()(labels, ign_label))/#Φlabels
+    %5 : Tensor(I32)[122880] = DoSignaturePrimitive::S-Prim-ZerosLike{prim_type=1}[output_names=["y"], input_names=["x"]](%4)    #(Tensor(I32)[122880]) #scope: Default/network-RandLAWithLoss
+      # In file /home/hjh/RFCR_NL_mindspore/src/model/model_weak_train.py(606)/        ignore_mask = P.zeros_like(labels).astype(ms.bool_)  # [b*n]/#[CNode]137
+    %6 : Func = Primitive::getattr{prim_type=1}(%5, "astype")    #(Tensor(I32)[122880], String) #scope: Default/network-RandLAWithLoss
+      # In file /home/hjh/RFCR_NL_mindspore/src/model/model_weak_train.py(606)/        ignore_mask = P.zeros_like(labels).astype(ms.bool_)  # [b*n]/#[CNode]138
+    %7 : Tensor(Bool)[122880] = %6(Bool)    #(TypeType) #scope: Default/network-RandLAWithLoss
+      # In file /home/hjh/RFCR_NL_mindspore/src/model/model_weak_train.py(606)/        ignore_mask = P.zeros_like(labels).astype(ms.bool_)  # [b*n]/#ignore_mask
+
+#------------------------> 4
+    %8 = FuncGraph::fg_51(I64(0), %7)    #(I64, Tensor(Bool)[122880])    # fg_51=⤾construct.51 #scope: Default/network-RandLAWithLoss
+      # In file /home/hjh/RFCR_NL_mindspore/src/model/model_weak_train.py(607)/        for ign_label in self.ignored_label_inds:/#[CNode]139
+    Primitive::Return{prim_type=1}(%8)    #(Undefined) #scope: Default/network-RandLAWithLoss
+      # In file /home/hjh/RFCR_NL_mindspore/src/model/model_weak_train.py(607)/        for ign_label in self.ignored_label_inds:/#[CNode]140
+}
+# order:
+#   1: construct.50:xyz{[0]: ValueNode<DoSignaturePrimitive> S-Prim-make_list, [1]: p0, [2]: p1, [3]: p2, [4]: p3, [5]: p4}
+#   2: construct.50:neighbor_idx{[0]: ValueNode<DoSignaturePrimitive> S-Prim-make_list, [1]: n0, [2]: n1, [3]: n2, [4]: n3, [5]: n4}
+#   3: construct.50:sub_idx{[0]: ValueNode<DoSignaturePrimitive> S-Prim-make_list, [1]: pl0, [2]: pl1, [3]: pl2, [4]: pl3, [5]: pl4}
+#   4: construct.50:interp_idx{[0]: ValueNode<DoSignaturePrimitive> S-Prim-make_list, [1]: u0, [2]: u1, [3]: u2, [4]: u3, [5]: u4}
+#   5: construct.50:[CNode]141{[0]: ValueNode<FuncGraph> construct.142, [1]: xyz, [2]: feature, [3]: neighbor_idx, [4]: sub_idx, [5]: interp_idx, [6]: labels}
+#   6: construct.50:Φlogits{[0]: ValueNode<DoSignaturePrimitive> S-Prim-getitem, [1]: [CNode]141, [2]: ValueNode<Int64Imm> 0}
+#   7: construct.50:Φmultihot_labels{[0]: ValueNode<DoSignaturePrimitive> S-Prim-getitem, [1]: [CNode]141, [2]: ValueNode<Int64Imm> 1}
+#   8: construct.50:Φsupervised_features{[0]: ValueNode<DoSignaturePrimitive> S-Prim-getitem, [1]: [CNode]141, [2]: ValueNode<Int64Imm> 2}
+#   9: construct.50:Φse_features_list{[0]: ValueNode<DoSignaturePrimitive> S-Prim-getitem, [1]: [CNode]141, [2]: ValueNode<Int64Imm> 3}
+#  10: construct.50:[CNode]134{[0]: ValueNode<Primitive> getattr, [1]: labels, [2]: ValueNode<StringImm> reshape}
+#  11: construct.50:[CNode]135{[0]: ValueNode<DoSignaturePrimitive> S-Prim-negative, [1]: ValueNode<Int64Imm> 1}
+#  12: construct.50:[CNode]136{[0]: ValueNode<DoSignaturePrimitive> S-Prim-MakeTuple, [1]: [CNode]135}
+#  13: construct.50:Φlabels{[0]: [CNode]134, [1]: [CNode]136}
+#  14: construct.50:[CNode]137{[0]: ValueNode<DoSignaturePrimitive> S-Prim-ZerosLike, [1]: Φlabels}
+#  15: construct.50:[CNode]138{[0]: ValueNode<Primitive> getattr, [1]: [CNode]137, [2]: ValueNode<StringImm> astype}
+#  16: construct.50:ignore_mask{[0]: [CNode]138, [1]: ValueNode<Bool> Bool}
+#  17: construct.50:[CNode]143{[0]: ValueNode<FuncGraph> ms_len.9, [1]: ValueNode<ValueList> [13]}
+#  18: construct.50:[CNode]139{[0]: ValueNode<FuncGraph> ⤾construct.51, [1]: ValueNode<Int64Imm> 0, [2]: ignore_mask}
+#  19: construct.50:[CNode]140{[0]: ValueNode<Primitive> Return, [1]: [CNode]139}
+
+
+# [No.6] ⤾construct.51
+# In file /home/hjh/RFCR_NL_mindspore/src/model/model_weak_train.py(607)/        for ign_label in self.ignored_label_inds:/
+funcgraph fg_51[fg_50](
+        %para1116 : I64    # @[CNode]52
+        , %para1117 : Tensor(Bool)[122880]    # Φignore_mask
+    ) {
+    %1 : $(construct.50):I64 = FuncGraph::fg_9([I64(13)])    #(List[I64])    # fg_9=ms_len.9 #scope: Default/network-RandLAWithLoss
+      # In file /home/hjh/RFCR_NL_mindspore/src/model/model_weak_train.py(607)/        for ign_label in self.ignored_label_inds:/#[CNode]143
+    %2 : Bool = MultitypeFuncGraph::less{(Tensor, Number), (Number, Tensor), (Tensor, Tensor), (Number, Number)}(%para1116, %1)    #(I64, I64) #scope: Default/network-RandLAWithLoss
+      # In file /home/hjh/RFCR_NL_mindspore/src/model/model_weak_train.py(607)/        for ign_label in self.ignored_label_inds:/#[CNode]144
+    %3 : Func = Primitive::Switch{prim_type=1}(%2, FuncGraph::fg_53, FuncGraph::fg_54)    #(Bool, Func, Func)    # fg_53=⥁construct.53, fg_54=↓construct.54 #scope: Default/network-RandLAWithLoss
+      # In file /home/hjh/RFCR_NL_mindspore/src/model/model_weak_train.py(607)/        for ign_label in self.ignored_label_inds:/#[CNode]145
+
+#------------------------> 7
+    %4 = %3() #scope: Default/network-RandLAWithLoss
+      # In file /home/hjh/RFCR_NL_mindspore/src/model/model_weak_train.py(607)/        for ign_label in self.ignored_label_inds:/#[CNode]146
+    Primitive::Return{prim_type=1}(%4)    #(Undefined) #scope: Default/network-RandLAWithLoss
+      # In file /home/hjh/RFCR_NL_mindspore/src/model/model_weak_train.py(607)/        for ign_label in self.ignored_label_inds:/#[CNode]147
+}
+# order:
+#   1: ⤾construct.51:[CNode]144{[0]: ValueNode<MultitypeFuncGraph> less.15, [1]: @[CNode]52, [2]: [CNode]143}
+#   2: ⤾construct.51:[CNode]145{[0]: ValueNode<Primitive> Switch, [1]: [CNode]144, [2]: ValueNode<FuncGraph> ⥁construct.53, [3]: ValueNode<FuncGraph> ↓construct.54}
+#   3: ⤾construct.51:[CNode]146{[0]: [CNode]145}
+#   4: ⤾construct.51:[CNode]147{[0]: ValueNode<Primitive> Return, [1]: [CNode]146}
+
+
+# [No.7] ⥁construct.53
+# In file /home/hjh/RFCR_NL_mindspore/src/model/model_weak_train.py(607)/        for ign_label in self.ignored_label_inds:/
+funcgraph fg_53[fg_51](
+) {
+    %1 : I64 = MultitypeFuncGraph::add{(RowTensor, Tensor), (NoneType, NoneType), (Tensor, Tensor), (List, List), (Tuple, Tuple), (Tensor, List), (Tensor, Tuple), (List, Tensor), (Tuple, Tensor), (Tensor, Number), (Number, Tensor), (String, String), (Number, Number)}(%para1116, I64(1))    #(I64, I64) #scope: Default/network-RandLAWithLoss
+      # In file /home/hjh/RFCR_NL_mindspore/src/model/model_weak_train.py(607)/        for ign_label in self.ignored_label_inds:/#[CNode]52
+    %2 : I64 = Primitive::stop_gradient{prim_type=1}(%1)    #(I64) #scope: Default/network-RandLAWithLoss
+      # In file /home/hjh/.conda/envs/md17/lib/python3.9/site-packages/mindspore/nn/wrap/loss_scale.py(332)/        loss = self.network(*inputs)/#[CNode]148
+    %3 : Func = ClassType() #scope: Default/network-RandLAWithLoss
+      # In file /home/hjh/RFCR_NL_mindspore/src/model/model_weak_train.py(609)/                ignore_mask, P.Equal()(labels, ign_label))/#[CNode]149
+    %4 : $(construct.50):Func = Primitive::getattr{prim_type=1}(%para1093, "reshape")    #(Tensor(I32)[3, 40960], String) #scope: Default/network-RandLAWithLoss
+      # In file /home/hjh/RFCR_NL_mindspore/src/model/model_weak_train.py(605)/        labels = labels.reshape((-1,))/#[CNode]134
+    %5 : $(construct.50):I64 = DoSignaturePrimitive::S-Prim-negative{prim_type=1}(I64(1))    #(I64) #scope: Default/network-RandLAWithLoss
+      # In file /home/hjh/RFCR_NL_mindspore/src/model/model_weak_train.py(605)/        labels = labels.reshape((-1,))/#[CNode]135
+    %6 : $(construct.50):Tuple[I64] = DoSignaturePrimitive::S-Prim-MakeTuple{prim_type=1}(%5)    #(I64) #scope: Default/network-RandLAWithLoss
+      # In file /home/hjh/RFCR_NL_mindspore/src/model/model_weak_train.py(605)/        labels = labels.reshape((-1,))/#[CNode]136
+    %7 : $(construct.50):Tensor(I32)[122880] = %4(%6)    #(Tuple[I64]) #scope: Default/network-RandLAWithLoss
+      # In file /home/hjh/RFCR_NL_mindspore/src/model/model_weak_train.py(609)/                ignore_mask, P.Equal()(labels, ign_label))/#Φlabels
+    %8 : I64 = DoSignaturePrimitive::S-Prim-getitem{prim_type=1}([I64(13)], %para1116)    #(List[I64], I64) #scope: Default/network-RandLAWithLoss
+      # In file /home/hjh/RFCR_NL_mindspore/src/model/model_weak_train.py(607)/        for ign_label in self.ignored_label_inds:/#ign_label
+    %9 : Tensor(Bool)[122880] = %3(%7, %8)    #(Tensor(I32)[122880], I64) #scope: Default/network-RandLAWithLoss
+      # In file /home/hjh/RFCR_NL_mindspore/src/model/model_weak_train.py(609)/                ignore_mask, P.Equal()(labels, ign_label))/#[CNode]150
+    %10 : Tensor(Bool)[122880] = FuncGraph::fg_151(%para1117, %9)    #(Tensor(Bool)[122880], Tensor(Bool)[122880])    # fg_151=logical_or.151 #scope: Default/network-RandLAWithLoss
+      # In file /home/hjh/RFCR_NL_mindspore/src/model/model_weak_train.py(608)/            ignore_mask = P.logical_or(/#ignore_mask
+
+#------------------------> 6
+    %11 = FuncGraph::fg_51(%1, %10)    #(I64, Tensor(Bool)[122880])    # fg_51=⤾construct.51 #scope: Default/network-RandLAWithLoss
+      # In file /home/hjh/RFCR_NL_mindspore/src/model/model_weak_train.py(607)/        for ign_label in self.ignored_label_inds:/#[CNode]152
+    %12 = Primitive::Depend{prim_type=1}[side_effect_propagate=I64(1)](%11, %2)    #(Undefined, I64) #scope: Default/network-RandLAWithLoss
+      # In file /home/hjh/.conda/envs/md17/lib/python3.9/site-packages/mindspore/nn/wrap/loss_scale.py(332)/        loss = self.network(*inputs)/#[CNode]153
+    Primitive::Return{prim_type=1}(%12)    #(Undefined) #scope: Default/network-RandLAWithLoss
+      # In file /home/hjh/RFCR_NL_mindspore/src/model/model_weak_train.py(607)/        for ign_label in self.ignored_label_inds:/#[CNode]154
+}
+# order:
+#   1: ⥁construct.53:ign_label{[0]: ValueNode<DoSignaturePrimitive> S-Prim-getitem, [1]: ValueNode<ValueList> [13], [2]: @[CNode]52}
+#   2: ⥁construct.53:[CNode]150{[0]: [CNode]150, [1]: ign_label, [2]: ValueNode<Int> Int32}
+#   3: ⥁construct.53:[CNode]52{[0]: ValueNode<MultitypeFuncGraph> add.7, [1]: @[CNode]52, [2]: ValueNode<Int64Imm> 1}
+#   4: ⥁construct.53:[CNode]149{[0]: ValueNode<ClassType> class 'mindspore.ops.operations.math_ops.Equal'}
+#   5: ⥁construct.53:[CNode]150{[0]: [CNode]149, [1]: Φlabels, [2]: ign_label}
+#   6: ⥁construct.53:ignore_mask{[0]: ValueNode<FuncGraph> logical_or.151, [1]: Φignore_mask, [2]: [CNode]150}
+#   7: ⥁construct.53:[CNode]152{[0]: ValueNode<FuncGraph> ⤾construct.51, [1]: [CNode]52, [2]: ignore_mask}
+#   8: ⥁construct.53:[CNode]154{[0]: ValueNode<Primitive> Return, [1]: [CNode]153}
+
+
+# [No.8] ↓construct.54
+# In file /home/hjh/RFCR_NL_mindspore/src/model/model_weak_train.py(607)/        for ign_label in self.ignored_label_inds:/
+funcgraph fg_54[fg_51](
+) {
+    %1 : Tensor(I32)[] = DoSignaturePrimitive::S-Prim-add{prim_type=1}(%para258, I64(1))    #(Ref[Tensor(I32)][], I64) #scope: Default/network-RandLAWithLoss
+      # In file /home/hjh/RFCR_NL_mindspore/src/model/model_weak_train.py(617)/        self.training_epoch += 1/#[CNode]155
+    %2 : Tensor(I32)[] = FuncGraph::fg_156(%para258, %1)    #(Ref[Tensor(I32)][], Tensor(I32)[])    # fg_156=assign.156 #scope: Default/network-RandLAWithLoss
+      # In file /home/hjh/RFCR_NL_mindspore/src/model/model_weak_train.py(617)/        self.training_epoch += 1/#[CNode]157
+    %3 : $(construct.50):List[Tensor(F32)*5] = DoSignaturePrimitive::S-Prim-make_list{prim_type=1}(%para1096, %para1097, %para1098, %para1099, %para1100)    #(Tensor(F32)[3, 40960, 3], Tensor(F32)[3, 10240, 3], Tensor(F32)[3, 2560, 3], Tensor(F32)[3, 640, 3], Tensor(F32)[3, 160, 3]) #scope: Default/network-RandLAWithLoss
+      # In file /home/hjh/RFCR_NL_mindspore/src/model/model_weak_train.py(599)/        xyz = [p0, p1, p2, p3, p4]/#xyz
+    %4 : $(construct.50):List[Tensor(I32)*5] = DoSignaturePrimitive::S-Prim-make_list{prim_type=1}(%para1101, %para1102, %para1103, %para1104, %para1105)    #(Tensor(I32)[3, 40960, 16], Tensor(I32)[3, 10240, 16], Tensor(I32)[3, 2560, 16], Tensor(I32)[3, 640, 16], Tensor(I32)[3, 160, 16]) #scope: Default/network-RandLAWithLoss
+      # In file /home/hjh/RFCR_NL_mindspore/src/model/model_weak_train.py(600)/        neighbor_idx = [n0, n1, n2, n3, n4]/#neighbor_idx
+    %5 : $(construct.50):List[Tensor(I32)*5] = DoSignaturePrimitive::S-Prim-make_list{prim_type=1}(%para1106, %para1107, %para1108, %para1109, %para1110)    #(Tensor(I32)[3, 10240, 16], Tensor(I32)[3, 2560, 16], Tensor(I32)[3, 640, 16], Tensor(I32)[3, 160, 16], Tensor(I32)[3, 80, 16]) #scope: Default/network-RandLAWithLoss
+      # In file /home/hjh/RFCR_NL_mindspore/src/model/model_weak_train.py(601)/        sub_idx = [pl0, pl1, pl2, pl3, pl4]/#sub_idx
+    %6 : $(construct.50):List[Tensor(I32)*5] = DoSignaturePrimitive::S-Prim-make_list{prim_type=1}(%para1111, %para1112, %para1113, %para1114, %para1115)    #(Tensor(I32)[3, 40960, 1], Tensor(I32)[3, 10240, 1], Tensor(I32)[3, 2560, 1], Tensor(I32)[3, 640, 1], Tensor(I32)[3, 160, 1]) #scope: Default/network-RandLAWithLoss
+      # In file /home/hjh/RFCR_NL_mindspore/src/model/model_weak_train.py(602)/        interp_idx = [u0, u1, u2, u3, u4]/#interp_idx
+    %7 : $(construct.50):Tuple[Tensor(F32),List[Tensor(I32),Tensor(F32)*5],List[Tensor(F32)*6],List[Tensor(F32)*4]] = FuncGraph::fg_142(%3, %para1092, %4, %5, %6, %para1093)    #(List[Tensor(F32)*5], Tensor(F32)[3, 40960, 6], List[Tensor(I32)*5], List[Tensor(I32)*5], List[Tensor(I32)*5], Tensor(I32)[3, 40960])    # fg_142=construct.142 #scope: Default/network-RandLAWithLoss
+      # In file /home/hjh/RFCR_NL_mindspore/src/model/model_weak_train.py(603)/        logits, multihot_labels, supervised_features, se_features_list = self.network(xyz, feature, neighbor_idx,/#[CNode]141
+    %8 : $(construct.50):Tensor(F32)[3, 13, 40960] = DoSignaturePrimitive::S-Prim-getitem{prim_type=1}(%7, I64(0))    #(Tuple[Tensor(F32),List[Tensor(I32),Tensor(F32)*5],List[Tensor(F32)*6],List[Tensor(F32)*4]], I64) #scope: Default/network-RandLAWithLoss
+      # In file /home/hjh/RFCR_NL_mindspore/src/model/model_weak_train.py(612)/        CE_loss = self.ce_loss(logits, labels, valid_idx)/#Φlogits
+    %9 : $(construct.50):Func = Primitive::getattr{prim_type=1}(%para1093, "reshape")    #(Tensor(I32)[3, 40960], String) #scope: Default/network-RandLAWithLoss
+      # In file /home/hjh/RFCR_NL_mindspore/src/model/model_weak_train.py(605)/        labels = labels.reshape((-1,))/#[CNode]134
+    %10 : $(construct.50):I64 = DoSignaturePrimitive::S-Prim-negative{prim_type=1}(I64(1))    #(I64) #scope: Default/network-RandLAWithLoss
+      # In file /home/hjh/RFCR_NL_mindspore/src/model/model_weak_train.py(605)/        labels = labels.reshape((-1,))/#[CNode]135
+    %11 : $(construct.50):Tuple[I64] = DoSignaturePrimitive::S-Prim-MakeTuple{prim_type=1}(%10)    #(I64) #scope: Default/network-RandLAWithLoss
+      # In file /home/hjh/RFCR_NL_mindspore/src/model/model_weak_train.py(605)/        labels = labels.reshape((-1,))/#[CNode]136
+    %12 : $(construct.50):Tensor(I32)[122880] = %9(%11)    #(Tuple[I64]) #scope: Default/network-RandLAWithLoss
+      # In file /home/hjh/RFCR_NL_mindspore/src/model/model_weak_train.py(609)/                ignore_mask, P.Equal()(labels, ign_label))/#Φlabels
+    %13 : Tensor(Bool)[122880] = FuncGraph::fg_158(%para1117)    #(Tensor(Bool)[122880])    # fg_158=logical_not.158 #scope: Default/network-RandLAWithLoss
+      # In file /home/hjh/RFCR_NL_mindspore/src/model/model_weak_train.py(611)/        valid_idx = P.logical_not(ignore_mask).astype(ms.int32)  # [b*n]/#[CNode]159
+    %14 : Func = Primitive::getattr{prim_type=1}(%13, "astype")    #(Tensor(Bool)[122880], String) #scope: Default/network-RandLAWithLoss
+      # In file /home/hjh/RFCR_NL_mindspore/src/model/model_weak_train.py(611)/        valid_idx = P.logical_not(ignore_mask).astype(ms.int32)  # [b*n]/#[CNode]160
+    %15 : Tensor(I32)[122880] = %14(I32)    #(TypeType) #scope: Default/network-RandLAWithLoss
+      # In file /home/hjh/RFCR_NL_mindspore/src/model/model_weak_train.py(611)/        valid_idx = P.logical_not(ignore_mask).astype(ms.int32)  # [b*n]/#valid_idx
+    %16 : Tensor(F32)[] = FuncGraph::fg_161(%8, %12, %15)    #(Tensor(F32)[3, 13, 40960], Tensor(I32)[122880], Tensor(I32)[122880])    # fg_161=construct.161 #scope: Default/network-RandLAWithLoss
+      # In file /home/hjh/RFCR_NL_mindspore/src/model/model_weak_train.py(612)/        CE_loss = self.ce_loss(logits, labels, valid_idx)/#CE_loss
+
+#------------------------> 8
+    %17 = Primitive::getattr{prim_type=1}(%16, "asnumpy")    #(Tensor(F32)[], String) #scope: Default/network-RandLAWithLoss
+      # In file /home/hjh/RFCR_NL_mindspore/src/model/model_weak_train.py(618)/        print(CE_loss.asnumpy(), h_loss.asnumpy(), se_loss.asnumpy())/#[CNode]162
+    %18 = %17() #scope: Default/network-RandLAWithLoss
+      # In file /home/hjh/RFCR_NL_mindspore/src/model/model_weak_train.py(618)/        print(CE_loss.asnumpy(), h_loss.asnumpy(), se_loss.asnumpy())/#[CNode]163
+    %19 = $(construct.50):DoSignaturePrimitive::S-Prim-getitem{prim_type=1}(%7, I64(1))    #(Tuple[Tensor(F32),List[Tensor(I32),Tensor(F32)*5],List[Tensor(F32)*6],List[Tensor(F32)*4]], Undefined) #scope: Default/network-RandLAWithLoss
+      # In file /home/hjh/RFCR_NL_mindspore/src/model/model_weak_train.py(613)/        h_loss = self.h_loss(multihot_labels, supervised_features, self.training_epoch)/#Φmultihot_labels
+    %20 = $(construct.50):DoSignaturePrimitive::S-Prim-getitem{prim_type=1}(%7, I64(2))    #(Tuple[Tensor(F32),List[Tensor(I32),Tensor(F32)*5],List[Tensor(F32)*6],List[Tensor(F32)*4]], Undefined) #scope: Default/network-RandLAWithLoss
+      # In file /home/hjh/RFCR_NL_mindspore/src/model/model_weak_train.py(613)/        h_loss = self.h_loss(multihot_labels, supervised_features, self.training_epoch)/#Φsupervised_features
+    %21 = FuncGraph::fg_164(%19, %20, %para258)    #(Undefined, Undefined, Ref[Tensor(I32)][])    # fg_164=construct.164 #scope: Default/network-RandLAWithLoss
+      # In file /home/hjh/RFCR_NL_mindspore/src/model/model_weak_train.py(613)/        h_loss = self.h_loss(multihot_labels, supervised_features, self.training_epoch)/#h_loss
+    %22 = Primitive::getattr{prim_type=1}(%21, "asnumpy")    #(Undefined, Undefined) #scope: Default/network-RandLAWithLoss
+      # In file /home/hjh/RFCR_NL_mindspore/src/model/model_weak_train.py(618)/        print(CE_loss.asnumpy(), h_loss.asnumpy(), se_loss.asnumpy())/#[CNode]165
+    %23 = %22() #scope: Default/network-RandLAWithLoss
+      # In file /home/hjh/RFCR_NL_mindspore/src/model/model_weak_train.py(618)/        print(CE_loss.asnumpy(), h_loss.asnumpy(), se_loss.asnumpy())/#[CNode]166
+    %24 = $(construct.50):DoSignaturePrimitive::S-Prim-getitem{prim_type=1}(%7, I64(3))    #(Tuple[Tensor(F32),List[Tensor(I32),Tensor(F32)*5],List[Tensor(F32)*6],List[Tensor(F32)*4]], Undefined) #scope: Default/network-RandLAWithLoss
+      # In file /home/hjh/RFCR_NL_mindspore/src/model/model_weak_train.py(614)/        se_loss = self.se_loss(se_features_list)/#Φse_features_list
+    %25 = FuncGraph::fg_167(%24)    #(Undefined)    # fg_167=construct.167 #scope: Default/network-RandLAWithLoss
+      # In file /home/hjh/RFCR_NL_mindspore/src/model/model_weak_train.py(614)/        se_loss = self.se_loss(se_features_list)/#se_loss
+    %26 = Primitive::getattr{prim_type=1}(%25, "asnumpy")    #(Undefined, Undefined) #scope: Default/network-RandLAWithLoss
+      # In file /home/hjh/RFCR_NL_mindspore/src/model/model_weak_train.py(618)/        print(CE_loss.asnumpy(), h_loss.asnumpy(), se_loss.asnumpy())/#[CNode]168
+    %27 = %26() #scope: Default/network-RandLAWithLoss
+      # In file /home/hjh/RFCR_NL_mindspore/src/model/model_weak_train.py(618)/        print(CE_loss.asnumpy(), h_loss.asnumpy(), se_loss.asnumpy())/#[CNode]169
+    %28 = DoSignaturePrimitive::S-Prim-Print{prim_type=1}[side_effect_io=Bool(1)](%18, %23, %27)    #(Undefined, Undefined, Undefined) #scope: Default/network-RandLAWithLoss
+      # In file /home/hjh/RFCR_NL_mindspore/src/model/model_weak_train.py(618)/        print(CE_loss.asnumpy(), h_loss.asnumpy(), se_loss.asnumpy())/#[CNode]170
+    %29 = Primitive::MakeTuple{prim_type=1}(%2, %28)    #(Tensor(I32)[], Undefined) #scope: Default/network-RandLAWithLoss
+      # In file /home/hjh/.conda/envs/md17/lib/python3.9/site-packages/mindspore/nn/wrap/loss_scale.py(332)/        loss = self.network(*inputs)/#[CNode]171
+    %30 = Primitive::stop_gradient{prim_type=1}(%29)    #(Undefined) #scope: Default/network-RandLAWithLoss
+      # In file /home/hjh/.conda/envs/md17/lib/python3.9/site-packages/mindspore/nn/wrap/loss_scale.py(332)/        loss = self.network(*inputs)/#[CNode]172
+    %31 = DoSignaturePrimitive::S-Prim-add{prim_type=1}(%16, %25)    #(Tensor(F32)[], Undefined) #scope: Default/network-RandLAWithLoss
+      # In file /home/hjh/RFCR_NL_mindspore/src/model/model_weak_train.py(616)/        loss = CE_loss + se_loss + h_loss/#[CNode]173
+    %32 = DoSignaturePrimitive::S-Prim-add{prim_type=1}(%31, %21)    #(Undefined, Undefined) #scope: Default/network-RandLAWithLoss
+      # In file /home/hjh/RFCR_NL_mindspore/src/model/model_weak_train.py(616)/        loss = CE_loss + se_loss + h_loss/#loss
+    %33 = Primitive::Depend{prim_type=1}[side_effect_propagate=I64(1)](%32, %30)    #(Undefined, Undefined) #scope: Default/network-RandLAWithLoss
+      # In file /home/hjh/.conda/envs/md17/lib/python3.9/site-packages/mindspore/nn/wrap/loss_scale.py(332)/        loss = self.network(*inputs)/#[CNode]174
+    Primitive::Return{prim_type=1}(%33)    #(Undefined) #scope: Default/network-RandLAWithLoss
+      # In file /home/hjh/RFCR_NL_mindspore/src/model/model_weak_train.py(619)/        return loss/#[CNode]175
+}
+# order:
+#   1: ↓construct.54:[CNode]159{[0]: ValueNode<FuncGraph> logical_not.158, [1]: Φignore_mask}
+#   2: ↓construct.54:[CNode]160{[0]: ValueNode<Primitive> getattr, [1]: [CNode]159, [2]: ValueNode<StringImm> astype}
+#   3: ↓construct.54:valid_idx{[0]: [CNode]160, [1]: ValueNode<Int> Int32}
+#   4: ↓construct.54:CE_loss{[0]: ValueNode<FuncGraph> construct.161, [1]: Φlogits, [2]: Φlabels, [3]: valid_idx}
+#   5: ↓construct.54:h_loss{[0]: ValueNode<FuncGraph> construct.164, [1]: Φmultihot_labels, [2]: Φsupervised_features, [3]: training_epoch}
+#   6: ↓construct.54:se_loss{[0]: ValueNode<FuncGraph> construct.167, [1]: Φse_features_list}
+#   7: ↓construct.54:[CNode]173{[0]: ValueNode<DoSignaturePrimitive> S-Prim-add, [1]: CE_loss, [2]: se_loss}
+#   8: ↓construct.54:loss{[0]: ValueNode<DoSignaturePrimitive> S-Prim-add, [1]: [CNode]173, [2]: h_loss}
+#   9: ↓construct.54:[CNode]155{[0]: ValueNode<DoSignaturePrimitive> S-Prim-add, [1]: training_epoch, [2]: ValueNode<Int64Imm> 1}
+#  10: ↓construct.54:[CNode]157{[0]: ValueNode<FuncGraph> assign.156, [1]: training_epoch, [2]: [CNode]155}
+#  11: ↓construct.54:[CNode]162{[0]: ValueNode<Primitive> getattr, [1]: CE_loss, [2]: ValueNode<StringImm> asnumpy}
+#  12: ↓construct.54:[CNode]163{[0]: [CNode]162}
+#  13: ↓construct.54:[CNode]165{[0]: ValueNode<Primitive> getattr, [1]: h_loss, [2]: ValueNode<StringImm> asnumpy}
+#  14: ↓construct.54:[CNode]166{[0]: [CNode]165}
+#  15: ↓construct.54:[CNode]168{[0]: ValueNode<Primitive> getattr, [1]: se_loss, [2]: ValueNode<StringImm> asnumpy}
+#  16: ↓construct.54:[CNode]169{[0]: [CNode]168}
+#  17: ↓construct.54:[CNode]170{[0]: ValueNode<DoSignaturePrimitive> S-Prim-Print, [1]: [CNode]163, [2]: [CNode]166, [3]: [CNode]169}
+#  18: ↓construct.54:[CNode]175{[0]: ValueNode<Primitive> Return, [1]: [CNode]174}
+
+
+#===============================================================================
+# num of function graphs in stack: 8/9 (Ignored 1 internal frames).
