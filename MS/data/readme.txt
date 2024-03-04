@@ -1,0 +1,1 @@
+add Cifar-100 dataset here (binary version)
